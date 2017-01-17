@@ -12,16 +12,14 @@ import java.io.Serializable;
  */
 public class Usuario implements Serializable{
     private int id;
-    private String nombres;
-    private String apellidos;
+    private String nombre;
     private String rol;
     private String estado;
     private String clave;
     
-    public Usuario(int id, String nombres, String apellidos, String rol, String estado, String clave){
+    public Usuario(int id, String nombres, String rol, String estado, String clave){
         this.id=id;
-        this.nombres=nombres;
-        this.apellidos=apellidos;
+        this.nombre=nombres;
         this.rol=rol;
         this.clave=clave;
     }
@@ -35,11 +33,7 @@ public class Usuario implements Serializable{
     }
 
     public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+        this.nombre = nombres;
     }
 
     public void setRol(String rol) {
@@ -60,11 +54,7 @@ public class Usuario implements Serializable{
     }
 
     public String getNombres() {
-        return nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
+        return nombre;
     }
 
     public String getRol() {

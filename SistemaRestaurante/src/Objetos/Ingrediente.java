@@ -81,5 +81,5 @@ public class Ingrediente implements Serializable{
     public String getEstado() {
         return estado;
     }
-    
+        
 }
