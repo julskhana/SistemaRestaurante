@@ -1,6 +1,6 @@
 /SistemaRestaurante/nbproject/private/
 
-#Julian Bajaña Araujo
+#Julian Bajaï¿½a Araujo
 
 # *   SISTEMA DE ENCUESTAS PARA RESTAURANTE #
 # Archivos para ser ignorados por el repositorio de git
@@ -20,3 +20,4 @@ nb-configuration.xml
 *.jar
 *.war
 *.ear
+/PracticaWeb3/nbproject/private/
