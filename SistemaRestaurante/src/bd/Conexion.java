@@ -12,7 +12,7 @@ public class Conexion {
        private static final String DBMS = "mysql";
        private static final String HOST = "127.0.0.1";
        private static final String PORT = "3306";
-       private static final String DATABASE = "base_proyecto_java_20162s";
+       private static final String DATABASE = "base_restaurante1";
        private static final String USER = "root";
        private static final String PASSWORD = "";
 
