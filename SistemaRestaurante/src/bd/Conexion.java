@@ -47,6 +47,7 @@ public class Conexion {
         }    
     }
     
+    /*
     public boolean ingresarUniversidad(Universidad u)
     {
         try
@@ -169,5 +170,5 @@ public class Conexion {
         }           
      return resultado; 
     }
-    
+    */
 }

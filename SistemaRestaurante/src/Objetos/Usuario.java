@@ -12,13 +12,15 @@ import java.io.Serializable;
  */
 public class Usuario implements Serializable{
     private int id;
+    private String cedula;
     private String nombre;
     private String rol;
     private String estado;
     private String clave;
     
-    public Usuario(int id, String nombres, String rol, String estado, String clave){
+    public Usuario(int id, String cedula, String nombres, String rol, String estado, String clave){
         this.id=id;
+        this.cedula=cedula;
         this.nombre=nombres;
         this.rol=rol;
         this.clave=clave;
@@ -32,6 +34,10 @@ public class Usuario implements Serializable{
         this.id = id;
     }
 
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+    
     public void setNombres(String nombres) {
         this.nombre = nombres;
     }
@@ -51,6 +57,10 @@ public class Usuario implements Serializable{
     //funciones para obtener datos usuario
     public int getId() {
         return id;
+    }
+
+    public String getCedula() {
+        return cedula;
     }
 
     public String getNombres() {
