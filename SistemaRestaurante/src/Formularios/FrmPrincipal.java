@@ -20,6 +20,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         initComponents();
+        
     }
 
     /**
@@ -160,6 +161,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void presentarInfoUser(){
+        
+    }
+    
     private void mnArchSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnArchSalirActionPerformed
         // TODO add your handling code here:
         //SALIR
