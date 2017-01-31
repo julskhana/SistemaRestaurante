@@ -180,13 +180,13 @@ public class frmLogin extends javax.swing.JFrame {
         System.out.println("online...");
         try {
             c.conectar();
-            
             String cuenta = tfUser.getText();
             String clave = String.valueOf(pfPassword.getPassword());
             Usuario u = new Usuario(cuenta,clave);
             System.out.println("Consultando usuario");
             if (c.esUsuarioValido(u)){
                 u.setClave(null);
+                pfPassword.setText("");
                 // Despliegue de programa rpincipal
                 FrmPrincipal principal = new FrmPrincipal();
                 principal.setVisible(true);
