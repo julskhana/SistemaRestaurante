@@ -5,6 +5,8 @@
  */
 package General;
 
+import Formularios.*;
+
 /**
  *
  * @author Julian
@@ -15,5 +17,7 @@ public class Principal {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        frmLogin login = new frmLogin();
+        login.setVisible(true);
     }
 }
