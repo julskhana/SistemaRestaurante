@@ -2,6 +2,7 @@ package bd;
 
 //import entidades.Universidad;
 //import entidades.Usuario;
+import Objetos.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -45,6 +46,33 @@ public class Conexion {
         {
             return(false);
         }    
+    }
+    
+    public boolean esUsuarioValido(Usuario u)
+    {        
+        boolean resultado = false;
+        ResultSet rs = null;                       
+        PreparedStatement st = null;
+        try
+        {            
+            st = con.prepareStatement("SELECT * FROM usuario WHERE cuenta = ? AND clave = ? AND estado = ?");            
+            st.setString(1,u.getCuenta());         
+            st.setString(2,u.getClave());
+            st.setString(3,"activo");
+            rs = st.executeQuery();            
+            if(rs.next()){
+                u.setRol(rs.getString("rol"));
+                //u.setRol(rs.getString("rol").charAt(0));
+                resultado = true;
+            } 
+            rs.close();
+            st.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+            resultado = false;
+        }           
+     return resultado; 
     }
     
     /*

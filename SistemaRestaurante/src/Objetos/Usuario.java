@@ -16,20 +16,29 @@ public class Usuario implements Serializable{
     private String nombre;
     private String rol;
     private String estado;
+    private String cuenta;
     private String clave;
     
-    public Usuario(int id, String cedula, String nombres, String rol, String estado, String clave){
+    public Usuario(int id, String cedula, String nombres, String rol, String estado, String cuenta, String clave){
         this.id=id;
         this.cedula=cedula;
         this.nombre=nombres;
         this.rol=rol;
+        this.estado=estado;
+        this.cuenta=cuenta;
         this.clave=clave;
     }
     
     //Constructor vaciousuario
     public Usuario(){}
 
+    public Usuario(String cuenta, String clave) {
+        this.cuenta=cuenta;
+        this.clave=clave;
+    }
+
     //funciones para ingresar datos usuario
+
     public void setId(int id) {
         this.id = id;
     }
@@ -37,9 +46,9 @@ public class Usuario implements Serializable{
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-    
-    public void setNombres(String nombres) {
-        this.nombre = nombres;
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setRol(String rol) {
@@ -50,11 +59,17 @@ public class Usuario implements Serializable{
         this.estado = estado;
     }
 
+    public void setCuenta(String cuenta) {
+        this.cuenta = cuenta;
+    }
+
     public void setClave(String clave) {
         this.clave = clave;
     }
+    
 
     //funciones para obtener datos usuario
+
     public int getId() {
         return id;
     }
@@ -63,7 +78,7 @@ public class Usuario implements Serializable{
         return cedula;
     }
 
-    public String getNombres() {
+    public String getNombre() {
         return nombre;
     }
 
@@ -73,6 +88,10 @@ public class Usuario implements Serializable{
 
     public String getEstado() {
         return estado;
+    }
+
+    public String getCuenta() {
+        return cuenta;
     }
 
     public String getClave() {
