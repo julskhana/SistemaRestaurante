@@ -33,18 +33,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         mArchivo = new javax.swing.JMenu();
         mcCambioClave = new javax.swing.JMenuItem();
         mnArchSalir = new javax.swing.JMenuItem();
         mMantenimiento = new javax.swing.JMenu();
-        mnCliente = new javax.swing.JMenuItem();
-        mnUser = new javax.swing.JMenuItem();
-        mnProducto = new javax.swing.JMenuItem();
-        mnIngredientes = new javax.swing.JMenuItem();
+        mClientes = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        mEditarClientes = new javax.swing.JMenuItem();
+        mProductos = new javax.swing.JMenu();
+        mnIngresarCliente = new javax.swing.JMenuItem();
+        mnEditarCliente = new javax.swing.JMenuItem();
+        mIngredientes = new javax.swing.JMenu();
+        mnIngresarIngredientes = new javax.swing.JMenuItem();
+        mnEditarIngredientes = new javax.swing.JMenuItem();
         mProcesos = new javax.swing.JMenu();
         mnCreacionPlato = new javax.swing.JMenuItem();
         mnInPedido = new javax.swing.JMenuItem();
+        mnConsultaClientes = new javax.swing.JMenuItem();
+        mnConsultaIngredientes = new javax.swing.JMenuItem();
         mAcciones = new javax.swing.JMenu();
         mnListCli = new javax.swing.JMenuItem();
         mnListProductos = new javax.swing.JMenuItem();
@@ -56,6 +64,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnAyuda = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
+
+        jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Encuenstas para Restaurantes - Java");
@@ -77,22 +87,35 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         mMantenimiento.setText("Mantenimiento");
 
-        mnCliente.setText("Cliente");
-        mMantenimiento.add(mnCliente);
+        mClientes.setText("Clientes");
 
-        mnUser.setText("Usuarios");
-        mnUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnUserActionPerformed(evt);
-            }
-        });
-        mMantenimiento.add(mnUser);
+        jMenuItem2.setText("Ingresar Clientes");
+        mClientes.add(jMenuItem2);
 
-        mnProducto.setText("Producto");
-        mMantenimiento.add(mnProducto);
+        mEditarClientes.setText("Editar Clientes");
+        mClientes.add(mEditarClientes);
 
-        mnIngredientes.setText("Ingrediente");
-        mMantenimiento.add(mnIngredientes);
+        mMantenimiento.add(mClientes);
+
+        mProductos.setText("Productos");
+
+        mnIngresarCliente.setText("Ingresar Productos");
+        mProductos.add(mnIngresarCliente);
+
+        mnEditarCliente.setText("Editar Productos");
+        mProductos.add(mnEditarCliente);
+
+        mMantenimiento.add(mProductos);
+
+        mIngredientes.setText("Ingredientes");
+
+        mnIngresarIngredientes.setText("Ingresar Ingredientes");
+        mIngredientes.add(mnIngresarIngredientes);
+
+        mnEditarIngredientes.setText("Editar Ingredientes");
+        mIngredientes.add(mnEditarIngredientes);
+
+        mMantenimiento.add(mIngredientes);
 
         jMenuBar1.add(mMantenimiento);
 
@@ -101,8 +124,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnCreacionPlato.setText("Creacion de Platos");
         mProcesos.add(mnCreacionPlato);
 
-        mnInPedido.setText("Ingresar Pedido");
+        mnInPedido.setText("Ingresar Orden");
         mProcesos.add(mnInPedido);
+
+        mnConsultaClientes.setText("Consultar Clientes");
+        mProcesos.add(mnConsultaClientes);
+
+        mnConsultaIngredientes.setText("Consultar Platos");
+        mProcesos.add(mnConsultaIngredientes);
 
         jMenuBar1.add(mProcesos);
 
@@ -181,12 +210,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         info.setVisible(true);
     }//GEN-LAST:event_mnInfoActionPerformed
 
-    private void mnUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnUserActionPerformed
-        // TODO add your handling code here:
-        //frmDispUsuario dispuser = new frmDispUsuario();
-        //dispuser.setVisible(true);
-    }//GEN-LAST:event_mnUserActionPerformed
-
     private void mAcercadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAcercadeActionPerformed
         // TODO add your handling code here:
         frmAcercaDe info = new frmAcercaDe();
@@ -201,24 +224,32 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu mAcciones;
     private javax.swing.JMenu mAcercade;
     private javax.swing.JMenu mArchivo;
+    private javax.swing.JMenu mClientes;
+    private javax.swing.JMenuItem mEditarClientes;
+    private javax.swing.JMenu mIngredientes;
     private javax.swing.JMenu mMantenimiento;
     private javax.swing.JMenu mProcesos;
+    private javax.swing.JMenu mProductos;
     private javax.swing.JMenuItem mcCambioClave;
     private javax.swing.JMenuItem mnArchSalir;
     private javax.swing.JMenuItem mnAyuda;
-    private javax.swing.JMenuItem mnCliente;
+    private javax.swing.JMenuItem mnConsultaClientes;
+    private javax.swing.JMenuItem mnConsultaIngredientes;
     private javax.swing.JMenuItem mnCreacionPlato;
+    private javax.swing.JMenuItem mnEditarCliente;
+    private javax.swing.JMenuItem mnEditarIngredientes;
     private javax.swing.JMenuItem mnInPedido;
     private javax.swing.JMenuItem mnInfo;
-    private javax.swing.JMenuItem mnIngredientes;
+    private javax.swing.JMenuItem mnIngresarCliente;
+    private javax.swing.JMenuItem mnIngresarIngredientes;
     private javax.swing.JMenuItem mnListCli;
     private javax.swing.JMenuItem mnListProductos;
     private javax.swing.JMenuItem mnListUsers;
     private javax.swing.JMenuItem mnPedidos;
-    private javax.swing.JMenuItem mnProducto;
-    private javax.swing.JMenuItem mnUser;
     // End of variables declaration//GEN-END:variables
 }

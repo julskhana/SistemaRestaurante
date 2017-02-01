@@ -32,6 +32,8 @@ public class frmLogin extends javax.swing.JFrame {
         }catch (Exception e){  
         }
     
+        String usuarioActivo;
+        usuarioActivo = tfUser.getText();
         
     }
 
@@ -190,7 +192,6 @@ public class frmLogin extends javax.swing.JFrame {
                 // Despliegue de programa rpincipal
                 FrmPrincipal principal = new FrmPrincipal();
                 principal.setVisible(true);
-                
                 System.out.println("usuario valido :D");
                 JOptionPane.showMessageDialog(null,"BIENVENIDO");
             }else{
@@ -201,7 +202,6 @@ public class frmLogin extends javax.swing.JFrame {
         }catch (Exception e){
             System.out.println("Error de autenticacion a base de datos...");
         }
-        
     }//GEN-LAST:event_btLoginActionPerformed
 
     private void btlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btlimpiarActionPerformed

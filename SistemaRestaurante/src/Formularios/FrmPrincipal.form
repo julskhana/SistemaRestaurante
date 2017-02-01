@@ -11,6 +11,11 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
+    <Component class="javax.swing.JMenuItem" name="jMenuItem3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jMenuItem3"/>
+      </Properties>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="mArchivo">
@@ -38,29 +43,57 @@
             <Property name="text" type="java.lang.String" value="Mantenimiento"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnCliente">
+            <Menu class="javax.swing.JMenu" name="mClientes">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cliente"/>
+                <Property name="text" type="java.lang.String" value="Clientes"/>
               </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnUser">
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Ingresar Clientes"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="mEditarClientes">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Editar Clientes"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="mProductos">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Usuarios"/>
+                <Property name="text" type="java.lang.String" value="Productos"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnUserActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnProducto">
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="mnIngresarCliente">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Ingresar Productos"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="mnEditarCliente">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Editar Productos"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="mIngredientes">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Producto"/>
+                <Property name="text" type="java.lang.String" value="Ingredientes"/>
               </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnIngredientes">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ingrediente"/>
-              </Properties>
-            </MenuItem>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="mnIngresarIngredientes">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Ingresar Ingredientes"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="mnEditarIngredientes">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Editar Ingredientes"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mProcesos">
@@ -75,7 +108,17 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnInPedido">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ingresar Pedido"/>
+                <Property name="text" type="java.lang.String" value="Ingresar Orden"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnConsultaClientes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Consultar Clientes"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnConsultaIngredientes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Consultar Platos"/>
               </Properties>
             </MenuItem>
           </SubComponents>
