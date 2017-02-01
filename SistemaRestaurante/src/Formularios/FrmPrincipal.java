@@ -49,15 +49,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnIngresarIngredientes = new javax.swing.JMenuItem();
         mnEditarIngredientes = new javax.swing.JMenuItem();
         mProcesos = new javax.swing.JMenu();
-        mnCreacionPlato = new javax.swing.JMenuItem();
         mnInPedido = new javax.swing.JMenuItem();
+        mnCreacionPlato = new javax.swing.JMenuItem();
         mnConsultaClientes = new javax.swing.JMenuItem();
         mnConsultaIngredientes = new javax.swing.JMenuItem();
+        mnConsultarIngredientes = new javax.swing.JMenuItem();
         mAcciones = new javax.swing.JMenu();
         mnListCli = new javax.swing.JMenuItem();
         mnListProductos = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        mnListUsers = new javax.swing.JMenuItem();
         mnPedidos = new javax.swing.JMenuItem();
         mAcercade = new javax.swing.JMenu();
         mnInfo = new javax.swing.JMenuItem();
@@ -90,6 +90,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mClientes.setText("Clientes");
 
         jMenuItem2.setText("Ingresar Clientes");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         mClientes.add(jMenuItem2);
 
         mEditarClientes.setText("Editar Clientes");
@@ -121,17 +126,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         mProcesos.setText("Procesos");
 
-        mnCreacionPlato.setText("Creacion de Platos");
-        mProcesos.add(mnCreacionPlato);
-
         mnInPedido.setText("Ingresar Orden");
         mProcesos.add(mnInPedido);
+
+        mnCreacionPlato.setText("Creacion de Platos");
+        mProcesos.add(mnCreacionPlato);
 
         mnConsultaClientes.setText("Consultar Clientes");
         mProcesos.add(mnConsultaClientes);
 
         mnConsultaIngredientes.setText("Consultar Platos");
         mProcesos.add(mnConsultaIngredientes);
+
+        mnConsultarIngredientes.setText("Consultar Ingredientes");
+        mProcesos.add(mnConsultarIngredientes);
 
         jMenuBar1.add(mProcesos);
 
@@ -145,9 +153,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuItem1.setText("Lista Ingredientes");
         mAcciones.add(jMenuItem1);
-
-        mnListUsers.setText("Lista Usuarios");
-        mAcciones.add(mnListUsers);
 
         mnPedidos.setText("Pedidos");
         mAcciones.add(mnPedidos);
@@ -216,6 +221,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         info.setVisible(true);
     }//GEN-LAST:event_mAcercadeActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        frmIngresoClientes inClientes = new frmIngresoClientes();
+        inClientes.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -240,6 +251,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnAyuda;
     private javax.swing.JMenuItem mnConsultaClientes;
     private javax.swing.JMenuItem mnConsultaIngredientes;
+    private javax.swing.JMenuItem mnConsultarIngredientes;
     private javax.swing.JMenuItem mnCreacionPlato;
     private javax.swing.JMenuItem mnEditarCliente;
     private javax.swing.JMenuItem mnEditarIngredientes;
@@ -249,7 +261,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnIngresarIngredientes;
     private javax.swing.JMenuItem mnListCli;
     private javax.swing.JMenuItem mnListProductos;
-    private javax.swing.JMenuItem mnListUsers;
     private javax.swing.JMenuItem mnPedidos;
     // End of variables declaration//GEN-END:variables
 }

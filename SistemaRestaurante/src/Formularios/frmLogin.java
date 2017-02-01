@@ -191,6 +191,7 @@ public class frmLogin extends javax.swing.JFrame {
                 pfPassword.setText("");
                 // Despliegue de programa rpincipal
                 FrmPrincipal principal = new FrmPrincipal();
+                
                 principal.setVisible(true);
                 System.out.println("usuario valido :D");
                 JOptionPane.showMessageDialog(null,"BIENVENIDO");

@@ -52,6 +52,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ingresar Clientes"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="mEditarClientes">
                   <Properties>
@@ -101,14 +104,14 @@
             <Property name="text" type="java.lang.String" value="Procesos"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnCreacionPlato">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Creacion de Platos"/>
-              </Properties>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnInPedido">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ingresar Orden"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnCreacionPlato">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Creacion de Platos"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnConsultaClientes">
@@ -119,6 +122,11 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnConsultaIngredientes">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consultar Platos"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnConsultarIngredientes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Consultar Ingredientes"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -141,11 +149,6 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Lista Ingredientes"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnListUsers">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Lista Usuarios"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnPedidos">
