@@ -22,8 +22,10 @@ public class Cliente implements Serializable{
     private String fecha_nacimiento;
     private String sexo;
     private String estado;
+    private String direccion;
+    private String telefono;
     
-    public Cliente(int id, String cedula, String nombres, String apellidos, String correo, String tipo , int edad, String fecha_nacimiento, String sexo, String estado){
+    public Cliente(int id, String cedula, String nombres, String apellidos, String correo, String tipo , int edad, String fecha_nacimiento, String sexo, String estado, String direccion, String telefono){
         this.id=id;
         this.cedula=cedula;
         this.nombres=nombres;
@@ -34,6 +36,9 @@ public class Cliente implements Serializable{
         this.fecha_nacimiento=fecha_nacimiento;
         this.sexo=sexo;
         this.estado=estado;
+        this.direccion=direccion;
+        this.telefono=telefono;
+                
     }
     
     //Constructor vacio Cliente
@@ -80,7 +85,15 @@ public class Cliente implements Serializable{
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+        
     //Funciones para obtener datos clientes
 
     public int getId() {
@@ -121,6 +134,14 @@ public class Cliente implements Serializable{
 
     public String getEstado() {
         return estado;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
     }
     
 }

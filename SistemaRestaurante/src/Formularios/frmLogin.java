@@ -6,7 +6,7 @@
 package Formularios;
 
 import Objetos.Usuario;
-import bd.Conexion;
+import bd.ConexionBase;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -178,7 +178,7 @@ public class frmLogin extends javax.swing.JFrame {
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
         // conectar a base datos
         System.out.println("conectando...");
-        Conexion c = new Conexion();
+        ConexionBase c = new ConexionBase();
         System.out.println("online...");
         try {
             c.conectar();

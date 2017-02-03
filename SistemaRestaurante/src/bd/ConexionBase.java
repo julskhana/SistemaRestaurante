@@ -6,7 +6,7 @@ import Objetos.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Conexion {
+public class ConexionBase {
     
        private Connection con;
        private static final String DRIVER = "com.mysql.jdbc.Driver";
@@ -73,6 +73,21 @@ public class Conexion {
             resultado = false;
         }           
      return resultado; 
+    }
+    
+    public boolean ingresarCliente(Cliente cliente){
+        
+        try{
+            //Ingreso de Datos de Cliente
+            PreparedStatement st=null;
+            st = con.prepareStatement("INSERT INTO Cliente(cedula,nombre,apellido,correo,direccion,telefono) VALUES(?,?,?,?)");
+            
+            System.out.println("Cliente Ingresado...");
+            return true;
+        }catch (Exception e){
+            System.out.println("Error al ingrear cliente...");
+            return false;
+        }
     }
     
     /*
