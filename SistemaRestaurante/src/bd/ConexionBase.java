@@ -80,7 +80,21 @@ public class ConexionBase {
         try{
             //Ingreso de Datos de Cliente
             PreparedStatement st=null;
-            st = con.prepareStatement("INSERT INTO Cliente(cedula,nombre,apellido,correo,tipo,edad,fecha_nacimiento,sexo,estado,direccion,telefono) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+            st = con.prepareStatement("INSERT INTO Cliente(cedula,nombre,apellido,correo,tipo,edad,fecha_nacimiento,sexo,direccion,telefono) VALUES(?,?,?,?,?,?,?,?,?,?)");
+            st.setString(1,cliente.getCedula());
+            st.setString(2,cliente.getNombres());
+            st.setString(3,cliente.getApellidos());
+            st.setString(4,cliente.getCorreo());
+            st.setString(5,cliente.getTipo());
+            st.setInt(6,cliente.getEdad());
+            st.setString(7,cliente.getFecha_nacimiento());
+            st.setString(8,cliente.getSexo());
+            //st.setString(9,cliente.getEstado());
+            st.setString(9,cliente.getDireccion());
+            st.setString(10,cliente.getTelefono());
+            
+            st.executeUpdate();
+            st.close();
             
             System.out.println("Cliente Ingresado...");
             return true;

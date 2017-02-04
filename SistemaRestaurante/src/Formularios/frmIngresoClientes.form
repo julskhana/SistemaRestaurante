@@ -158,7 +158,7 @@
                   <Component id="btIngresar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="btLimpiar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -168,6 +168,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ingresar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btIngresarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btLimpiar">
       <Properties>
@@ -217,8 +220,8 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
-            <StringItem index="0" value="Huesped"/>
-            <StringItem index="1" value="Cliente"/>
+            <StringItem index="0" value="Cliente"/>
+            <StringItem index="1" value="Huesped"/>
           </StringArray>
         </Property>
       </Properties>
@@ -246,7 +249,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfFechaNacimiento">
       <Properties>
-        <Property name="text" type="java.lang.String" value="AAAA-MM-DD"/>
+        <Property name="text" type="java.lang.String" value="1999-01-01"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfFechaNacimientoActionPerformed"/>

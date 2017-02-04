@@ -190,10 +190,9 @@ public class frmLogin extends javax.swing.JFrame {
                 u.setClave(null);
                 pfPassword.setText("");
                 // Despliegue de programa rpincipal
+                System.out.println("usuario valido!");
                 FrmPrincipal principal = new FrmPrincipal();
-                
                 principal.setVisible(true);
-                System.out.println("usuario valido :D");
                 JOptionPane.showMessageDialog(null,"BIENVENIDO");
             }else{
                 JOptionPane.showMessageDialog(null,"Usuario o Clave incorrecta","Autenticación",JOptionPane.ERROR_MESSAGE);

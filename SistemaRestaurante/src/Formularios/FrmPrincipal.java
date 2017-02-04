@@ -20,7 +20,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         initComponents();
-        
+        System.out.println("Ingreso al Sistema");
     }
 
     /**

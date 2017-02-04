@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 package Formularios;
+import Objetos.Cliente;
+import bd.ConexionBase;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -69,6 +72,11 @@ public class frmIngresoClientes extends javax.swing.JFrame {
         setTitle("Ingreso de Clientes");
 
         btIngresar.setText("Ingresar");
+        btIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btIngresarActionPerformed(evt);
+            }
+        });
 
         btLimpiar.setText("Limpiar");
         btLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +101,7 @@ public class frmIngresoClientes extends javax.swing.JFrame {
 
         jLabel5.setText("Tipo:");
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Huesped", "Cliente" }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cliente", "Huesped" }));
 
         jLabel6.setText("Edad:");
 
@@ -106,7 +114,7 @@ public class frmIngresoClientes extends javax.swing.JFrame {
 
         jLabel7.setText("Fecha de Nacimiento:");
 
-        tfFechaNacimiento.setText("AAAA-MM-DD");
+        tfFechaNacimiento.setText("1999-01-01");
         tfFechaNacimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfFechaNacimientoActionPerformed(evt);
@@ -239,7 +247,7 @@ public class frmIngresoClientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
@@ -247,12 +255,7 @@ public class frmIngresoClientes extends javax.swing.JFrame {
 
     private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
         // TODO add your handling code here:
-        tfCedula.setText("");
-        tfNombres.setText("");
-        tfApellidos.setText("");
-        tfCorreo.setText("");
-        tfEdad.setText("18");
-        tfFechaNacimiento.setText("AAAA-MM-DD");
+        limpiarFormCli();
     }//GEN-LAST:event_btLimpiarActionPerformed
 
     private void tfApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfApellidosActionPerformed
@@ -271,6 +274,53 @@ public class frmIngresoClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfEdadActionPerformed
 
+    private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
+        // TODO add your handling code here:
+        //guardando datos en variables
+        String cedula = tfCedula.getText();
+        String nombres = tfNombres.getText();
+        String apellidos = tfApellidos.getText();
+        String correo = tfCorreo.getText();
+        String direccion = tfDireccion.getText();
+        String telefono = tfTelefono.getText();
+        String tipo = (String) cbTipo.getSelectedItem();
+        int edad = Integer.parseInt(tfEdad.getText());
+        String fecha_nac = tfFechaNacimiento.getText();
+        String sexo = (String) cbSexo.getSelectedItem();
+        
+        //creacion arraylist cliente
+        Cliente cli = new Cliente(cedula,nombres,apellidos,correo,tipo,edad,fecha_nac,sexo,direccion,telefono);
+        //conexion
+        ConexionBase c = new ConexionBase();
+        //insertR CLIENTE
+        try{
+            c.conectar();
+            if(c.ingresarCliente(cli)){
+                System.out.println("Cliente ingresado.");
+                limpiarFormCli();
+                JOptionPane.showMessageDialog(null,"Cliente Ingresado Correctamenre.");
+                
+            }else{
+                System.out.println("Cliente no ingresado.");
+                JOptionPane.showMessageDialog(null,"Información Incorrecta.","Ingreso de Clientes",JOptionPane.ERROR_MESSAGE);
+            }
+        }catch (Exception e){
+            System.out.println("Error al ingresar formulario cliente...");
+        }
+        c.desconectar();
+    }//GEN-LAST:event_btIngresarActionPerformed
+
+    private void limpiarFormCli(){
+        tfCedula.setText("");
+        tfNombres.setText("");
+        tfApellidos.setText("");
+        tfCorreo.setText("");
+        tfEdad.setText("18");
+        tfFechaNacimiento.setText("1999-01-01");
+        tfDireccion.setText("");
+        tfTelefono.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
