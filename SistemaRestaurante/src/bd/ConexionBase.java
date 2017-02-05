@@ -75,6 +75,7 @@ public class ConexionBase {
      return resultado; 
     }
     
+    //funcion para ingresar cliente a bd
     public boolean ingresarCliente(Cliente cliente){
         
         try{
@@ -96,13 +97,77 @@ public class ConexionBase {
             st.executeUpdate();
             st.close();
             
-            System.out.println("Cliente Ingresado...");
+            System.out.println("Cliente Ingresado a DB...");
             return true;
         }catch (Exception e){
-            System.out.println("Error al ingrear cliente...");
+            System.out.println("Error al ingrear cliente a DB...");
             return false;
         }
     }
+    
+    //funcion para cargar al sistema datos de los clientes
+    public ArrayList<Cliente>  cargarClientes() throws Exception{
+        //coneccion a base
+        ConexionBase cdb = new ConexionBase();
+        cdb.conectar();
+        //comando para 
+        Statement st=null;
+        st = con.createStatement();
+        String sql = "SELECT * FROM cliente";
+        ResultSet rst;
+        rst = st.executeQuery(sql);
+        ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
+        while (rst.next()){
+            Cliente c = new Cliente(); // falta codigo
+        }
+        
+        return null;
+    }
+    
+    
+    //funcion para consultar clientes en bd
+    public ArrayList<Cliente> consultarCli(String busqueda, String tip){
+        
+        ArrayList<Cliente> registroC = new ArrayList<Cliente>();
+        
+        try{
+            //rs es resultado
+            Statement st = this.con.createStatement();
+            ResultSet rs = null;
+            
+            if (tip.equalsIgnoreCase("cliente")){
+                rs = st.executeQuery("SELECT * FROM cliente;");
+            }else if (tip.equalsIgnoreCase("huesped")){
+                rs = st.executeQuery("select * from cliente where tipo = huesped;");
+            }else if (tip.equalsIgnoreCase("cedula")){
+                rs = st.executeQuery("select * from cliente where cedula = "+tip+";");
+            }else{
+                rs = st.executeQuery("SELECT * FROM cliente WHERE "+tip+" LIKE '%"+busqueda+"%';");
+            }
+            while(rs.next())
+            {
+                String cedula = rs.getString("cedula");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String correo = rs.getString("correo");
+                String tipo = rs.getString("tipo");
+                int edad = rs.getInt("edad");
+                String fecha_nacimiento = rs.getString("fecha_nacimiento");
+                String sexo = rs.getString("sexo");
+                //int estado = rs.getInt("estado");
+                String direccion = rs.getString("direccion");
+                String telefono = rs.getString("telefono");
+                //creacion de cliente desde consulta
+                Cliente cli = new Cliente(cedula,nombre,apellido,correo,tipo,edad,fecha_nacimiento,sexo,direccion,telefono);
+                registroC.add(cli);
+            }
+            System.out.println("cliente consultado");
+        }catch(Exception e){
+            System.out.println("error en consulta de cliente db");
+        }
+        return (registroC);
+    }
+    
     
     /*
     public boolean ingresarUniversidad(Universidad u)
