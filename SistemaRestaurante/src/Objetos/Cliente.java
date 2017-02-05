@@ -60,6 +60,7 @@ public class Cliente implements Serializable{
 
     //constructor para edicion de clientes
     public Cliente(String nombres, String apellidos, String correo, String tipo, int edad, String fecha_nac, String sexo, String direccion, String telefono) {
+        //this.cedula=cedula;
         this.nombres=nombres;
         this.apellidos=apellidos;
         this.correo=correo;
