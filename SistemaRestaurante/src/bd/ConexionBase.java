@@ -118,7 +118,7 @@ public class ConexionBase {
         rst = st.executeQuery(sql);
         ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
         while (rst.next()){
-            Cliente c = new Cliente(); // falta codigo
+            Cliente c = new Cliente(); // falta codigo completar pendiente
         }
         
         return null;
