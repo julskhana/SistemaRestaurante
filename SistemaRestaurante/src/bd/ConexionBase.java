@@ -62,7 +62,6 @@ public class ConexionBase {
             rs = st.executeQuery();            
             if(rs.next()){
                 u.setRol(rs.getString("rol"));
-                //u.setRol(rs.getString("rol").charAt(0));
                 resultado = true;
             } 
             rs.close();
@@ -73,6 +72,12 @@ public class ConexionBase {
             resultado = false;
         }           
      return resultado; 
+    }
+    
+    public String obtenerUsuarioActivo(){
+        String cuenta="";
+        
+        return cuenta;
     }
     
     //funcion para ingresar cliente a bd
@@ -106,14 +111,10 @@ public class ConexionBase {
     }
     
     //funcion para cargar al sistema datos de los clientes
-    public ArrayList<Cliente> cargarClientes() throws Exception{
-        //coneccion a base
-        ConexionBase cdb = new ConexionBase();
-        cdb.conectar();
+    public ArrayList<Cliente> cargarClientes() throws Exception , SQLException{
         //recoleccion de datos de clientes en base de datos a arraylist
-        Statement st = con.createStatement();
-        ResultSet rst;
-        rst = st.executeQuery("SELECT * FROM cliente");
+        Statement st = this.con.createStatement();
+        ResultSet rst = st.executeQuery("SELECT * FROM cliente");
         ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
         while (rst.next()){
             Cliente c = new Cliente(Integer.getInteger(rst.getString("id")),rst.getString("cedula"),rst.getString("nombre"),rst.getString("apellido"),rst.getString("correo"),rst.getString("tipo"),Integer.getInteger(rst.getString("edad")),rst.getString("fecha_nacimiento"),rst.getString("sexo"),rst.getString("estado"),rst.getString("direccion"),rst.getString("telefono"));
@@ -130,7 +131,6 @@ public class ConexionBase {
             //rs es resultado
             Statement st = this.con.createStatement();
             ResultSet rs = null;
-            
             if (tip.equalsIgnoreCase("cliente")){
                 rs = st.executeQuery("SELECT * FROM cliente;");
             }else if (tip.equalsIgnoreCase("huesped")){

@@ -31,9 +31,9 @@ public class frmLogin extends javax.swing.JFrame {
             imgLogin.setIcon(new ImageIcon(usericon));
         }catch (Exception e){  
         }
-    
-        String usuarioActivo;
-        usuarioActivo = tfUser.getText();
+         
+        //definicion de suario activo
+        Usuario uAct= new Usuario();
         
     }
 

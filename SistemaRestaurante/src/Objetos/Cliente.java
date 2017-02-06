@@ -38,13 +38,28 @@ public class Cliente implements Serializable{
         this.estado=estado;
         this.direccion=direccion;
         this.telefono=telefono;
-                
     }
     
     //Constructor vacio Cliente
     public Cliente(){}
-
-    //constructor para ingreso de clientes y cargar clientes
+    
+    /*
+    //Constructor de consulta cliente
+    public Cliente(String cedula, String nombres, String apellidos, String correo, String tipo , int edad, String fecha_nacimiento, String sexo, String direccion, String telefono){
+        this.cedula=cedula;
+        this.nombres=nombres;
+        this.apellidos=apellidos;
+        this.correo=correo;
+        this.tipo=tipo;
+        this.edad=edad;
+        this.fecha_nacimiento=fecha_nacimiento;
+        this.sexo=sexo;
+        this.direccion=direccion;
+        this.telefono=telefono;
+    }
+    */
+    
+    //constructor para ingreso, consulta y cargar clientes
     public Cliente(String cedula, String nombres, String apellidos, String correo,String tipo, int edad, String fecha_nac, String sexo, String direccion, String telefono) {
         this.cedula=cedula;
         this.nombres=nombres;

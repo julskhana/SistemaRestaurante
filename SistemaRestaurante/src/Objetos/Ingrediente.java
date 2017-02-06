@@ -15,16 +15,16 @@ public class Ingrediente implements Serializable{
     private String nombre;
     private String descripcion;
     private String tipo;
-    private float costo_unitario;
-    private String estado;
+    private float costo_porcion;
+    private int cantidad;
     
-    public Ingrediente(int id, String nombre, String descripcion, String tipo, float costo, String estado){
+    public Ingrediente(int id, String nombre, String descripcion, String tipo, float costo, int cantidad){
         this.id=id;
         this.nombre=nombre;
         this.descripcion=descripcion;
         this.tipo=tipo;
-        this.costo_unitario=costo;
-        this.estado=estado;
+        this.costo_porcion=costo;
+        this.cantidad=cantidad;
     }
     
     //constructor vacio ingrediente
@@ -48,13 +48,16 @@ public class Ingrediente implements Serializable{
         this.tipo = tipo;
     }
 
-    public void setCosto_unitario(float costo_unitario) {
-        this.costo_unitario = costo_unitario;
+    public void setCosto_porcion(float costo_porcion) {
+        this.costo_porcion = costo_porcion;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
+
+    
+
     
     //Funciones para obtener datos ingredientes
 
@@ -74,12 +77,11 @@ public class Ingrediente implements Serializable{
         return tipo;
     }
 
-    public float getCosto_unitario() {
-        return costo_unitario;
+    public float getCosto_porcion() {
+        return costo_porcion;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-        
+    public int getCantidad() {
+        return cantidad;
+    }       
 }

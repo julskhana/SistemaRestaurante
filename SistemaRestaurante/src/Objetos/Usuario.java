@@ -32,13 +32,20 @@ public class Usuario implements Serializable{
     //Constructor vaciousuario
     public Usuario(){}
 
+    //constructor para autenticar usuario
     public Usuario(String cuenta, String clave) {
+        this.cuenta=cuenta;
+        this.clave=clave;
+    }
+    
+    //constuctor para cambia clave usuario
+    public Usuario(String nombre, String cuenta,String clave){
+        this.nombre=nombre;
         this.cuenta=cuenta;
         this.clave=clave;
     }
 
     //funciones para ingresar datos usuario
-
     public void setId(int id) {
         this.id = id;
     }

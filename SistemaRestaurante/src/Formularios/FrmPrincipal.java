@@ -7,7 +7,11 @@
 package Formularios;
 
 //import Formularios.Consultas.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+
+import Objetos.*;
+import bd.ConexionBase;
 
 /**
  *
@@ -21,6 +25,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal() {
         initComponents();
         System.out.println("Ingreso al Sistema");
+        
+        //conexion a base de datos
+        ConexionBase c = new ConexionBase();
+        ArrayList<Cliente> listaC = new ArrayList<Cliente>();
+        try{
+            c.conectar();
+            listaC = c.cargarClientes(); 
+            System.out.println("se cargaron correctamente los datos desde la base");
+        }catch (Exception e){
+            System.out.println(e);
+            System.out.println("error la cargar datos desde base");
+        }
+        c.desconectar();
+        
     }
 
     /**
