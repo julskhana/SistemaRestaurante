@@ -58,6 +58,7 @@ public class Cliente implements Serializable{
         this.telefono=telefono;
     }
 
+    /*
     //constructor para edicion de clientes
     public Cliente(String nombres, String apellidos, String correo, String tipo, int edad, String fecha_nac, String sexo, String direccion, String telefono) {
         //this.cedula=cedula;
@@ -71,6 +72,7 @@ public class Cliente implements Serializable{
         this.direccion=direccion;
         this.telefono=telefono;
     }
+    */
     
     //Funciones para ingresar datos clientes
 
