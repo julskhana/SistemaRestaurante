@@ -5,6 +5,13 @@
  */
 package Formularios;
 
+import bd.ConexionBase;
+import java.util.ArrayList;
+import sun.security.util.PropertyExpander;
+import Objetos.Cliente;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Julian
@@ -27,18 +34,19 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cbConsulta = new javax.swing.JComboBox<>();
+        cbTipoConsulta = new javax.swing.JComboBox<>();
         tfdescripcion = new javax.swing.JTextField();
-        btConsulta = new javax.swing.JButton();
+        btConsultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable();
         btingresar = new javax.swing.JButton();
         btEditar = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Mantenimiento de Clientes");
 
-        cbConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cedula", "Nombres", "Apellidos" }));
+        cbTipoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Cedula", "Nombres", "Apellidos" }));
 
         tfdescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,30 +54,40 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
             }
         });
 
-        btConsulta.setText("Consultar");
-        btConsulta.addActionListener(new java.awt.event.ActionListener() {
+        btConsultar.setText("Consultar");
+        btConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btConsultaActionPerformed(evt);
+                btConsultarActionPerformed(evt);
             }
         });
 
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombres", "Apellidos", "Direccion", "Telefono", "Correo", "Edad", "Fecha Nacimiento"
+                "Cedula", "Nombres", "Apellidos", "Direccion", "Telefono", "Correo", "Edad", "Fecha Nacimiento", "Tipo"
             }
         ));
         jScrollPane1.setViewportView(tablaClientes);
 
         btingresar.setText("Ingresar");
+        btingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btingresarActionPerformed(evt);
+            }
+        });
 
         btEditar.setText("Editar");
+        btEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarActionPerformed(evt);
+            }
+        });
 
         btEliminar.setText("Eliminar");
         btEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +101,7 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(30, 30, 30)
                 .addComponent(btEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -98,11 +116,11 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 87, Short.MAX_VALUE)
-                        .addComponent(cbConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbTipoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(tfdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
-                        .addComponent(btConsulta)
+                        .addComponent(btConsultar)
                         .addGap(106, 106, 106))))
         );
         layout.setVerticalGroup(
@@ -110,17 +128,17 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipoConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btConsulta))
+                    .addComponent(btConsultar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btingresar)
+                    .addComponent(btEliminar)
                     .addComponent(btEditar)
-                    .addComponent(btEliminar))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(btingresar))
+                .addContainerGap())
         );
 
         pack();
@@ -130,55 +148,85 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdescripcionActionPerformed
 
-    private void btConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultaActionPerformed
+    private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btConsultaActionPerformed
+        consultarRegistro();
+    }//GEN-LAST:event_btConsultarActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btEliminarActionPerformed
 
+    private void btingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btingresarActionPerformed
+        // TODO add your handling code here:
+        frmIngresoClientes incli= new frmIngresoClientes();
+        incli.setVisible(true);
+    }//GEN-LAST:event_btingresarActionPerformed
+
+    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+        // TODO add your handling code here:
+        int fila = tablaClientes.getSelectedRow();
+        String cedula = tablaClientes.getValueAt(fila,0).toString();
+        
+        
+    }//GEN-LAST:event_btEditarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    
+    public void consultarRegistro(){
+        String tipo = cbTipoConsulta.getSelectedItem().toString();
+        String descripcion = tfdescripcion.getText();
+        
+        //consultar
+        try{
+            //cunsolta a la base
+            try{
+                ConexionBase c = new ConexionBase();
+                c.conectar();
+                
+                ArrayList<Cliente> registro = c.consultarClientes("","cliente");
+                ArrayList<Cliente> resultado = new ArrayList<Cliente>();
+                
+                if (tipo.equals("Todos")){
+                    resultado = registro;
+                }else{
+                    System.out.println("consulta invalida...");
                 }
+                DefaultTableModel dtm = (DefaultTableModel)tablaClientes.getModel();
+                dtm.setRowCount(0);
+                
+                //recorriendo base de datos
+                for (Cliente cli:resultado){
+                    Object[] fila = new Object[9];
+                    fila[0] = cli.getCedula();
+                    fila[1] = cli.getNombres();
+                    fila[2] = cli.getApellidos();
+                    fila[3] = cli.getDireccion();
+                    fila[4] = cli.getTelefono();
+                    fila[5] = cli.getCorreo();
+                    fila[6] = cli.getEdad();
+                    fila[7] = cli.getFecha_nacimiento();
+                    fila[8] = cli.getTipo();
+                    dtm.addRow(fila);
+                }
+            c.desconectar();
+            }catch (Exception e){
+                System.out.println("error al consultar clientes");
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMantenimientoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMantenimientoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMantenimientoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMantenimientoClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Ocurrió un error al consultar los registros","Consulta",JOptionPane.ERROR_MESSAGE);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmMantenimientoClientes().setVisible(true);
-            }
-        });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btConsulta;
+    private javax.swing.JButton btConsultar;
     private javax.swing.JButton btEditar;
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btingresar;
-    private javax.swing.JComboBox<String> cbConsulta;
+    private javax.swing.JComboBox<String> cbTipoConsulta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaClientes;
     private javax.swing.JTextField tfdescripcion;

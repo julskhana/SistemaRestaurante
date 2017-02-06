@@ -131,6 +131,7 @@ public class ConexionBase {
             //rs es resultado
             Statement st = this.con.createStatement();
             ResultSet rs = null;
+            
             if (tip.equalsIgnoreCase("cliente")){
                 rs = st.executeQuery("SELECT * FROM cliente;");
             }else if (tip.equalsIgnoreCase("huesped")){
