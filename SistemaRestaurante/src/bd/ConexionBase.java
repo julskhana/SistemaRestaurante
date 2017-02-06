@@ -111,8 +111,7 @@ public class ConexionBase {
         ConexionBase cdb = new ConexionBase();
         cdb.conectar();
         //comando para 
-        Statement st=null;
-        st = con.createStatement();
+        Statement st = con.createStatement();
         String sql = "SELECT * FROM cliente";
         ResultSet rst;
         rst = st.executeQuery(sql);
@@ -128,7 +127,6 @@ public class ConexionBase {
     
     //funcion para consultar clientes en bd
     public ArrayList<Cliente> consultarCli(String busqueda, String tip){
-        
         ArrayList<Cliente> registroC = new ArrayList<Cliente>();
         
         try{

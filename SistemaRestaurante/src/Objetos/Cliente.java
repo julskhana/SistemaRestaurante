@@ -44,7 +44,7 @@ public class Cliente implements Serializable{
     //Constructor vacio Cliente
     public Cliente(){}
 
-    //constructor para ingreso de clientes
+    //constructor para ingreso de clientes y cargar clientes
     public Cliente(String cedula, String nombres, String apellidos, String correo,String tipo, int edad, String fecha_nac, String sexo, String direccion, String telefono) {
         this.cedula=cedula;
         this.nombres=nombres;
