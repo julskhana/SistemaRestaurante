@@ -11,6 +11,7 @@ import sun.security.util.PropertyExpander;
 import Objetos.Cliente;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Funciones.*;
 
 /**
  *
@@ -168,7 +169,24 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
         int fila = tablaClientes.getSelectedRow();
         String cedula = tablaClientes.getValueAt(fila,0).toString();
         
+        ArrayList<Cliente> cli = new ArrayList<>();
         
+        try{
+            ConexionBase c = new ConexionBase();
+            c.conectar();
+            cli = c.consultarClientes("","cedula");
+            c.desconectar();
+        }catch (Exception e){
+            System.out.println("Error al iniciar edicion de cliente");
+        }
+        
+        if (Validaciones.validarDupCliCedula(cli, cedula)){
+            frmEdicionClientes cliedit = new frmEdicionClientes(cedula,this);
+            cliedit.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this,"El cliente seleccionado no existe","Edición",JOptionPane.ERROR_MESSAGE);
+            System.out.println("El cliente no existe");
+        }
     }//GEN-LAST:event_btEditarActionPerformed
 
     /**

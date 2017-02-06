@@ -110,6 +110,50 @@ public class ConexionBase {
         }
     }
     
+    public boolean modificarCliente(Cliente cl)
+    {
+        //obteniendo id desde cedula
+        String ced = cl.getCedula();
+        String id_cli="";
+        Cliente climod = new Cliente();
+        ResultSet rs = null;                       
+        PreparedStatement st = null;
+        try{
+            PreparedStatement st1=null;
+            st1 = con.prepareStatement("select * from cliente where cedula = "+ced);
+            rs = st1.executeQuery();
+            id_cli = rs.getString("id");
+            System.out.println("cliente id: "+id_cli);
+        }catch (Exception e){
+        }
+                       
+        //modificando datos
+        try
+        {
+            PreparedStatement st2 = null;
+            st2 = con.prepareStatement("update cliente set nombre = ?, apellido = ?, correo = ?, tipo = ?, edad = ?, fecha_nacimiento = ?, sexo = ?, estado = 1 , direccion = ?, telefono = ? where id = "+id_cli);
+            st.setString(1,cl.getNombres());
+            st.setString(2,cl.getApellidos());
+            st.setString(3,cl.getCorreo());
+            st.setString(4,cl.getTipo());
+            st.setInt(5,cl.getEdad());
+            st.setString(6,cl.getFecha_nacimiento());
+            st.setString(7,cl.getSexo());
+            st.setString(8,cl.getDireccion());
+            st.setString(9,cl.getTelefono());            
+            st.executeUpdate();
+            st.close();
+            System.out.println("modificacion de cliente exitosa");
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            return false;
+        }
+        
+    }
+    
     //funcion para cargar al sistema datos de los clientes
     public ArrayList<Cliente> cargarClientes() throws Exception , SQLException{
         //recoleccion de datos de clientes en base de datos a arraylist

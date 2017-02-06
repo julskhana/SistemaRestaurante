@@ -29,8 +29,7 @@ public class frmLogin extends javax.swing.JFrame {
         try{
             BufferedImage usericon = ImageIO.read(new File("src/icons/user_small.png"));
             imgLogin.setIcon(new ImageIcon(usericon));
-        }catch (Exception e){  
-        }
+        }catch (Exception e){}
          
         //definicion de suario activo
         Usuario uAct= new Usuario();
@@ -180,28 +179,32 @@ public class frmLogin extends javax.swing.JFrame {
         System.out.println("conectando...");
         ConexionBase c = new ConexionBase();
         System.out.println("online...");
-        try {
-            c.conectar();
-            String cuenta = tfUser.getText();
-            String clave = String.valueOf(pfPassword.getPassword());
-            Usuario u = new Usuario(cuenta,clave);
-            System.out.println("Consultando usuario");
-            if (c.esUsuarioValido(u)){
-                u.setClave(null);
-                pfPassword.setText("");
-                // Despliegue de programa rpincipal
-                System.out.println("usuario valido!");
-                FrmPrincipal principal = new FrmPrincipal();
-                principal.setVisible(true);
-                JOptionPane.showMessageDialog(null,"BIENVENIDO");
-            }else{
-                JOptionPane.showMessageDialog(null,"Usuario o Clave incorrecta","Autenticación",JOptionPane.ERROR_MESSAGE);
-                System.out.println("usuario o clave incorrectos...");
+        if (tfUser.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Ingrese un Usuario correcto");
+        }else{
+            try {
+                c.conectar();
+                String cuenta = tfUser.getText();
+                String clave = String.valueOf(pfPassword.getPassword());
+                Usuario u = new Usuario(cuenta,clave);
+                System.out.println("Consultando usuario");
+                if (c.esUsuarioValido(u)){
+                    u.setClave(null);
+                    pfPassword.setText("");
+                    // Despliegue de programa rpincipal
+                    System.out.println("usuario valido!");
+                    FrmPrincipal principal = new FrmPrincipal();
+                    principal.setVisible(true);
+                    JOptionPane.showMessageDialog(null,"BIENVENIDO");
+                }else{
+                    JOptionPane.showMessageDialog(null,"Usuario o Clave incorrecta","Autenticación",JOptionPane.ERROR_MESSAGE);
+                    System.out.println("usuario o clave incorrectos...");
+                }
+            }catch (Exception e){
+                System.out.println("Error de autenticacion a base de datos...");
             }
-                    
-        }catch (Exception e){
-            System.out.println("Error de autenticacion a base de datos...");
         }
+        
     }//GEN-LAST:event_btLoginActionPerformed
 
     private void btlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btlimpiarActionPerformed

@@ -63,15 +63,14 @@
                                   <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                              <Component id="btLimpiar" min="-2" pref="92" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btConsultar" min="-2" pref="89" max="-2" attributes="0"/>
+                              <Component id="btLimpiar" min="-2" pref="92" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -83,9 +82,9 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="btEditar" min="-2" pref="92" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
@@ -156,10 +155,9 @@
                           <Component id="cbSexo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btEditar" alignment="1" pref="31" max="32767" attributes="0"/>
-                          <Component id="btLimpiar" alignment="1" pref="31" max="32767" attributes="0"/>
-                          <Component id="btConsultar" alignment="1" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btEditar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="btLimpiar" alignment="3" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -196,11 +194,11 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfCedula">
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfNombres">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfNombres">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -208,9 +206,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfApellidos">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfApellidosActionPerformed"/>
       </Events>
@@ -221,9 +216,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfCorreo">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -232,6 +224,7 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="cbTipo">
       <Properties>
+        <Property name="editable" type="boolean" value="true"/>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
             <StringItem index="0" value="Cliente"/>
@@ -249,9 +242,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfEdad">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfEdadActionPerformed"/>
       </Events>
@@ -262,9 +252,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfFechaNacimiento">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfFechaNacimientoActionPerformed"/>
       </Events>
@@ -276,6 +263,7 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="cbSexo">
       <Properties>
+        <Property name="editable" type="boolean" value="true"/>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="2">
             <StringItem index="0" value="Masculino"/>
@@ -308,9 +296,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfDireccion">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>
@@ -318,20 +303,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfTelefono">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btConsultar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Consultar"/>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[65, 23]"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btConsultarActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>
