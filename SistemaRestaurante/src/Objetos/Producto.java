@@ -32,6 +32,17 @@ public class Producto {
         this.ingredientes=ing;
     }
     
+    //constructor para ingresar productos
+    public Producto(String nombre,String descripcion,String tamaño,float precio,String tipo,LinkedList<Ingrediente> ing){
+        //this.id=id;
+        this.nombre=nombre;
+        this.descripcion=descripcion;
+        this.tamaño=tamaño;
+        this.precio=precio;
+        this.tipo=tipo;
+        this.ingredientes=ing;
+    }
+    
     //constructor vacio
     public Producto(){}
 

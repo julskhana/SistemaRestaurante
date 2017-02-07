@@ -29,19 +29,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lbCuenta.setText(cuentaUser);
         System.out.println("Ingreso al Sistema");
         
+        //TRANSACCION CREACION DE PLATOS
         //CARGA DE INGREDIENTES PARA CREAR PRODUCTOS
         ConexionBase c = new ConexionBase();
         try{
             c.conectar();
             ArrayList<Ingrediente> ing = c.consultarIngredientes("","ingrediente");
             LinkedList<Ingrediente> ln = new LinkedList();
+            
             ln.add(ing.get(3));
             ln.add(ing.get(4));
+            Producto pr1 = new Producto("arroz con atun","arroz atun","mediano",2,"at",ln);
             
-            Producto pr = new Producto(1,"arroz con atun","arroz atun","mediano",2,"at",ln);
+            System.out.print(pr1.getIngredientes().get(0).getId()+" ");
+            System.out.println(pr1.getIngredientes().get(1).getId());
             
-            System.out.println(pr.getIngredientes().get(0).getId());
-            System.out.println(pr.getIngredientes().get(1).getId());
+            c.ingresarProducto(pr1);
+            c.ingresarPlato(1,pr1.getIngredientes().get(0).getId());
             
         }catch(Exception e){
             System.out.println(e);

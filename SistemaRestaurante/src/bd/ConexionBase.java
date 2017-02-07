@@ -386,6 +386,50 @@ public class ConexionBase {
         }        
     } 
     
+    public boolean ingresarProducto(Producto p){
+        try{
+            //Ingreso de Datos de producto
+            PreparedStatement st=null;
+            st = con.prepareStatement("insert into producto (nombre,descripcion,tamaño,precio,tipo) values (?,?,?,?,?);");
+            //query para ingresar manual
+            //  insert into producto (id,nombre,descripcion,tamaño,precio,tipo) values (2,"plato2","platoss","peq",3,"caldo")
+            st.setString(1,p.getNombre());
+            st.setString(2,p.getDescripcion());
+            st.setString(3,p.getTamaño());
+            st.setFloat(4,p.getPrecio());
+            st.setString(5,p.getTipo());
+            
+            st.executeUpdate();
+            st.close();
+            
+            System.out.println("Producto Ingresado a DB...");
+            return true;
+        }catch (Exception e){
+            System.out.println("Error al ingrear producto a DB...");
+            return false;
+        }
+    }
+    
+    public boolean ingresarPlato(int idpr,int iding){
+        try{
+            //Ingreso de Datos de producto
+            PreparedStatement st=null;
+            st = con.prepareStatement("insert into plato (id_producto,id_ingrediente) values (?,?);");
+            //query para ingresar manual
+            //  insert into producto (id,nombre,descripcion,tamaño,precio,tipo) values (2,"plato2","platoss","peq",3,"caldo")
+            st.setString(1,String.valueOf(idpr));
+            st.setString(2,String.valueOf(iding));
+            
+            st.executeUpdate();
+            st.close();
+            
+            System.out.println("Plato Ingresado a DB...");
+            return true;
+        }catch (Exception e){
+            System.out.println("Error al ingrear producto a DB...");
+            return false;
+        }
+    }
     /*
     public boolean ingresarUniversidad(Universidad u)
     {
