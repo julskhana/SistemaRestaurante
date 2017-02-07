@@ -60,11 +60,9 @@ public class frmEdicionClientes extends javax.swing.JFrame {
         try{
             BufferedImage clienticon = ImageIO.read(new File("src/icons/cliente_icon.png"));
             iconoCliente.setIcon(new ImageIcon(clienticon));
-        }catch (Exception e){}
-        
-        
+        }catch (Exception e){}        
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -326,34 +324,35 @@ public class frmEdicionClientes extends javax.swing.JFrame {
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         //Guardando datos nuevos
-        int id = Integer.parseInt(tfuserId.getText());
-        String cedula = tfCedula.getText();
-        String nombres = tfNombres.getText();
-        String apellidos = tfApellidos.getText();
-        String correo = tfCorreo.getText();
-        String direccion = tfDireccion.getText();
-        String telefono = tfTelefono.getText();
-        String tipo = (String) cbTipo.getSelectedItem();
-        int edad = Integer.parseInt(tfEdad.getText());
-        String fecha_nac = tfFechaNacimiento.getText();
-        String sexo = (String) cbSexo.getSelectedItem();
-        
-        Cliente clin = new Cliente(id,cedula,nombres,apellidos,correo,tipo,edad,fecha_nac,sexo,direccion,telefono);
-        ConexionBase c = new ConexionBase();
-        
-        try{
-            c.conectar();
-            if(c.modificarCliente(clin)){
-                System.out.println("cliente modificado");
-                JOptionPane.showMessageDialog(this,"Se editó correctamente el Cliente", "Edición Clientes",JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-            }else{
-                System.out.println("error al modificar cliente");
-                JOptionPane.showMessageDialog(this,"Ocurrió un error en la edición", "Error",JOptionPane.ERROR_MESSAGE);            
+        if(validarFormEdCliente()){
+            int id = Integer.parseInt(tfuserId.getText());
+            String cedula = tfCedula.getText();
+            String nombres = tfNombres.getText();
+            String apellidos = tfApellidos.getText();
+            String correo = tfCorreo.getText();
+            String direccion = tfDireccion.getText();
+            String telefono = tfTelefono.getText();
+            String tipo = (String) cbTipo.getSelectedItem();
+            int edad = Integer.parseInt(tfEdad.getText());
+            String fecha_nac = tfFechaNacimiento.getText();
+            String sexo = (String) cbSexo.getSelectedItem();
+
+            Cliente clin = new Cliente(id,cedula,nombres,apellidos,correo,tipo,edad,fecha_nac,sexo,direccion,telefono);
+            ConexionBase c = new ConexionBase();
+
+            try{
+                c.conectar();
+                if(c.modificarCliente(clin)){
+                    System.out.println("cliente modificado");
+                    JOptionPane.showMessageDialog(this,"Se editó correctamente el Cliente", "Edición Clientes",JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                }else{
+                    System.out.println("error al modificar cliente");
+                    JOptionPane.showMessageDialog(this,"Ocurrió un error en la edición", "Error",JOptionPane.ERROR_MESSAGE);            
+                }
+            }catch (Exception e){
             }
-        }catch (Exception e){
         }
-        
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void limpiarFormCli(){
@@ -367,9 +366,19 @@ public class frmEdicionClientes extends javax.swing.JFrame {
         tfTelefono.setText("");
     }
     
-    private void validarFormCli(){
-        
-    }
+    private boolean validarFormEdCliente(){
+        if (tfNombres.getText().equals("") ||
+            tfCorreo.getText().equals("") ||
+            tfDireccion.getText().equals("") ||
+            tfTelefono.getText().equals("") ||
+            tfEdad.getText().equals("") ||
+            tfFechaNacimiento.getText().equals("") ){
+            JOptionPane.showMessageDialog(null,"Formulario Incorrecto.","Edicion de Clientes",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else{
+            return true;
+        }
+    }    
     
     public void textoEditable(){
         tfNombres.setEditable(true);

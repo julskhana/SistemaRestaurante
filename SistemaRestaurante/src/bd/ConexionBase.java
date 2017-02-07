@@ -252,6 +252,25 @@ public class ConexionBase {
         return (registroC);
     }
     
+    //funcion para eliminar clientes
+    public boolean eliminarCliente(int id)
+    {
+        try
+        {
+            PreparedStatement st = null;
+            st = con.prepareStatement("DELETE FROM cliente WHERE id = ?");            
+            st.setInt(1,id);         
+            st.executeUpdate();
+            st.close();                        
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            return false;
+        }        
+    } 
+    
     public ArrayList<Usuario> consultarUsuarios(){
         ArrayList<Usuario> registroU = new ArrayList<Usuario>();
         try{
@@ -276,7 +295,61 @@ public class ConexionBase {
         return registroU;
     }
     
-    
+    //funcion para ingresar ingredientes
+    public boolean ingresarIngrediente(Ingrediente i){
+        try{
+            //Ingreso de Datos de Cliente
+            PreparedStatement st=null;
+            st = con.prepareStatement("INSERT INTO Cliente(cedula,nombre,apellido,correo,tipo,edad,fecha_nacimiento,sexo,direccion,telefono) VALUES(?,?,?,?,?,?,?,?,?,?)");
+            st.setString(1,i.getNombre());
+            st.setString(2,i.getDescripcion());
+            st.setString(3,i.getTipo());
+            st.setFloat(4,i.getCosto_porcion());
+            st.setInt(5,i.getCantidad());
+            
+            st.executeUpdate();
+            st.close();
+            
+            System.out.println("Ingrediente Ingresado a DB...");
+            return true;
+        }catch (Exception e){
+            System.out.println("Error al ingrear ingrediente a DB...");
+            return false;
+        }
+    }
+
+    //funcion para consultar ingredientes
+    public ArrayList<Ingrediente> consultarIngredientes(String busqueda, String tip){
+        ArrayList<Ingrediente> registroI = new ArrayList<Ingrediente>();
+        try{
+            Statement st = this.con.createStatement();
+            ResultSet rs = null;
+            
+            if (tip.equalsIgnoreCase("ingrediente")){
+                rs = st.executeQuery("SELECT * FROM ingrediente;");
+            }else if (tip.equalsIgnoreCase("nombre")){
+                rs = st.executeQuery("select * from ingrediente where nombre = "+tip+";");
+            }else{
+                rs = st.executeQuery("SELECT * FROM ingrediente WHERE "+tip+" LIKE '%"+busqueda+"%';");
+            }
+            while(rs.next())
+            {
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+                String tipo = rs.getString("tipo");
+                float costop = rs.getFloat("costo_porcion");
+                int cantidad = rs.getInt("cantidad");
+                
+                Ingrediente ing = new Ingrediente(id, nombre, descripcion, tipo, costop, cantidad);
+                registroI.add(ing);
+            }
+            System.out.println("ingredientes consultados");
+        }catch(Exception e){
+            System.out.println("error en consulta de ingredientes db");
+        }
+        return (registroI);
+    }
     /*
     public boolean ingresarUniversidad(Universidad u)
     {

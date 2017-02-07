@@ -55,9 +55,6 @@ public class Ingrediente implements Serializable{
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-
-    
-
     
     //Funciones para obtener datos ingredientes
 

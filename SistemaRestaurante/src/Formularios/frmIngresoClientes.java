@@ -277,36 +277,38 @@ public class frmIngresoClientes extends javax.swing.JFrame {
     private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
         // TODO add your handling code here:
         //guardando datos en variables
-        String cedula = tfCedula.getText();
-        String nombres = tfNombres.getText();
-        String apellidos = tfApellidos.getText();
-        String correo = tfCorreo.getText();
-        String direccion = tfDireccion.getText();
-        String telefono = tfTelefono.getText();
-        String tipo = (String) cbTipo.getSelectedItem();
-        int edad = Integer.parseInt(tfEdad.getText());
-        String fecha_nac = tfFechaNacimiento.getText();
-        String sexo = (String) cbSexo.getSelectedItem();
-        
-        //creacion arraylist cliente
-        Cliente cli = new Cliente(cedula,nombres,apellidos,correo,tipo,edad,fecha_nac,sexo,direccion,telefono);
-        //conexion
-        ConexionBase c = new ConexionBase();
-        //insertR CLIENTE
-        try{
-            c.conectar();
-            if(c.ingresarCliente(cli)){
-                System.out.println("Cliente ingresado.");
-                limpiarFormCli();
-                JOptionPane.showMessageDialog(null,"Cliente Ingresado Correctamente.");
-            }else{
-                System.out.println("Cliente no ingresado.");
-                JOptionPane.showMessageDialog(null,"Información Incorrecta.","Ingreso de Clientes",JOptionPane.ERROR_MESSAGE);
+        if(validarFormInCliente()){
+            String cedula = tfCedula.getText();
+            String nombres = tfNombres.getText();
+            String apellidos = tfApellidos.getText();
+            String correo = tfCorreo.getText();
+            String direccion = tfDireccion.getText();
+            String telefono = tfTelefono.getText();
+            String tipo = (String) cbTipo.getSelectedItem();
+            int edad = Integer.parseInt(tfEdad.getText());
+            String fecha_nac = tfFechaNacimiento.getText();
+            String sexo = (String) cbSexo.getSelectedItem();
+
+            //creacion arraylist cliente
+            Cliente cli = new Cliente(cedula,nombres,apellidos,correo,tipo,edad,fecha_nac,sexo,direccion,telefono);
+            //conexion
+            ConexionBase c = new ConexionBase();
+            //insertR CLIENTE
+            try{
+                c.conectar();
+                if(c.ingresarCliente(cli)){
+                    System.out.println("Cliente ingresado.");
+                    limpiarFormCli();
+                    JOptionPane.showMessageDialog(null,"Cliente Ingresado Correctamente.");
+                }else{
+                    System.out.println("Cliente no ingresado.");
+                    JOptionPane.showMessageDialog(null,"Información Incorrecta.","Ingreso de Clientes",JOptionPane.ERROR_MESSAGE);
+                }
+            }catch (Exception e){
+                System.out.println("Error al ingresar formulario cliente...");
             }
-        }catch (Exception e){
-            System.out.println("Error al ingresar formulario cliente...");
+            c.desconectar();
         }
-        c.desconectar();
     }//GEN-LAST:event_btIngresarActionPerformed
 
     private void limpiarFormCli(){
@@ -320,9 +322,31 @@ public class frmIngresoClientes extends javax.swing.JFrame {
         tfTelefono.setText("");
     }
     
-    private void validarFormCli(){
-        
+    private boolean validarFormInCliente(){
+        if (tfCedula.getText().length()==10 ||
+            tfNombres.getText().equals("") ||
+            tfCorreo.getText().equals("") ||
+            tfDireccion.getText().equals("") ||
+            tfTelefono.getText().equals("") ||
+            tfEdad.getText().equals("") ||
+            tfFechaNacimiento.getText().equals("") ){
+            JOptionPane.showMessageDialog(null,"Formulario Incorrecto.","Ingreso de Clientes",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else{
+            return true;
+        }
     }
+    
+    /*
+    private boolean validarFrmInCliente(){
+        if (tfCedula.getText().length()==10 &&
+            tfNombres.getText().    ){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    */
     
     /**
      * @param args the command line arguments

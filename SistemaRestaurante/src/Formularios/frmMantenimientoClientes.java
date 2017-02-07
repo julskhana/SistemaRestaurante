@@ -151,11 +151,30 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
 
     private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
         // TODO add your handling code here:
-        consultarRegistro();
+        if(formularioConsultaValidoA()){
+            consultarRegistro();}
     }//GEN-LAST:event_btConsultarActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
         // TODO add your handling code here:
+        if (seleccionEliminacionValida()){
+            ConexionBase c = new ConexionBase();
+            try{
+                c.conectar();
+                int filas[] =tablaClientes.getSelectedRows();
+                    for (int i = 0; i < filas.length; i++) {
+                        int fila = filas[i];
+                        String id = tablaClientes.getValueAt(fila,0).toString();
+                        if(!c.eliminarCliente(Integer.parseInt(id))){
+                            JOptionPane.showMessageDialog(this,"Ocurrió un error en la eliminación","Eliminación",JOptionPane.ERROR_MESSAGE);
+                            return ;
+                        }
+                    }
+            }catch(Exception e){
+                System.out.println(e);
+            }
+            c.desconectar();
+        }
     }//GEN-LAST:event_btEliminarActionPerformed
 
     private void btingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btingresarActionPerformed
@@ -166,28 +185,28 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         // TODO add your handling code here:
-        int fila = tablaClientes.getSelectedRow();
-        String id = tablaClientes.getValueAt(fila,0).toString();
-        
-        String cedula = tablaClientes.getValueAt(fila,1).toString();
-        
-        ArrayList<Cliente> cli = new ArrayList<>();
-        ConexionBase c = new ConexionBase();
-        
-        try{
-            c.conectar();
-            cli = c.consultarClientes("","cedula");
-        }catch (Exception e){
-            System.out.println("Error al iniciar edicion de cliente");
-        }
-        c.desconectar();
-        
-        if (Validaciones.validarDupCliCedula(cli, cedula)){
-            frmEdicionClientes cliedit = new frmEdicionClientes(id,cedula,this);
-            cliedit.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(this,"El cliente seleccionado no existe","Edición",JOptionPane.ERROR_MESSAGE);
-            System.out.println("El cliente no existe");
+        if (seleccionEdicionValida()){
+            int fila = tablaClientes.getSelectedRow();
+            String id = tablaClientes.getValueAt(fila,0).toString();
+            String cedula = tablaClientes.getValueAt(fila,1).toString();
+            ArrayList<Cliente> cli = new ArrayList<>();
+            ConexionBase c = new ConexionBase();
+
+            try{
+                c.conectar();
+                cli = c.consultarClientes("","cedula");
+            }catch (Exception e){
+                System.out.println("Error al iniciar edicion de cliente");
+            }
+            c.desconectar();
+
+            if (Validaciones.validarDupCliCedula(cli, cedula)){
+                frmEdicionClientes cliedit = new frmEdicionClientes(id,cedula,this);
+                cliedit.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this,"El cliente seleccionado no existe","Edición",JOptionPane.ERROR_MESSAGE);
+                System.out.println("El cliente no existe");
+            }
         }
     }//GEN-LAST:event_btEditarActionPerformed
 
@@ -212,7 +231,24 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
                 if (tipo.equals("Todos")){
                     resultado = registro;
                 }else{
-                    System.out.println("consulta invalida...");
+                    for (Cliente c1:registro){
+                        if(cbTipoConsulta.equals("Cedula")){
+                            if(c1.getCedula().contains(descripcion)){
+                                resultado.add(c1);
+                            }
+                        }
+                        if(cbTipoConsulta.equals("Nombres")){
+                            if(c1.getNombres().toUpperCase().contains(descripcion.toUpperCase())){
+                                resultado.add(c1);
+                            }
+                        }
+                        if(cbTipoConsulta.equals("Apellidos")){
+                            if(c1.getApellidos().toUpperCase().contains(descripcion.toUpperCase())){
+                                resultado.add(c1);
+                            }
+                        }
+                    }
+                    //System.out.println("consulta invalida...");
                 }
                 DefaultTableModel dtm = (DefaultTableModel)tablaClientes.getModel();
                 dtm.setRowCount(0);
@@ -239,9 +275,84 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
         }catch (Exception e){
             JOptionPane.showMessageDialog(this,"Ocurrió un error al consultar los registros","Consulta",JOptionPane.ERROR_MESSAGE);
         }
-        
+    }
+    
+    private boolean seleccionEdicionValida(){
+        int n = tablaClientes.getSelectedRowCount();
+        if(n!=1){
+            JOptionPane.showMessageDialog(this,
+                    "Debe seleccionar un registro para editar",
+                    "Edición",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    
+    }
+    
+    private boolean seleccionEliminacionValida(){ 
+        int n = tablaClientes.getSelectedRowCount();
+        if(n==0){
+            JOptionPane.showMessageDialog(this,
+                    "Debe seleccionar mínimo un registro para eliminar",
+                    "Eliminación",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;        
+        }
+        int op = JOptionPane.showConfirmDialog(this, "Está seguro de eliminar los registros seleccionados?","Eliminación",JOptionPane.YES_NO_OPTION);
+        if(op==0)
+            return true;
+        else
+            return false;
     }
 
+    private boolean formularioConsultaValidoA(){
+        String tipo = cbTipoConsulta.getSelectedItem().toString();
+        String descripcion = tfdescripcion.getText();
+        /*
+        if(!tipo.equals("Todo") && descripcion.equals("")){
+            JOptionPane.showMessageDialog(this,
+                    "Debe ingresar una descripción",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }*/
+        if(tipo.equals("Cedula") && descripcion.equals("")){
+            try{
+                tfdescripcion.equals("");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this,
+                    "Debe ingresar un número",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+                return false;
+            }        
+        }
+        if(tipo.equals("Nombres") && descripcion.equals("")){
+            try{
+                tfdescripcion.equals("");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this,
+                    "Debe ingresar un número",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+                return false;
+            }        
+        }
+        if(tipo.equals("Apellidos") && descripcion.equals("")){
+            try{
+                tfdescripcion.equals("");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this,
+                    "Debe ingresar un número",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+                return false;
+            }        
+        }
+        return true;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btConsultar;
     private javax.swing.JButton btEditar;
