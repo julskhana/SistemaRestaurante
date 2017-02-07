@@ -5,6 +5,7 @@
  */
 package Formularios;
 
+import Funciones.Validaciones;
 import Objetos.Cliente;
 import Objetos.Ingrediente;
 import bd.ConexionBase;
@@ -76,6 +77,11 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
         });
 
         btEditar.setText("Editar");
+        btEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarActionPerformed(evt);
+            }
+        });
 
         btIngresar.setText("Ingresar");
         btIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +149,33 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
         frmIngresoIngredientes inIng = new frmIngresoIngredientes();
         inIng.setVisible(true);
     }//GEN-LAST:event_btIngresarActionPerformed
+
+    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+        // TODO add your handling code here:
+        if (seleccionEdicionValida()){
+            int fila = tablaIngredientes.getSelectedRow();
+            String id = tablaIngredientes.getValueAt(fila,0).toString();
+            String nombre = tablaIngredientes.getValueAt(fila,1).toString();
+            ArrayList<Ingrediente> ing = new ArrayList<>();
+            ConexionBase c = new ConexionBase();
+
+            try{
+                c.conectar();
+                ing = c.consultarIngredientes("","id");
+            }catch (Exception e){
+                System.out.println("Error al iniciar edicion de cliente");
+            }
+            c.desconectar();
+
+            if (Validaciones.validarDupNombreIng(ing, nombre)){
+                frmEdicionIngredientes ingedit = new frmEdicionIngredientes(id,nombre,this);
+                ingedit.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this,"El ingrediente seleccionado no existe","Edición",JOptionPane.ERROR_MESSAGE);
+                System.out.println("El ingrediente no existe");
+            }
+        }
+    }//GEN-LAST:event_btEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +285,18 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
                 return false;
             }        
+        }
+        return true;
+    }
+    
+    private boolean seleccionEdicionValida(){
+        int n = tablaIngredientes.getSelectedRowCount();
+        if(n!=1){
+            JOptionPane.showMessageDialog(this,
+                    "Debe seleccionar un registro para editar",
+                    "Edición",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
         }
         return true;
     }

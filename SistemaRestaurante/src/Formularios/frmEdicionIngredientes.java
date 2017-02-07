@@ -26,6 +26,7 @@ public class frmEdicionIngredientes extends javax.swing.JFrame {
     public frmEdicionIngredientes(String id, String nombre, frmMantenimientoIngredientes frm) {
         initComponents();
         this.frmMantIng=frm;
+        tfid.setText(id);
         tfnombre.setText(nombre);
         
         //cargando datos de cliente a editar
@@ -71,6 +72,8 @@ public class frmEdicionIngredientes extends javax.swing.JFrame {
         tfcantidad = new javax.swing.JTextField();
         cblimpiar = new javax.swing.JButton();
         cbeditar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        tfid = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Edicion de Ingredientes");
@@ -106,12 +109,16 @@ public class frmEdicionIngredientes extends javax.swing.JFrame {
             }
         });
 
-        cbeditar.setText("Ingresar");
+        cbeditar.setText("Editar");
         cbeditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbeditarActionPerformed(evt);
             }
         });
+
+        jLabel6.setText("Id:");
+
+        tfid.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,27 +127,34 @@ public class frmEdicionIngredientes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(83, 83, 83)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfid, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(tfcantidad, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(tfcosto_porcion, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(cbtipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 74, Short.MAX_VALUE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(cbeditar)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfdescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                                    .addComponent(tfnombre)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfdescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                .addComponent(tfnombre))
+                            .addComponent(cbeditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(cblimpiar)))
+                        .addComponent(cblimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -149,7 +163,9 @@ public class frmEdicionIngredientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(tfid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -192,21 +208,23 @@ public class frmEdicionIngredientes extends javax.swing.JFrame {
     private void cbeditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbeditarActionPerformed
         // TODO add your handling code here:
         if (validarFormInIngrediente()){
+            int id = Integer.parseInt(tfid.getText());
             String nombre = tfnombre.getText();
             String descripcion = tfdescripcion.getText();
             String tipo = cbtipo.getSelectedItem().toString();
             float costo_p = Float.parseFloat(tfcosto_porcion.getText());
             int cant = Integer.parseInt(tfcantidad.getText());
             
-            Ingrediente i = new Ingrediente(nombre, descripcion, tipo, costo_p, cant);
+            Ingrediente i = new Ingrediente(id,nombre, descripcion, tipo, costo_p, cant);
             ConexionBase c =new ConexionBase();
             
             try{
                 c.conectar();
-                if(c.ingresarIngrediente(i)){
+                if(c.modificarIngrediente(i)){
                     System.out.println("ingrediente ingresado.");
                     limpiar();
-                    JOptionPane.showMessageDialog(null,"Ingrediente Ingresado Correctamente.");
+                    JOptionPane.showMessageDialog(null,"Ingrediente Editado Correctamente.");
+                    this.dispose();
                 }else{
                     System.out.println("Ingrediente no ingresado.");
                     JOptionPane.showMessageDialog(null,"Información Incorrecta.","Ingreso de Ingredientes",JOptionPane.ERROR_MESSAGE);
@@ -241,6 +259,8 @@ public class frmEdicionIngredientes extends javax.swing.JFrame {
         }
     }
     
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cbeditar;
     private javax.swing.JButton cblimpiar;
@@ -250,9 +270,11 @@ public class frmEdicionIngredientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField tfcantidad;
     private javax.swing.JTextField tfcosto_porcion;
     private javax.swing.JTextField tfdescripcion;
+    private javax.swing.JTextField tfid;
     private javax.swing.JTextField tfnombre;
     // End of variables declaration//GEN-END:variables
 }

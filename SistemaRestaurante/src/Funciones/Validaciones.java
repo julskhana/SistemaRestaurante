@@ -32,4 +32,12 @@ public class Validaciones {
         return false;
     }
 
+    public static boolean validarDupNombreIng(ArrayList<Ingrediente> registroI, String nombre){
+        for (Ingrediente p:registroI){
+            if(p.getNombre().equals(nombre)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

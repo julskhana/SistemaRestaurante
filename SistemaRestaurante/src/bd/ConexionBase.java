@@ -288,7 +288,7 @@ public class ConexionBase {
         try{
             //Ingreso de Datos de Cliente
             PreparedStatement st=null;
-            st = con.prepareStatement("insert into ingrediente(nombre,descripcion,tipo,costo_porcion,cantidad) values (?,?,?,?,?);");
+            st = con.prepareStatement("insert into ingrediente (nombre,descripcion,tipo,costo_porcion,cantidad) values (?,?,?,?,?);");
             st.setString(1,i.getNombre());
             st.setString(2,i.getDescripcion());
             st.setString(3,i.getTipo());
