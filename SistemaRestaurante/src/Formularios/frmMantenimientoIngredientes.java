@@ -5,6 +5,13 @@
  */
 package Formularios;
 
+import Objetos.Cliente;
+import Objetos.Ingrediente;
+import bd.ConexionBase;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Julian
@@ -36,9 +43,10 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
         btEditar = new javax.swing.JButton();
         btIngresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Mantenimiento de Ingredientes");
 
-        cbConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "Id", "Nombre" }));
+        cbConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Id", "Nombre", "Tipo" }));
 
         tbConsultar.setText("Consultar");
         tbConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +78,11 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
         btEditar.setText("Editar");
 
         btIngresar.setText("Ingresar");
+        btIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btIngresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,47 +129,133 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
 
     private void tbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbConsultarActionPerformed
         // TODO add your handling code here:
+        if (formularioConsultaValida()){
+            consultarRegistro();
+        }
     }//GEN-LAST:event_tbConsultarActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btEliminarActionPerformed
 
+    private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
+        // TODO add your handling code here:
+        frmIngresoIngredientes inIng = new frmIngresoIngredientes();
+        inIng.setVisible(true);
+    }//GEN-LAST:event_btIngresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    
+    public void consultarRegistro(){
+        String tipo = cbConsulta.getSelectedItem().toString();
+        String descripcion = tfdescripcion.getText();
+        
+        //consultar
+        try{
+            //cunsolta a la base
+            try{
+                ConexionBase c = new ConexionBase();
+                c.conectar();
+                
+                ArrayList<Ingrediente> registro = c.consultarIngredientes("","ingrediente");
+                ArrayList<Ingrediente> resultado = new ArrayList<Ingrediente>();
+                
+                if (tipo.equals("Todos")){
+                    resultado = registro;
+                }else{
+                    
+                    for (Ingrediente i1:registro){
+                        if(cbConsulta.equals("Id")){
+                            if(i1.getId()==Integer.parseInt(descripcion)){
+                                resultado.add(i1);
+                            }
+                        }
+                        if(cbConsulta.equals("Nombre")){
+                            if(i1.getNombre().toUpperCase().contains(descripcion.toUpperCase())){
+                                resultado.add(i1);
+                            }
+                        }
+                        if(cbConsulta.equals("Tipo")){
+                            if(i1.getTipo().toUpperCase().contains(descripcion.toUpperCase())){
+                                resultado.add(i1);
+                            }
+                        }
+                        
+                    }
+                    //System.out.println("consulta invalida...");
                 }
+                DefaultTableModel dtm = (DefaultTableModel)tablaIngredientes.getModel();
+                dtm.setRowCount(0);
+                
+                //recorriendo base de datos
+                for (Ingrediente ing:resultado){
+                    Object[] fila = new Object[10];
+                    fila[0] = ing.getId();
+                    fila[1] = ing.getNombre();
+                    fila[2] = ing.getDescripcion();
+                    fila[3] = ing.getTipo();
+                    fila[4] = ing.getCosto_porcion();
+                    fila[5] = ing.getCantidad();
+                    dtm.addRow(fila);
+                }
+            c.desconectar();
+            }catch (Exception e){
+                System.out.println("error al consultar ingredientes");
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMantenimientoIngredientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMantenimientoIngredientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMantenimientoIngredientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMantenimientoIngredientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Ocurrió un error al consultar los registros","Consulta",JOptionPane.ERROR_MESSAGE);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmMantenimientoIngredientes().setVisible(true);
-            }
-        });
     }
-
+    
+    private boolean formularioConsultaValida(){
+        String tipo = cbConsulta.getSelectedItem().toString();
+        String descripcion = tfdescripcion.getText();
+        /*
+        if(!tipo.equals("Todo") && descripcion.equals("")){
+            JOptionPane.showMessageDialog(this,
+                    "Debe ingresar una descripción",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }*/
+        if(tipo.equals("Nombre") && descripcion.equals("")){
+            try{
+                tfdescripcion.equals("");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this,
+                    "Debe ingresar un nombre",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+                return false;
+            }        
+        }
+        if(tipo.equals("Tipo") && descripcion.equals("")){
+            try{
+                tfdescripcion.equals("");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this,
+                    "Debe ingresar un tipo",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+                return false;
+            }        
+        }
+        if(tipo.equals("Id") && descripcion.equals("")){
+            try{
+                tfdescripcion.equals("");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this,
+                    "Debe ingresar un número",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+                return false;
+            }        
+        }
+        return true;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEditar;
     private javax.swing.JButton btEliminar;

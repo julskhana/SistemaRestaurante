@@ -255,6 +255,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void mnIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnIngredientesActionPerformed
         // TODO add your handling code here:
+        frmMantenimientoIngredientes maning = new frmMantenimientoIngredientes();
+        maning.setVisible(true);
     }//GEN-LAST:event_mnIngredientesActionPerformed
 
     private void mnMantClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnMantClientesActionPerformed

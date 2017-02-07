@@ -197,20 +197,7 @@ public class ConexionBase {
         }
         
     }
-    
-    //funcion para cargar al sistema datos de los clientes
-    public ArrayList<Cliente> cargarClientes() throws Exception , SQLException{
-        //recoleccion de datos de clientes en base de datos a arraylist
-        Statement st = this.con.createStatement();
-        ResultSet rst = st.executeQuery("SELECT * FROM cliente");
-        ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
-        while (rst.next()){
-            Cliente c = new Cliente(Integer.getInteger(rst.getString("id")),rst.getString("cedula"),rst.getString("nombre"),rst.getString("apellido"),rst.getString("correo"),rst.getString("tipo"),Integer.getInteger(rst.getString("edad")),rst.getString("fecha_nacimiento"),rst.getString("sexo"),rst.getString("estado"),rst.getString("direccion"),rst.getString("telefono"));
-            listaClientes.add(c);
-        }
-        return listaClientes;
-    }
-    
+        
     //funcion para consultar clientes en bd
     public ArrayList<Cliente> consultarClientes(String busqueda, String tip){
         ArrayList<Cliente> registroC = new ArrayList<Cliente>();
@@ -350,6 +337,8 @@ public class ConexionBase {
         }
         return (registroI);
     }
+    
+    
     /*
     public boolean ingresarUniversidad(Universidad u)
     {
@@ -472,6 +461,22 @@ public class ConexionBase {
             resultado = false;
         }           
      return resultado; 
+    }
+    */
+    
+    
+    /*
+    //funcion para cargar al sistema datos de los clientes
+    public ArrayList<Cliente> cargarClientes() throws Exception , SQLException{
+        //recoleccion de datos de clientes en base de datos a arraylist
+        Statement st = this.con.createStatement();
+        ResultSet rst = st.executeQuery("SELECT * FROM cliente");
+        ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
+        while (rst.next()){
+            Cliente c = new Cliente(Integer.getInteger(rst.getString("id")),rst.getString("cedula"),rst.getString("nombre"),rst.getString("apellido"),rst.getString("correo"),rst.getString("tipo"),Integer.getInteger(rst.getString("edad")),rst.getString("fecha_nacimiento"),rst.getString("sexo"),rst.getString("estado"),rst.getString("direccion"),rst.getString("telefono"));
+            listaClientes.add(c);
+        }
+        return listaClientes;
     }
     */
 }

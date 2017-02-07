@@ -337,21 +337,6 @@ public class frmIngresoClientes extends javax.swing.JFrame {
         }
     }
     
-    /*
-    private boolean validarFrmInCliente(){
-        if (tfCedula.getText().length()==10 &&
-            tfNombres.getText().    ){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    */
-    
-    /**
-     * @param args the command line arguments
-     */
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btIngresar;
     private javax.swing.JButton btLimpiar;

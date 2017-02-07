@@ -317,7 +317,7 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }*/
-        if(tipo.equals("Cedula") && descripcion.equals("")){
+        if(tipo.equals("Cedula")){
             try{
                 tfdescripcion.equals("");
             }catch(Exception e){
@@ -328,7 +328,7 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
                 return false;
             }        
         }
-        if(tipo.equals("Nombres") && descripcion.equals("")){
+        if(tipo.equals("Nombres")){
             try{
                 tfdescripcion.equals("");
             }catch(Exception e){
@@ -339,7 +339,7 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
                 return false;
             }        
         }
-        if(tipo.equals("Apellidos") && descripcion.equals("")){
+        if(tipo.equals("Apellidos")){
             try{
                 tfdescripcion.equals("");
             }catch(Exception e){
