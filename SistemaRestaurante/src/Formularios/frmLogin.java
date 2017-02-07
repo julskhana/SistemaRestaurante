@@ -180,7 +180,8 @@ public class frmLogin extends javax.swing.JFrame {
         ConexionBase c = new ConexionBase();
         System.out.println("online...");
         if (tfUser.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"Ingrese un Usuario correcto");
+            //JOptionPane.showMessageDialog(null,"Ingrese un Usuario correcto");
+            JOptionPane.showMessageDialog(this,"Ingrese un Usuario correcto", "Error",JOptionPane.ERROR_MESSAGE);            
         }else{
             try {
                 c.conectar();

@@ -27,9 +27,11 @@ public class frmEdicionClientes extends javax.swing.JFrame {
     
     frmMantenimientoClientes editarCli;
     
-    public frmEdicionClientes(String cedula, frmMantenimientoClientes edClientes) {
+    public frmEdicionClientes(String id,String cedula, frmMantenimientoClientes edClientes) {
+        System.out.println("id del usuario a editar: "+id);
         initComponents();
         this.editarCli=edClientes;
+        tfuserId.setText(id);
         tfCedula.setText(cedula);
         
         //cargando datos de cliente a editar
@@ -96,6 +98,8 @@ public class frmEdicionClientes extends javax.swing.JFrame {
         tfDireccion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         tfTelefono = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        tfuserId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingreso de Clientes");
@@ -169,6 +173,10 @@ public class frmEdicionClientes extends javax.swing.JFrame {
 
         jLabel11.setText("Telefono:");
 
+        jLabel12.setText("Id:");
+
+        tfuserId.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,7 +185,12 @@ public class frmEdicionClientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(iconoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(iconoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfuserId, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
@@ -232,7 +245,12 @@ public class frmEdicionClientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(iconoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(iconoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(tfuserId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -308,6 +326,7 @@ public class frmEdicionClientes extends javax.swing.JFrame {
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         //Guardando datos nuevos
+        int id = Integer.parseInt(tfuserId.getText());
         String cedula = tfCedula.getText();
         String nombres = tfNombres.getText();
         String apellidos = tfApellidos.getText();
@@ -319,13 +338,20 @@ public class frmEdicionClientes extends javax.swing.JFrame {
         String fecha_nac = tfFechaNacimiento.getText();
         String sexo = (String) cbSexo.getSelectedItem();
         
-        Cliente clin = new Cliente(cedula,nombres,apellidos,correo,tipo,edad,fecha_nac,sexo,direccion,telefono);
+        Cliente clin = new Cliente(id,cedula,nombres,apellidos,correo,tipo,edad,fecha_nac,sexo,direccion,telefono);
         ConexionBase c = new ConexionBase();
         
         try{
             c.conectar();
+            if(c.modificarCliente(clin)){
+                System.out.println("cliente modificado");
+                JOptionPane.showMessageDialog(this,"Se editó correctamente el Cliente", "Edición Clientes",JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }else{
+                System.out.println("error al modificar cliente");
+                JOptionPane.showMessageDialog(this,"Ocurrió un error en la edición", "Error",JOptionPane.ERROR_MESSAGE);            
+            }
         }catch (Exception e){
-            
         }
         
         /*
@@ -352,7 +378,7 @@ public class frmEdicionClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void limpiarFormCli(){
-        tfCedula.setText("");
+        //tfCedula.setText("");
         tfNombres.setText("");
         tfApellidos.setText("");
         tfCorreo.setText("");
@@ -391,6 +417,7 @@ public class frmEdicionClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -407,5 +434,6 @@ public class frmEdicionClientes extends javax.swing.JFrame {
     private javax.swing.JTextField tfFechaNacimiento;
     private javax.swing.JTextField tfNombres;
     private javax.swing.JTextField tfTelefono;
+    private javax.swing.JTextField tfuserId;
     // End of variables declaration//GEN-END:variables
 }

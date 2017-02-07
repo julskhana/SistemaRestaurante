@@ -64,14 +64,14 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
 
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cedula", "Nombres", "Apellidos", "Direccion", "Telefono", "Correo", "Edad", "Fecha Nacimiento", "Tipo"
+                "Id", "Cedula", "Nombres", "Apellidos", "Direccion", "Telefono", "Correo", "Edad", "Fecha Nacimiento", "Tipo"
             }
         ));
         jScrollPane1.setViewportView(tablaClientes);
@@ -167,21 +167,23 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         // TODO add your handling code here:
         int fila = tablaClientes.getSelectedRow();
-        String cedula = tablaClientes.getValueAt(fila,0).toString();
+        String id = tablaClientes.getValueAt(fila,0).toString();
+        
+        String cedula = tablaClientes.getValueAt(fila,1).toString();
         
         ArrayList<Cliente> cli = new ArrayList<>();
+        ConexionBase c = new ConexionBase();
         
         try{
-            ConexionBase c = new ConexionBase();
             c.conectar();
             cli = c.consultarClientes("","cedula");
-            c.desconectar();
         }catch (Exception e){
             System.out.println("Error al iniciar edicion de cliente");
         }
+        c.desconectar();
         
         if (Validaciones.validarDupCliCedula(cli, cedula)){
-            frmEdicionClientes cliedit = new frmEdicionClientes(cedula,this);
+            frmEdicionClientes cliedit = new frmEdicionClientes(id,cedula,this);
             cliedit.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this,"El cliente seleccionado no existe","Edición",JOptionPane.ERROR_MESSAGE);
@@ -217,16 +219,17 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
                 
                 //recorriendo base de datos
                 for (Cliente cli:resultado){
-                    Object[] fila = new Object[9];
-                    fila[0] = cli.getCedula();
-                    fila[1] = cli.getNombres();
-                    fila[2] = cli.getApellidos();
-                    fila[3] = cli.getDireccion();
-                    fila[4] = cli.getTelefono();
-                    fila[5] = cli.getCorreo();
-                    fila[6] = cli.getEdad();
-                    fila[7] = cli.getFecha_nacimiento();
-                    fila[8] = cli.getTipo();
+                    Object[] fila = new Object[10];
+                    fila[0] = cli.getId();
+                    fila[1] = cli.getCedula();
+                    fila[2] = cli.getNombres();
+                    fila[3] = cli.getApellidos();
+                    fila[4] = cli.getDireccion();
+                    fila[5] = cli.getTelefono();
+                    fila[6] = cli.getCorreo();
+                    fila[7] = cli.getEdad();
+                    fila[8] = cli.getFecha_nacimiento();
+                    fila[9] = cli.getTipo();
                     dtm.addRow(fila);
                 }
             c.desconectar();

@@ -74,12 +74,6 @@ public class ConexionBase {
      return resultado; 
     }
     
-    public String obtenerUsuarioActivo(){
-        String cuenta="";
-        
-        return cuenta;
-    }
-    
     //funcion para ingresar cliente a bd
     public boolean ingresarCliente(Cliente cliente){
         
@@ -112,37 +106,49 @@ public class ConexionBase {
     
     public boolean modificarCliente(Cliente cl)
     {
+        
+        /*
         //obteniendo id desde cedula
         String ced = cl.getCedula();
+        System.out.println("Cedula del cliente: "+ced);
         String id_cli="";
         Cliente climod = new Cliente();
-        ResultSet rs = null;                       
+        //ResultSet rs = null;                       
         PreparedStatement st = null;
+        System.out.println("consulando cedula de cliente para obtener id");
+                
         try{
-            PreparedStatement st1=null;
-            st1 = con.prepareStatement("select * from cliente where cedula = "+ced);
-            rs = st1.executeQuery();
+            PreparedStatement st1 = con.prepareStatement("select * from cliente where cedula = "+ced+";");
+            ResultSet rs = st1.executeQuery();
             id_cli = rs.getString("id");
             System.out.println("cliente id: "+id_cli);
+            st1.close();
+            rs.close();
         }catch (Exception e){
+            System.out.println(e);
         }
-                       
+        */
+        
         //modificando datos
         try
         {
+            int idc = cl.getId();
+            System.out.println("id de usuario: "+idc);
             PreparedStatement st2 = null;
-            st2 = con.prepareStatement("update cliente set nombre = ?, apellido = ?, correo = ?, tipo = ?, edad = ?, fecha_nacimiento = ?, sexo = ?, estado = 1 , direccion = ?, telefono = ? where id = "+id_cli);
-            st.setString(1,cl.getNombres());
-            st.setString(2,cl.getApellidos());
-            st.setString(3,cl.getCorreo());
-            st.setString(4,cl.getTipo());
-            st.setInt(5,cl.getEdad());
-            st.setString(6,cl.getFecha_nacimiento());
-            st.setString(7,cl.getSexo());
-            st.setString(8,cl.getDireccion());
-            st.setString(9,cl.getTelefono());            
-            st.executeUpdate();
-            st.close();
+            st2 = con.prepareStatement("update cliente set nombre = ?, apellido = ?, correo = ?, tipo = ?, edad = ?, fecha_nacimiento = ?, sexo = ?, estado = 1 , direccion = ?, telefono = ? where id = ?");
+            st2.setString(1,cl.getNombres());
+            st2.setString(2,cl.getApellidos());
+            st2.setString(3,cl.getCorreo());
+            st2.setString(4,cl.getTipo());
+            st2.setInt(5,cl.getEdad());
+            st2.setString(6,cl.getFecha_nacimiento());
+            st2.setString(7,cl.getSexo());
+            st2.setString(8,cl.getDireccion());
+            st2.setString(9,cl.getTelefono());            
+            st2.setInt(10,cl.getId());            
+            
+            st2.executeUpdate();
+            st2.close();
             System.out.println("modificacion de cliente exitosa");
             return true;
         }
@@ -187,6 +193,7 @@ public class ConexionBase {
             }
             while(rs.next())
             {
+                int id = rs.getInt("id");
                 String cedula = rs.getString("cedula");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
@@ -199,7 +206,7 @@ public class ConexionBase {
                 String direccion = rs.getString("direccion");
                 String telefono = rs.getString("telefono");
                 //creacion de cliente desde consulta
-                Cliente cli = new Cliente(cedula,nombre,apellido,correo,tipo,edad,fecha_nacimiento,sexo,direccion,telefono);
+                Cliente cli = new Cliente(id,cedula,nombre,apellido,correo,tipo,edad,fecha_nacimiento,sexo,direccion,telefono);
                 registroC.add(cli);
             }
             System.out.println("cliente consultado");
