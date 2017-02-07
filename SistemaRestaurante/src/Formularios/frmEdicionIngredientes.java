@@ -5,21 +5,49 @@
  */
 package Formularios;
 
+import Objetos.Cliente;
 import Objetos.Ingrediente;
 import bd.ConexionBase;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Julian
  */
-public class frmIngresoIngredientes extends javax.swing.JFrame {
+public class frmEdicionIngredientes extends javax.swing.JFrame {
 
     /**
      * Creates new form frmIngresarIngrediente
      */
-    public frmIngresoIngredientes() {
+    
+    frmMantenimientoIngredientes frmMantIng;
+    
+    public frmEdicionIngredientes(String id, String nombre, frmMantenimientoIngredientes frm) {
         initComponents();
+        this.frmMantIng=frm;
+        tfnombre.setText(nombre);
+        
+        //cargando datos de cliente a editar
+        ConexionBase c = new ConexionBase();
+        try{
+            c.conectar();
+            ArrayList<Ingrediente> ing = c.consultarIngredientes("","ingrediente");
+            c.desconectar();
+            
+            for (Ingrediente ie:ing){
+                if(String.valueOf(ie.getId()).equals(id)){
+                   tfnombre.setText(nombre);
+                   tfdescripcion.setText("");
+                   //cbtipo.setText("");
+                   tfcosto_porcion.setText("");
+                   tfcantidad.setText("");
+                }
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Ocurrió un error al consultar los datos del registro","Edición",JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
 
     /**
@@ -42,10 +70,10 @@ public class frmIngresoIngredientes extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         tfcantidad = new javax.swing.JTextField();
         cblimpiar = new javax.swing.JButton();
-        cbingresar = new javax.swing.JButton();
+        cbeditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Ingreso de Ingredientes");
+        setTitle("Edicion de Ingredientes");
 
         jLabel1.setText("Nombre:");
 
@@ -78,10 +106,10 @@ public class frmIngresoIngredientes extends javax.swing.JFrame {
             }
         });
 
-        cbingresar.setText("Ingresar");
-        cbingresar.addActionListener(new java.awt.event.ActionListener() {
+        cbeditar.setText("Ingresar");
+        cbeditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbingresarActionPerformed(evt);
+                cbeditarActionPerformed(evt);
             }
         });
 
@@ -106,7 +134,7 @@ public class frmIngresoIngredientes extends javax.swing.JFrame {
                                 .addComponent(tfcosto_porcion, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(cbtipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 74, Short.MAX_VALUE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(cbingresar)
+                                .addComponent(cbeditar)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfdescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                                     .addComponent(tfnombre)))))
@@ -141,7 +169,7 @@ public class frmIngresoIngredientes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cblimpiar)
-                    .addComponent(cbingresar))
+                    .addComponent(cbeditar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -161,7 +189,7 @@ public class frmIngresoIngredientes extends javax.swing.JFrame {
         limpiar();
     }//GEN-LAST:event_cblimpiarActionPerformed
 
-    private void cbingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbingresarActionPerformed
+    private void cbeditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbeditarActionPerformed
         // TODO add your handling code here:
         if (validarFormInIngrediente()){
             String nombre = tfnombre.getText();
@@ -188,7 +216,7 @@ public class frmIngresoIngredientes extends javax.swing.JFrame {
             }
             c.desconectar();
         }
-    }//GEN-LAST:event_cbingresarActionPerformed
+    }//GEN-LAST:event_cbeditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,7 +242,7 @@ public class frmIngresoIngredientes extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cbingresar;
+    private javax.swing.JButton cbeditar;
     private javax.swing.JButton cblimpiar;
     private javax.swing.JComboBox<String> cbtipo;
     private javax.swing.JLabel jLabel1;

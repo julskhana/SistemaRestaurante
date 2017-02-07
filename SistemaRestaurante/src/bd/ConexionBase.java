@@ -166,6 +166,7 @@ public class ConexionBase {
         }
     }
     
+    //funcion para modificar clientes
     public boolean modificarCliente(Cliente cl)
     {
         try
@@ -287,7 +288,7 @@ public class ConexionBase {
         try{
             //Ingreso de Datos de Cliente
             PreparedStatement st=null;
-            st = con.prepareStatement("INSERT INTO Cliente(cedula,nombre,apellido,correo,tipo,edad,fecha_nacimiento,sexo,direccion,telefono) VALUES(?,?,?,?,?,?,?,?,?,?)");
+            st = con.prepareStatement("insert into ingrediente(nombre,descripcion,tipo,costo_porcion,cantidad) values (?,?,?,?,?);");
             st.setString(1,i.getNombre());
             st.setString(2,i.getDescripcion());
             st.setString(3,i.getTipo());
@@ -338,6 +339,34 @@ public class ConexionBase {
         return (registroI);
     }
     
+    //funcion para modificar ingredientes
+    public boolean modificarIngrediente(Ingrediente ing)
+    {
+        try
+        {
+            int id = ing.getId();
+            System.out.println("id de ingrediente: "+id);
+            PreparedStatement st2 = null;
+            st2 = con.prepareStatement("update ingrediente set nombre = ?, descripcion = ?, tipo = ?, costo_porcion = ?, cantidad = ? where id = ?");
+            st2.setString(1,ing.getNombre());
+            st2.setString(2,ing.getDescripcion());
+            st2.setString(3,ing.getTipo());
+            st2.setFloat(4,ing.getCosto_porcion());
+            st2.setInt(5,ing.getCantidad());        
+            st2.setInt(6,ing.getId());
+            
+            st2.executeUpdate();
+            st2.close();
+            System.out.println("modificacion de ingrediente exitosa");
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            return false;
+        }
+        
+    }
     
     /*
     public boolean ingresarUniversidad(Universidad u)

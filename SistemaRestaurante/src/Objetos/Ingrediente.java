@@ -30,6 +30,15 @@ public class Ingrediente implements Serializable{
     //constructor vacio ingrediente
     public Ingrediente(){}
 
+    //constructor para ingresar ingrediente
+    public Ingrediente(String nombre, String descripcion, String tipo, Float costo_p, int cant) {
+        this.nombre=nombre;
+        this.descripcion=descripcion;
+        this.tipo=tipo;
+        this.costo_porcion=costo_p;
+        this.cantidad=cant;
+    }
+
     //Funciones para ingresar informacion ingredientes
 
     public void setId(int id) {
