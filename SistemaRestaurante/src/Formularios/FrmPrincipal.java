@@ -258,7 +258,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void mnArchSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnArchSalirActionPerformed
         // TODO add your handling code here:
         //SALIR
-        int opt1= JOptionPane.showConfirmDialog(this,"Esta Seguro de que desea Salir?","Salir",JOptionPane.YES_NO_OPTION);
+        int opt1= JOptionPane.showConfirmDialog(this,"¿Esta Seguro de que desea Salir?","Salir",JOptionPane.YES_NO_OPTION);
         if(opt1==0){
             System.exit(0);
         }

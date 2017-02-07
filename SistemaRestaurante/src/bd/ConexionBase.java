@@ -386,6 +386,7 @@ public class ConexionBase {
         }        
     } 
     
+    //FUNCIONES DE INGRESO DE TRANSACCIONES: PRODUCTO Y PLATO
     public boolean ingresarProducto(Producto p){
         try{
             //Ingreso de Datos de producto
