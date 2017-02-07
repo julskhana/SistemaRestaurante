@@ -5,7 +5,7 @@
  */
 package Funciones;
 
-import Objetos.Cliente;
+import Objetos.*;
 import java.util.ArrayList;
 
 /**

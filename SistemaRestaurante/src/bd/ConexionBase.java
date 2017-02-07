@@ -74,9 +74,71 @@ public class ConexionBase {
      return resultado; 
     }
     
+    public String obtenerNombreUsuario(Usuario u){
+        String nombre = "";
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try
+        {            
+            st = con.prepareStatement("SELECT * FROM usuario WHERE cuenta = ?");            
+            st.setString(1,u.getCuenta());         
+            rs = st.executeQuery();            
+            if(rs.next()){
+                nombre = rs.getString("nombre");
+                //u.getId(Integer.parseInt(rs.getString("id"));
+                //u.setRol(rs.getString("nombre"));
+            } 
+            rs.close();
+            st.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }    
+        System.out.println("el nombre del usuario activo es: "+nombre);
+        return nombre;
+    }
+    
+    public Usuario obtenerDatosUsuario(String cuenta){
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        Usuario user = new Usuario();
+        try
+        {            
+            st = con.prepareStatement("SELECT * FROM usuario WHERE cuenta = ?");            
+            st.setString(1,cuenta);         
+            rs = st.executeQuery();            
+            if(rs.next()){
+                int id = Integer.parseInt(rs.getString("id"));
+                String nombre = rs.getString("nombre");
+                String cuentau = rs.getString("cuenta");
+                String pass = rs.getString("clave");
+                user = new Usuario(id, nombre, cuentau, pass);
+            } 
+            rs.close();
+            st.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }    
+        //System.out.println("el nombre del usuario activo es: "+id);
+        return user;
+    }
+    
+    public boolean cambiarClaveUsuario(Usuario u){
+        try{
+            String id = String.valueOf(u.getId());
+            System.out.println("id del usuario para cambio clave: "+id);
+            PreparedStatement st = con.prepareStatement("update usuario set clave = ? where id = "+id);
+            st.setString(1,u.getClave());
+            
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    
     //funcion para ingresar cliente a bd
     public boolean ingresarCliente(Cliente cliente){
-        
         try{
             //Ingreso de Datos de Cliente
             PreparedStatement st=null;
@@ -106,30 +168,6 @@ public class ConexionBase {
     
     public boolean modificarCliente(Cliente cl)
     {
-        
-        /*
-        //obteniendo id desde cedula
-        String ced = cl.getCedula();
-        System.out.println("Cedula del cliente: "+ced);
-        String id_cli="";
-        Cliente climod = new Cliente();
-        //ResultSet rs = null;                       
-        PreparedStatement st = null;
-        System.out.println("consulando cedula de cliente para obtener id");
-                
-        try{
-            PreparedStatement st1 = con.prepareStatement("select * from cliente where cedula = "+ced+";");
-            ResultSet rs = st1.executeQuery();
-            id_cli = rs.getString("id");
-            System.out.println("cliente id: "+id_cli);
-            st1.close();
-            rs.close();
-        }catch (Exception e){
-            System.out.println(e);
-        }
-        */
-        
-        //modificando datos
         try
         {
             int idc = cl.getId();
@@ -176,9 +214,7 @@ public class ConexionBase {
     //funcion para consultar clientes en bd
     public ArrayList<Cliente> consultarClientes(String busqueda, String tip){
         ArrayList<Cliente> registroC = new ArrayList<Cliente>();
-        
         try{
-            //rs es resultado
             Statement st = this.con.createStatement();
             ResultSet rs = null;
             
@@ -214,6 +250,30 @@ public class ConexionBase {
             System.out.println("error en consulta de cliente db");
         }
         return (registroC);
+    }
+    
+    public ArrayList<Usuario> consultarUsuarios(){
+        ArrayList<Usuario> registroU = new ArrayList<Usuario>();
+        try{
+            Statement st = this.con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM usuario");
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String cedula = rs.getString("cedula");
+                String nombre = rs.getString("nombre");
+                String rol = rs.getString("rol");
+                String estado = rs.getString("estado");
+                String cuenta = rs.getString("cuenta");
+                String clave = rs.getString("clave");
+                
+                Usuario usr = new Usuario(id,cedula,nombre,rol,estado,cuenta,clave);
+                registroU.add(usr);
+            }
+            System.out.println("usuarios consultados.");
+        }catch (Exception e){
+            System.out.println("error en consulta de usuarios.");
+        }
+        return registroU;
     }
     
     

@@ -194,9 +194,11 @@ public class frmLogin extends javax.swing.JFrame {
                     pfPassword.setText("");
                     // Despliegue de programa rpincipal
                     System.out.println("usuario valido!");
-                    FrmPrincipal principal = new FrmPrincipal();
+                    String nombreUsr = c.obtenerNombreUsuario(u);
+                    //Usuario usrAct = c.obtenerDatosUsuario(cuenta);
+                    FrmPrincipal principal = new FrmPrincipal(nombreUsr,cuenta);
                     principal.setVisible(true);
-                    JOptionPane.showMessageDialog(null,"BIENVENIDO");
+                    JOptionPane.showMessageDialog(null,"Bienvenido "+nombreUsr);
                     this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(null,"Usuario o Clave incorrecta","Autenticación",JOptionPane.ERROR_MESSAGE);

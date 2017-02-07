@@ -38,8 +38,9 @@ public class Usuario implements Serializable{
         this.clave=clave;
     }
     
-    //constuctor para cambia clave usuario
-    public Usuario(String nombre, String cuenta,String clave){
+    //constuctor para cambio de clave usuario
+    public Usuario(int id,String nombre, String cuenta,String clave){
+        this.id=id;
         this.nombre=nombre;
         this.cuenta=cuenta;
         this.clave=clave;

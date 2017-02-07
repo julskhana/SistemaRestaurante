@@ -6,7 +6,9 @@
 
 package Formularios;
 
-//import Objetos.Usuario;
+import Objetos.Usuario;
+import bd.ConexionBase;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,9 +17,19 @@ package Formularios;
 public class frmCambioClave extends javax.swing.JFrame {
 
     /** Creates new form frmCambioClave */
-    public frmCambioClave() {
+    public frmCambioClave(String cuenta) {
         initComponents();
         
+        //obteniendo datos de usuario
+        ConexionBase c = new ConexionBase();
+        try{
+            c.conectar();
+            Usuario usrAct = c.obtenerDatosUsuario(cuenta);
+            tfNombreUsr.setText(usrAct.getNombre());
+            tfCuentausr.setText(usrAct.getCuenta());
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -29,23 +41,25 @@ public class frmCambioClave extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tfCuentaUsr = new javax.swing.JTextField();
+        tfNombreUsr = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jpass1 = new javax.swing.JPasswordField();
+        pfpass1 = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jpass2 = new javax.swing.JPasswordField();
+        pfpass2 = new javax.swing.JPasswordField();
         btLimpiar = new javax.swing.JButton();
         btCambiarClave = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tfCuentausr = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cambio de Clave - Usuario");
 
-        tfCuentaUsr.setEditable(false);
-        tfCuentaUsr.addActionListener(new java.awt.event.ActionListener() {
+        tfNombreUsr.setEditable(false);
+        tfNombreUsr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCuentaUsrActionPerformed(evt);
+                tfNombreUsrActionPerformed(evt);
             }
         });
 
@@ -71,6 +85,15 @@ public class frmCambioClave extends javax.swing.JFrame {
 
         jLabel4.setText("Ingrese una clave que contenga letras y numeros, minimo 6 caracteres.");
 
+        jLabel5.setText("Cuenta:");
+
+        tfCuentausr.setEditable(false);
+        tfCuentausr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCuentausrActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,27 +101,33 @@ public class frmCambioClave extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfCuentaUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btLimpiar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btCambiarClave))
-                            .addComponent(jLabel4)))
+                                .addGap(48, 48, 48)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(pfpass1)
+                                    .addComponent(pfpass2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(175, 175, 175)
+                                .addComponent(btCambiarClave, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
+                        .addGap(180, 180, 180)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jpass1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(jpass2))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfCuentausr))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfNombreUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -107,18 +136,22 @@ public class frmCambioClave extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfCuentaUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(tfNombreUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(tfCuentausr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jpass1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pfpass1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jpass2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(pfpass2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCambiarClave)
                     .addComponent(btLimpiar))
@@ -128,21 +161,60 @@ public class frmCambioClave extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfCuentaUsrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCuentaUsrActionPerformed
+    private void tfNombreUsrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombreUsrActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfCuentaUsrActionPerformed
+    }//GEN-LAST:event_tfNombreUsrActionPerformed
 
     private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
         // TODO add your handling code here:
+        limpiar();
     }//GEN-LAST:event_btLimpiarActionPerformed
 
     private void btCambiarClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCambiarClaveActionPerformed
-        // TODO add your handling code here:
+        // rpoceso de cambio de clave
+        String cuenta = tfCuentausr.getText();
+        String nclave = String.valueOf(pfpass1.getPassword());
+        //String nclave2 = String.valueOf(pfpass2.getPassword());
+        ConexionBase c = new ConexionBase();
+        try{
+            c.conectar();
+            if (claveValida()){
+                Usuario u = c.obtenerDatosUsuario(cuenta);
+                c.cambiarClaveUsuario(u);
+                System.out.println("Cambio de clave exitosa");
+                JOptionPane.showMessageDialog(this,"Se realizo cambio de clave.", "Edición Clave",JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                System.out.println("error en cambio de clave");
+                JOptionPane.showMessageDialog(this,"Ocurrió un error al cambiar la clave.", "Error",JOptionPane.ERROR_MESSAGE);            
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        c.desconectar();
     }//GEN-LAST:event_btCambiarClaveActionPerformed
+
+    private void tfCuentausrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCuentausrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCuentausrActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    
+    public void limpiar(){
+        pfpass1.setText("");
+        pfpass2.setText("");
+    }
+    
+    private boolean claveValida(){
+        String p1 = String.valueOf(pfpass1.getPassword());
+        String p2 = String.valueOf(pfpass2.getPassword());
+        if (p1==p2 && p1!=""){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCambiarClave;
@@ -151,9 +223,11 @@ public class frmCambioClave extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jpass1;
-    private javax.swing.JPasswordField jpass2;
-    private javax.swing.JTextField tfCuentaUsr;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPasswordField pfpass1;
+    private javax.swing.JPasswordField pfpass2;
+    private javax.swing.JTextField tfCuentausr;
+    private javax.swing.JTextField tfNombreUsr;
     // End of variables declaration//GEN-END:variables
 
 }

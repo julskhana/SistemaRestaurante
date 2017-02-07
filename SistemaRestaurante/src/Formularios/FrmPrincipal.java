@@ -22,8 +22,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form FrmPrincipal
      */
-    public FrmPrincipal() {
+    public FrmPrincipal(String nombreUsr, String cuentaUser) {
         initComponents();
+        tfNombreUsr.setText(nombreUsr);
+        lbCuenta.setText(cuentaUser);
         System.out.println("Ingreso al Sistema");
         
         /*
@@ -53,6 +55,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jLabel1 = new javax.swing.JLabel();
+        tfNombreUsr = new javax.swing.JTextField();
+        lbCuenta = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mArchivo = new javax.swing.JMenu();
         mcCambioClave = new javax.swing.JMenuItem();
@@ -83,9 +88,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Encuenstas para Restaurantes - Java");
 
+        jLabel1.setText("Usuario Activo:");
+
+        tfNombreUsr.setEditable(false);
+
+        lbCuenta.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
         mArchivo.setText("Archivo");
+        mArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mArchivoActionPerformed(evt);
+            }
+        });
 
         mcCambioClave.setText("Cambio de Contraseña");
+        mcCambioClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mcCambioClaveActionPerformed(evt);
+            }
+        });
         mArchivo.add(mcCambioClave);
 
         mnArchSalir.setText("Salir");
@@ -182,11 +203,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 611, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfNombreUsr, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
+                .addComponent(lbCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(329, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(tfNombreUsr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -228,15 +263,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mantCli.setVisible(true);
     }//GEN-LAST:event_mnMantClientesActionPerformed
 
+    private void mcCambioClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcCambioClaveActionPerformed
+        // TODO add your handling code here:
+        String cuenta = lbCuenta.getText();
+        frmCambioClave cambioPass = new frmCambioClave(cuenta);
+        cambioPass.setVisible(true);
+    }//GEN-LAST:event_mcCambioClaveActionPerformed
+
+    private void mArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mArchivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mArchivoActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JLabel lbCuenta;
     private javax.swing.JMenu mAcciones;
     private javax.swing.JMenu mAcercade;
     private javax.swing.JMenu mArchivo;
@@ -257,5 +305,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnMantenimiento;
     private javax.swing.JMenuItem mnPedidos;
     private javax.swing.JMenuItem mnProductos;
+    private javax.swing.JTextField tfNombreUsr;
     // End of variables declaration//GEN-END:variables
 }
