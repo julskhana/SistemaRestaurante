@@ -197,6 +197,7 @@ public class frmLogin extends javax.swing.JFrame {
                     FrmPrincipal principal = new FrmPrincipal();
                     principal.setVisible(true);
                     JOptionPane.showMessageDialog(null,"BIENVENIDO");
+                    this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(null,"Usuario o Clave incorrecta","Autenticación",JOptionPane.ERROR_MESSAGE);
                     System.out.println("usuario o clave incorrectos...");

@@ -354,27 +354,6 @@ public class frmEdicionClientes extends javax.swing.JFrame {
         }catch (Exception e){
         }
         
-        /*
-        //creacion arraylist cliente
-        Cliente cli = new Cliente(nombres,apellidos,correo,tipo,edad,fecha_nac,sexo,direccion,telefono);
-        //conexion
-        ConexionBase c = new ConexionBase();
-        //insertR CLIENTE
-        try{
-            c.conectar();
-            if(c.ingresarCliente(cli)){
-                System.out.println("Cliente ingresado.");
-                //limpiarFormCli();
-                JOptionPane.showMessageDialog(null,"Cliente Ingresado Correctamente.");
-            }else{
-                System.out.println("Cliente no ingresado.");
-                JOptionPane.showMessageDialog(null,"Información Incorrecta.","Ingreso de Clientes",JOptionPane.ERROR_MESSAGE);
-            }
-        }catch (Exception e){
-            System.out.println("Error al ingresar formulario cliente...");
-        }
-        c.desconectar();
-        */
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void limpiarFormCli(){
