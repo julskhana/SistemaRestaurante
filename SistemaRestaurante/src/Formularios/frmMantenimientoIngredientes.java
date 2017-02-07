@@ -215,6 +215,7 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
                 ArrayList<Ingrediente> registro = c.consultarIngredientes("","ingrediente");
                 ArrayList<Ingrediente> resultado = new ArrayList<Ingrediente>();
                 
+                
                 if (tipo.equals("Todos")){
                     resultado = registro;
                 }else{

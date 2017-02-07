@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import Objetos.*;
 import bd.ConexionBase;
+import java.util.LinkedList;
 
 /**
  *
@@ -27,6 +28,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
         tfNombreUsr.setText(nombreUsr);
         lbCuenta.setText(cuentaUser);
         System.out.println("Ingreso al Sistema");
+        
+        //CARGA DE INGREDIENTES PARA CREAR PRODUCTOS
+        ConexionBase c = new ConexionBase();
+        try{
+            c.conectar();
+            ArrayList<Ingrediente> ing = c.consultarIngredientes("","ingrediente");
+            LinkedList<Ingrediente> ln = new LinkedList();
+            ln.add(ing.get(3));
+            ln.add(ing.get(4));
+            
+            Producto pr = new Producto(1,"arroz con atun","arroz atun","mediano",2,"at",ln);
+            
+            System.out.println(pr.getIngredientes().get(0).getId());
+            System.out.println(pr.getIngredientes().get(1).getId());
+            
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        c.desconectar();
         
         /*
         //conexion a base de datos
