@@ -365,8 +365,26 @@ public class ConexionBase {
             System.out.println(e);
             return false;
         }
-        
     }
+    
+    //funcion para eliminar ingredientes
+    public boolean eliminarIngrediente(int id)
+    {
+        try
+        {
+            PreparedStatement st = null;
+            st = con.prepareStatement("DELETE FROM ingrediente WHERE id = ?");            
+            st.setInt(1,id);         
+            st.executeUpdate();
+            st.close();                        
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            return false;
+        }        
+    } 
     
     /*
     public boolean ingresarUniversidad(Universidad u)

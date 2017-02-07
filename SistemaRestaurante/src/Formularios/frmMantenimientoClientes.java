@@ -175,6 +175,8 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
             }
             c.desconectar();
         }
+        if(formularioConsultaValidoA()){
+            consultarRegistro();}
     }//GEN-LAST:event_btEliminarActionPerformed
 
     private void btingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btingresarActionPerformed

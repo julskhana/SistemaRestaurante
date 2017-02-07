@@ -142,6 +142,26 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
         // TODO add your handling code here:
+        if (seleccionEliminacionValida()){
+            ConexionBase c = new ConexionBase();
+            try{
+                c.conectar();
+                int filas[] =tablaIngredientes.getSelectedRows();
+                    for (int i = 0; i < filas.length; i++) {
+                        int fila = filas[i];
+                        String id = tablaIngredientes.getValueAt(fila,0).toString();
+                        if(!c.eliminarIngrediente(Integer.parseInt(id))){
+                            JOptionPane.showMessageDialog(this,"Ocurrió un error en la eliminación","Eliminación",JOptionPane.ERROR_MESSAGE);
+                            return ;
+                        }
+                    }
+            }catch(Exception e){
+                System.out.println(e);
+            }
+            c.desconectar();
+        }
+        if (formularioConsultaValida()){
+            consultarRegistro();}
     }//GEN-LAST:event_btEliminarActionPerformed
 
     private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
@@ -299,6 +319,22 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
             return false;
         }
         return true;
+    }
+    
+    private boolean seleccionEliminacionValida(){ 
+        int n = tablaIngredientes.getSelectedRowCount();
+        if(n==0){
+            JOptionPane.showMessageDialog(this,
+                    "Debe seleccionar mínimo un registro para eliminar",
+                    "Eliminación",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;        
+        }
+        int op = JOptionPane.showConfirmDialog(this, "Está seguro de eliminar los registros seleccionados?","Eliminación",JOptionPane.YES_NO_OPTION);
+        if(op==0)
+            return true;
+        else
+            return false;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
