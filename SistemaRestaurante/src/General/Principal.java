@@ -17,7 +17,18 @@ public class Principal {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        frmLogin login = new frmLogin();
-        login.setVisible(true);
+        
+        // SELECCION PARA EJECUTAR EL PROGRAMA CON O SIN INGRESO DE USUARIOS
+        int estadoIn = 0;
+        //
+        if (estadoIn==1){
+            // CODIGO PARA PRESENTACION DE PROYECTO
+            frmLogin login = new frmLogin();
+            login.setVisible(true);
+        }else{
+            // CODIGO PARA PRUEBAS DE PROGRAMACION
+            FrmPrincipal principal = new FrmPrincipal("Julian Bajaña","jaba");
+            principal.setVisible(true);
+        }
     }
 }

@@ -234,17 +234,15 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
                     resultado = registro;
                 }else{
                     for (Cliente c1:registro){
-                        if(cbTipoConsulta.equals("Cedula")){
+                        if(tipo.equals("Cedula")){
                             if(c1.getCedula().contains(descripcion)){
                                 resultado.add(c1);
                             }
-                        }
-                        if(cbTipoConsulta.equals("Nombres")){
+                        }else if(tipo.equals("Nombres")){
                             if(c1.getNombres().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(c1);
                             }
-                        }
-                        if(cbTipoConsulta.equals("Apellidos")){
+                        }else if(tipo.equals("Apellidos")){
                             if(c1.getApellidos().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(c1);
                             }

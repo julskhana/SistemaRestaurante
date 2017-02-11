@@ -234,25 +234,13 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
                             }
                         }
                     }
-                    //System.out.println("consulta invalida...");
-                    
-                    /*
-                    if(tipo.equals("Todos")){
-                        res=reg;
-                    }else{
-                        for (Materia m1:reg){
-                        if(String.valueOf(m1.getId()).contains(descripcion)){
-                            res.add(m1);
-                    }
-                       
-                    */
                 }
                 DefaultTableModel dtm = (DefaultTableModel)tablaIngredientes.getModel();
                 dtm.setRowCount(0);
                 
                 //recorriendo base de datos
                 for (Ingrediente ing:resultado){
-                    Object[] fila = new Object[10];
+                    Object[] fila = new Object[6];
                     fila[0] = ing.getId();
                     fila[1] = ing.getNombre();
                     fila[2] = ing.getDescripcion();
@@ -283,7 +271,7 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
         }*/
         if(tipo.equals("Nombre") && descripcion.equals("")){
             try{
-                tfdescripcion.equals("");
+                descripcion.equals("");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this,
                     "Debe ingresar un nombre",
@@ -294,7 +282,7 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
         }
         if(tipo.equals("Tipo") && descripcion.equals("")){
             try{
-                tfdescripcion.equals("");
+                descripcion.equals("");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this,
                     "Debe ingresar un tipo",
@@ -305,7 +293,7 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
         }
         if(tipo.equals("Id") && descripcion.equals("")){
             try{
-                tfdescripcion.equals("");
+                descripcion.equals("");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this,
                     "Debe ingresar un número",

@@ -35,7 +35,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cbConsulta = new javax.swing.JComboBox<>();
+        cdTipo = new javax.swing.JComboBox<>();
         tfdescripcion = new javax.swing.JTextField();
         tbConsultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -45,9 +45,9 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
         btIngresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Mantenimiento de Ingredientes");
+        setTitle("Mantenimiento de Productos");
 
-        cbConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Id", "Nombre" }));
+        cdTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Id", "Nombre" }));
 
         tbConsultar.setText("Consultar");
         tbConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -58,13 +58,13 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
 
         tablaIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Descripcion", "Tipo", "Costo Porcion", "Cantidad"
+                "Id", "Nombre", "Descripcion", "Tamaño", "Precio", "Tipo", "Ingredientes"
             }
         ));
         jScrollPane1.setViewportView(tablaIngredientes);
@@ -97,18 +97,18 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cbConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cdTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tfdescripcion)
                         .addGap(18, 18, 18)
                         .addComponent(tbConsultar))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(185, 185, 185)
                         .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(135, 135, 135)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btIngresar)))
                 .addContainerGap())
         );
@@ -117,7 +117,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cdTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tbConsultar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -127,7 +127,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
                     .addComponent(btEliminar)
                     .addComponent(btEditar)
                     .addComponent(btIngresar))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -188,8 +188,8 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
             c.desconectar();
 
             if (Validaciones.validarDupNombreIng(ing, nombre)){
-                frmEdicionIngredientes ingedit = new frmEdicionIngredientes(id,nombre,this);
-                ingedit.setVisible(true);
+                //frmEdicionIngredientes ingedit = new frmEdicionIngredientes(id,nombre,this);
+                //ingedit.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(this,"El ingrediente seleccionado no existe","Edición",JOptionPane.ERROR_MESSAGE);
                 System.out.println("El ingrediente no existe");
@@ -202,7 +202,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
      */
     
     public void consultarRegistro(){
-        String tipo = cbConsulta.getSelectedItem().toString();
+        String tipo = cdTipo.getSelectedItem().toString();
         String descripcion = tfdescripcion.getText();
         
         //consultar
@@ -221,17 +221,17 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
                 }else{
                     
                     for (Ingrediente i1:registro){
-                        if(cbConsulta.equals("Id")){
+                        if(cdTipo.equals("Id")){
                             if(i1.getId()==Integer.parseInt(descripcion)){
                                 resultado.add(i1);
                             }
                         }
-                        if(cbConsulta.equals("Nombre")){
+                        if(cdTipo.equals("Nombre")){
                             if(i1.getNombre().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(i1);
                             }
                         }
-                        if(cbConsulta.equals("Tipo")){
+                        if(cdTipo.equals("Tipo")){
                             if(i1.getTipo().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(i1);
                             }
@@ -264,7 +264,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     }
     
     private boolean formularioConsultaValida(){
-        String tipo = cbConsulta.getSelectedItem().toString();
+        String tipo = cdTipo.getSelectedItem().toString();
         String descripcion = tfdescripcion.getText();
         /*
         if(!tipo.equals("Todo") && descripcion.equals("")){
@@ -342,7 +342,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     private javax.swing.JButton btEditar;
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btIngresar;
-    private javax.swing.JComboBox<String> cbConsulta;
+    private javax.swing.JComboBox<String> cdTipo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaIngredientes;
     private javax.swing.JButton tbConsultar;

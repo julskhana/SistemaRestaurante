@@ -137,8 +137,8 @@ public class frmSeleccion_Ingredientes extends javax.swing.JFrame {
             c.desconectar();
 
             if (Validaciones.validarDupNombreIng(ing, nombre)){
-                frmEdicionIngredientes ingedit = new frmEdicionIngredientes(id,nombre,this);
-                ingedit.setVisible(true);
+                //frmEdicionIngredientes ingedit = new frmEdicionIngredientes(id,nombre,this);
+                //ingedit.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(this,"El ingrediente seleccionado no existe","Edición",JOptionPane.ERROR_MESSAGE);
                 System.out.println("El ingrediente no existe");
