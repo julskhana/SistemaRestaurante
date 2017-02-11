@@ -1,4 +1,4 @@
-/SistemaRestaurante/nbproject/private/
+﻿/SistemaRestaurante/nbproject/private/
 
 #Julian Baja�a Araujo
 
@@ -15,6 +15,9 @@ nb-configuration.xml
 
 # Class Files #
 *.class
+
+# SQL Files #
+*.sql
 
 # Package Files #
 *.jar
