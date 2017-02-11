@@ -5,6 +5,14 @@
  */
 package Formularios;
 
+import Funciones.Validaciones;
+import Objetos.Cliente;
+import Objetos.Ingrediente;
+import bd.ConexionBase;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Julian
@@ -12,7 +20,7 @@ package Formularios;
 public class frmMantenimientoProductos extends javax.swing.JFrame {
 
     /**
-     * Creates new form frmMantenimientoProductos
+     * Creates new form frmMantenimientoIngredientes
      */
     public frmMantenimientoProductos() {
         initComponents();
@@ -27,11 +35,60 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbConsulta = new javax.swing.JComboBox<>();
+        tfdescripcion = new javax.swing.JTextField();
+        tbConsultar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaIngredientes = new javax.swing.JTable();
+        btEliminar = new javax.swing.JButton();
+        btEditar = new javax.swing.JButton();
+        btIngresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Mantenimiento de Ingredientes");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
+        cbConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Id", "Nombre" }));
+
+        tbConsultar.setText("Consultar");
+        tbConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbConsultarActionPerformed(evt);
+            }
+        });
+
+        tablaIngredientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Id", "Nombre", "Descripcion", "Tipo", "Costo Porcion", "Cantidad"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaIngredientes);
+
+        btEliminar.setText("Eliminar");
+        btEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarActionPerformed(evt);
+            }
+        });
+
+        btEditar.setText("Editar");
+        btEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarActionPerformed(evt);
+            }
+        });
+
+        btIngresar.setText("Ingresar");
+        btIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btIngresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -39,26 +96,256 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(423, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfdescripcion)
+                        .addGap(18, 18, 18)
+                        .addComponent(tbConsultar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(135, 135, 135)
+                        .addComponent(btIngresar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tbConsultar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btEliminar)
+                    .addComponent(btEditar)
+                    .addComponent(btIngresar))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tbConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbConsultarActionPerformed
+        // TODO add your handling code here:
+        if (formularioConsultaValida()){
+            consultarRegistro();
+        }
+    }//GEN-LAST:event_tbConsultarActionPerformed
+
+    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
+        // TODO add your handling code here:
+        if (seleccionEliminacionValida()){
+            ConexionBase c = new ConexionBase();
+            try{
+                c.conectar();
+                int filas[] =tablaIngredientes.getSelectedRows();
+                    for (int i = 0; i < filas.length; i++) {
+                        int fila = filas[i];
+                        String id = tablaIngredientes.getValueAt(fila,0).toString();
+                        if(!c.eliminarIngrediente(Integer.parseInt(id))){
+                            JOptionPane.showMessageDialog(this,"Ocurrió un error en la eliminación","Eliminación",JOptionPane.ERROR_MESSAGE);
+                            return ;
+                        }
+                    }
+            }catch(Exception e){
+                System.out.println(e);
+            }
+            c.desconectar();
+        }
+        if (formularioConsultaValida()){
+            consultarRegistro();}
+    }//GEN-LAST:event_btEliminarActionPerformed
+
+    private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
+        // TODO add your handling code here:
+        frmIngresoIngredientes inIng = new frmIngresoIngredientes();
+        inIng.setVisible(true);
+    }//GEN-LAST:event_btIngresarActionPerformed
+
+    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+        // TODO add your handling code here:
+        if (seleccionEdicionValida()){
+            int fila = tablaIngredientes.getSelectedRow();
+            String id = tablaIngredientes.getValueAt(fila,0).toString();
+            String nombre = tablaIngredientes.getValueAt(fila,1).toString();
+            ArrayList<Ingrediente> ing = new ArrayList<>();
+            ConexionBase c = new ConexionBase();
+
+            try{
+                c.conectar();
+                ing = c.consultarIngredientes("","id");
+            }catch (Exception e){
+                System.out.println("Error al iniciar edicion de cliente");
+            }
+            c.desconectar();
+
+            if (Validaciones.validarDupNombreIng(ing, nombre)){
+                frmEdicionIngredientes ingedit = new frmEdicionIngredientes(id,nombre,this);
+                ingedit.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(this,"El ingrediente seleccionado no existe","Edición",JOptionPane.ERROR_MESSAGE);
+                System.out.println("El ingrediente no existe");
+            }
+        }
+    }//GEN-LAST:event_btEditarActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
-
+    public void consultarRegistro(){
+        String tipo = cbConsulta.getSelectedItem().toString();
+        String descripcion = tfdescripcion.getText();
+        
+        //consultar
+        try{
+            //cunsolta a la base
+            try{
+                ConexionBase c = new ConexionBase();
+                c.conectar();
+                
+                ArrayList<Ingrediente> registro = c.consultarIngredientes("","ingrediente");
+                ArrayList<Ingrediente> resultado = new ArrayList<Ingrediente>();
+                
+                
+                if (tipo.equals("Todos")){
+                    resultado = registro;
+                }else{
+                    
+                    for (Ingrediente i1:registro){
+                        if(cbConsulta.equals("Id")){
+                            if(i1.getId()==Integer.parseInt(descripcion)){
+                                resultado.add(i1);
+                            }
+                        }
+                        if(cbConsulta.equals("Nombre")){
+                            if(i1.getNombre().toUpperCase().contains(descripcion.toUpperCase())){
+                                resultado.add(i1);
+                            }
+                        }
+                        if(cbConsulta.equals("Tipo")){
+                            if(i1.getTipo().toUpperCase().contains(descripcion.toUpperCase())){
+                                resultado.add(i1);
+                            }
+                        }
+                        
+                    }
+                    //System.out.println("consulta invalida...");
+                }
+                DefaultTableModel dtm = (DefaultTableModel)tablaIngredientes.getModel();
+                dtm.setRowCount(0);
+                
+                //recorriendo base de datos
+                for (Ingrediente ing:resultado){
+                    Object[] fila = new Object[10];
+                    fila[0] = ing.getId();
+                    fila[1] = ing.getNombre();
+                    fila[2] = ing.getDescripcion();
+                    fila[3] = ing.getTipo();
+                    fila[4] = ing.getCosto_porcion();
+                    fila[5] = ing.getCantidad();
+                    dtm.addRow(fila);
+                }
+            c.desconectar();
+            }catch (Exception e){
+                System.out.println("error al consultar ingredientes");
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Ocurrió un error al consultar los registros","Consulta",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private boolean formularioConsultaValida(){
+        String tipo = cbConsulta.getSelectedItem().toString();
+        String descripcion = tfdescripcion.getText();
+        /*
+        if(!tipo.equals("Todo") && descripcion.equals("")){
+            JOptionPane.showMessageDialog(this,
+                    "Debe ingresar una descripción",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }*/
+        if(tipo.equals("Nombre") && descripcion.equals("")){
+            try{
+                tfdescripcion.equals("");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this,
+                    "Debe ingresar un nombre",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+                return false;
+            }        
+        }
+        if(tipo.equals("Tipo") && descripcion.equals("")){
+            try{
+                tfdescripcion.equals("");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this,
+                    "Debe ingresar un tipo",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+                return false;
+            }        
+        }
+        if(tipo.equals("Id") && descripcion.equals("")){
+            try{
+                tfdescripcion.equals("");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this,
+                    "Debe ingresar un número",
+                    "Consulta",
+                    JOptionPane.ERROR_MESSAGE);
+                return false;
+            }        
+        }
+        return true;
+    }
+    
+    private boolean seleccionEdicionValida(){
+        int n = tablaIngredientes.getSelectedRowCount();
+        if(n!=1){
+            JOptionPane.showMessageDialog(this,
+                    "Debe seleccionar un registro para editar",
+                    "Edición",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean seleccionEliminacionValida(){ 
+        int n = tablaIngredientes.getSelectedRowCount();
+        if(n==0){
+            JOptionPane.showMessageDialog(this,
+                    "Debe seleccionar mínimo un registro para eliminar",
+                    "Eliminación",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;        
+        }
+        int op = JOptionPane.showConfirmDialog(this, "Está seguro de eliminar los registros seleccionados?","Eliminación",JOptionPane.YES_NO_OPTION);
+        if(op==0)
+            return true;
+        else
+            return false;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btEditar;
+    private javax.swing.JButton btEliminar;
+    private javax.swing.JButton btIngresar;
+    private javax.swing.JComboBox<String> cbConsulta;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaIngredientes;
+    private javax.swing.JButton tbConsultar;
+    private javax.swing.JTextField tfdescripcion;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Julian
  */
-public class frmMantenimientoIngredientes extends javax.swing.JFrame {
+public class frmSeleccion_Ingredientes extends javax.swing.JFrame {
 
     /**
      * Creates new form frmMantenimientoIngredientes
      */
-    public frmMantenimientoIngredientes() {
+    public frmSeleccion_Ingredientes() {
         initComponents();
     }
 
@@ -40,9 +40,7 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
         tbConsultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaIngredientes = new javax.swing.JTable();
-        btEliminar = new javax.swing.JButton();
-        btEditar = new javax.swing.JButton();
-        btIngresar = new javax.swing.JButton();
+        btSeleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mantenimiento de Ingredientes");
@@ -69,24 +67,10 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaIngredientes);
 
-        btEliminar.setText("Eliminar");
-        btEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btSeleccionar.setText("Seleccionar");
+        btSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEliminarActionPerformed(evt);
-            }
-        });
-
-        btEditar.setText("Editar");
-        btEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEditarActionPerformed(evt);
-            }
-        });
-
-        btIngresar.setText("Ingresar");
-        btIngresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btIngresarActionPerformed(evt);
+                btSeleccionarActionPerformed(evt);
             }
         });
 
@@ -103,14 +87,12 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(tfdescripcion)
                         .addGap(18, 18, 18)
-                        .addComponent(tbConsultar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(135, 135, 135)
-                        .addComponent(btIngresar)))
+                        .addComponent(tbConsultar)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btSeleccionar)
+                .addGap(210, 210, 210))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,12 +104,9 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
                     .addComponent(tbConsultar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btEliminar)
-                    .addComponent(btEditar)
-                    .addComponent(btIngresar))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btSeleccionar)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,37 +119,7 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbConsultarActionPerformed
 
-    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-        // TODO add your handling code here:
-        if (seleccionEliminacionValida()){
-            ConexionBase c = new ConexionBase();
-            try{
-                c.conectar();
-                int filas[] =tablaIngredientes.getSelectedRows();
-                    for (int i = 0; i < filas.length; i++) {
-                        int fila = filas[i];
-                        String id = tablaIngredientes.getValueAt(fila,0).toString();
-                        if(!c.eliminarIngrediente(Integer.parseInt(id))){
-                            JOptionPane.showMessageDialog(this,"Ocurrió un error en la eliminación","Eliminación",JOptionPane.ERROR_MESSAGE);
-                            return ;
-                        }
-                    }
-            }catch(Exception e){
-                System.out.println(e);
-            }
-            c.desconectar();
-        }
-        if (formularioConsultaValida()){
-            consultarRegistro();}
-    }//GEN-LAST:event_btEliminarActionPerformed
-
-    private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
-        // TODO add your handling code here:
-        frmIngresoIngredientes inIng = new frmIngresoIngredientes();
-        inIng.setVisible(true);
-    }//GEN-LAST:event_btIngresarActionPerformed
-
-    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
+    private void btSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSeleccionarActionPerformed
         // TODO add your handling code here:
         if (seleccionEdicionValida()){
             int fila = tablaIngredientes.getSelectedRow();
@@ -195,7 +144,7 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
                 System.out.println("El ingrediente no existe");
             }
         }
-    }//GEN-LAST:event_btEditarActionPerformed
+    }//GEN-LAST:event_btSeleccionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,33 +168,26 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
                 if (tipo.equals("Todos")){
                     resultado = registro;
                 }else{
+                    
                     for (Ingrediente i1:registro){
-                        if(tipo.equals("Id")){
-                            if(String.valueOf(i1.getId()).contains(descripcion)){
+                        if(cbConsulta.equals("Id")){
+                            if(i1.getId()==Integer.parseInt(descripcion)){
                                 resultado.add(i1);
                             }
-                        }else if(tipo.equals("Nombre")){
+                        }
+                        if(cbConsulta.equals("Nombre")){
                             if(i1.getNombre().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(i1);
                             }
-                        }else if(tipo.equals("Tipo")){
+                        }
+                        if(cbConsulta.equals("Tipo")){
                             if(i1.getTipo().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(i1);
                             }
                         }
+                        
                     }
                     //System.out.println("consulta invalida...");
-                    
-                    /*
-                    if(tipo.equals("Todos")){
-                        res=reg;
-                    }else{
-                        for (Materia m1:reg){
-                        if(String.valueOf(m1.getId()).contains(descripcion)){
-                            res.add(m1);
-                    }
-                       
-                    */
                 }
                 DefaultTableModel dtm = (DefaultTableModel)tablaIngredientes.getModel();
                 dtm.setRowCount(0);
@@ -346,9 +288,7 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btEditar;
-    private javax.swing.JButton btEliminar;
-    private javax.swing.JButton btIngresar;
+    private javax.swing.JButton btSeleccionar;
     private javax.swing.JComboBox<String> cbConsulta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaIngredientes;
