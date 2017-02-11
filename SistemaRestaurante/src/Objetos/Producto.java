@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- *
+ *  EL STRING INGREDIENTES ESTARA CONFORMADO POR TODOS LOS INGREDIENTES USADOS PARA EL PRODUCTO
+ *  String ingredientes = "id_1,id_2,....,id_n"
+ *  DE ESTA FORMA SE LLAMARA A LOS INGREDIENTES RECORRIENDO EL STRING
+ * 
  * @author Julian
  */
 public class Producto {

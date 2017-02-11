@@ -6,7 +6,7 @@
 package Objetos;
 
 /**
- *
+ *  
  * @author Julian
  */
 public class Plato {

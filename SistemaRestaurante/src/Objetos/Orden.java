@@ -6,6 +6,9 @@
 package Objetos;
 
 /**
+ * EL OBJETO ORDEN TENDRA VARIOS STRINGS QUE CONTENDRAN DATOS DE CLIENTES, INGREDIENTES Y PRECIOS
+ * DE ESTA FORMA SE RECORRERA CADA STRING FORMATEADO PARA OBTENER ESTOS BALORES.
+ * 
  * String cliente = "cedula,nombre,direccion,telefono,correo"
  * String fecha = "AAAA-MM-DD HH:MM:SS"
  * String productos =id_producto,nombre,precio_unit"
