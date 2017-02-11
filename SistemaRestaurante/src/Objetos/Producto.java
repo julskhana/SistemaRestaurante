@@ -19,10 +19,11 @@ public class Producto {
     private String tamaño;
     private float precio;
     private String tipo;
-    private LinkedList<Ingrediente> ingredientes;
+    //private LinkedList<Ingrediente> ingredientes;
+    private String ingredientes;
     
     //constructor normal
-    public Producto(int id,String nombre,String descripcion,String tamaño,float precio,String tipo,LinkedList<Ingrediente> ing){
+    public Producto(int id,String nombre,String descripcion,String tamaño,float precio,String tipo,String ing){
         this.id=id;
         this.nombre=nombre;
         this.descripcion=descripcion;
@@ -33,7 +34,7 @@ public class Producto {
     }
     
     //constructor para ingresar productos
-    public Producto(String nombre,String descripcion,String tamaño,float precio,String tipo,LinkedList<Ingrediente> ing){
+    public Producto(String nombre,String descripcion,String tamaño,float precio,String tipo,String ing){
         //this.id=id;
         this.nombre=nombre;
         this.descripcion=descripcion;
@@ -70,7 +71,7 @@ public class Producto {
         return tipo;
     }
 
-    public LinkedList<Ingrediente> getIngredientes() {
+    public String getIngredientes() {
         return ingredientes;
     }
  
@@ -100,7 +101,7 @@ public class Producto {
         this.tipo = tipo;
     }
 
-    public void setIngredientes(LinkedList<Ingrediente> ingredientes) {
+    public void setIngredientes(String ingredientes) {
         this.ingredientes = ingredientes;
     }
     

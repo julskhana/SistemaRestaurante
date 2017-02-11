@@ -29,6 +29,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lbCuenta.setText(cuentaUser);
         System.out.println("Ingreso al Sistema");
         
+        
+       /*
         //TRANSACCION CREACION DE PLATOS
         //CARGA DE INGREDIENTES PARA CREAR PRODUCTOS
         ConexionBase c = new ConexionBase();
@@ -52,7 +54,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
         c.desconectar();
         
-        /*
+        
         //conexion a base de datos
         ConexionBase c = new ConexionBase();
         ArrayList<Cliente> listaC = new ArrayList<Cliente>();

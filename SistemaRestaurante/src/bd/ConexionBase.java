@@ -432,11 +432,39 @@ public class ConexionBase {
         }
     }
     
-    //  SUSTENTACION PROYECTO JAVA
-    // operacion 3: 
-    public void operacion3(){
-        
+    //  FUNCIONES PARA MANEJO DE PRODUCTOS
+    public ArrayList<Ingrediente> cargarIngredientes_Producto(String busqueda, String tip){
+        ArrayList<Ingrediente> registroI = new ArrayList<Ingrediente>();
+        try{
+            Statement st = this.con.createStatement();
+            ResultSet rs = null;
+            
+            if (tip.equalsIgnoreCase("ingrediente")){
+                rs = st.executeQuery("SELECT * FROM ingrediente;");
+            }else if (tip.equalsIgnoreCase("nombre")){
+                rs = st.executeQuery("select * from ingrediente where nombre = "+tip+";");
+            }else{
+                rs = st.executeQuery("SELECT * FROM ingrediente WHERE "+tip+" LIKE '%"+busqueda+"%';");
+            }
+            while(rs.next())
+            {
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+                String tipo = rs.getString("tipo");
+                float costop = rs.getFloat("costo_porcion");
+                int cantidad = rs.getInt("cantidad");
+                
+                Ingrediente ing = new Ingrediente(id, nombre, descripcion, tipo, costop, cantidad);
+                registroI.add(ing);
+            }
+            System.out.println("ingredientes consultados");
+        }catch(Exception e){
+            System.out.println("error en consulta de ingredientes db");
+        }
+        return (registroI);
     }
+    
     
     /*
     public boolean ingresarUniversidad(Universidad u)
