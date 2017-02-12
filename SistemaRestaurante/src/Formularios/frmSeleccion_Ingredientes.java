@@ -287,6 +287,12 @@ public class frmSeleccion_Ingredientes extends javax.swing.JFrame {
             return false;
     }
     
+    // FUNCION PARA GUARDAR LOS INGREDIENTES SELECCIONADOS EN UN ARRAYLIST PARA COLOCARLOS EN EL PRODUCTO
+    public ArrayList listaIngredientes (){
+        return null;
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSeleccionar;
     private javax.swing.JComboBox<String> cbConsulta;
