@@ -24,9 +24,10 @@ public class Producto {
     private String tipo;
     //private LinkedList<Ingrediente> ingredientes;
     private String ingredientes;
+    private int ventas;
     
     //constructor normal
-    public Producto(int id,String nombre,String descripcion,String tamaño,float precio,String tipo,String ing){
+    public Producto(int id,String nombre,String descripcion,String tamaño,float precio,String tipo,String ing, int ventas){
         this.id=id;
         this.nombre=nombre;
         this.descripcion=descripcion;
@@ -34,10 +35,11 @@ public class Producto {
         this.precio=precio;
         this.tipo=tipo;
         this.ingredientes=ing;
+        this.ventas=ventas;
     }
     
     //constructor para ingresar productos
-    public Producto(String nombre,String descripcion,String tamaño,float precio,String tipo,String ing){
+    public Producto(String nombre,String descripcion,String tamaño,float precio,String tipo,String ing, int ventas){
         //this.id=id;
         this.nombre=nombre;
         this.descripcion=descripcion;
@@ -45,6 +47,7 @@ public class Producto {
         this.precio=precio;
         this.tipo=tipo;
         this.ingredientes=ing;
+        this.ventas=ventas;
     }
     
     //constructor vacio

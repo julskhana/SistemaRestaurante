@@ -17,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Julian
  */
-public class frmMantenimientoProductos extends javax.swing.JFrame {
+public class frmIngresoProductos extends javax.swing.JFrame {
 
     /**
      * Creates new form frmMantenimientoIngredientes
      */
-    public frmMantenimientoProductos() {
+    public frmIngresoProductos() {
         initComponents();
     }
 
@@ -35,19 +35,29 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cdTipo = new javax.swing.JComboBox<>();
+        cbTipo_consulta = new javax.swing.JComboBox<>();
         tfdescripcion = new javax.swing.JTextField();
         tbConsultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaIngredientes = new javax.swing.JTable();
-        btEliminar = new javax.swing.JButton();
-        btEditar = new javax.swing.JButton();
+        btLimpiar = new javax.swing.JButton();
         btIngresar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tfNombre = new javax.swing.JTextField();
+        tfDescripcion = new javax.swing.JTextField();
+        cbTamaño = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tfPrecio = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        cbTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Mantenimiento de Productos");
+        setTitle("Ingreso de Productos");
 
-        cdTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Id", "Nombre" }));
+        cbTipo_consulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Id", "Nombre", "Tipo" }));
 
         tbConsultar.setText("Consultar");
         tbConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -58,28 +68,21 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
 
         tablaIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Descripcion", "Tamaño", "Precio", "Tipo", "Ingredientes", "Ventas"
+                "Id", "Nombre", "Descripcion", "Tipo", "Costo Porcion", "Cantidad"
             }
         ));
         jScrollPane1.setViewportView(tablaIngredientes);
 
-        btEliminar.setText("Eliminar");
-        btEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btLimpiar.setText("Limpiar");
+        btLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEliminarActionPerformed(evt);
-            }
-        });
-
-        btEditar.setText("Editar");
-        btEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEditarActionPerformed(evt);
+                btLimpiarActionPerformed(evt);
             }
         });
 
@@ -90,6 +93,22 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Ingresar los ingredientes del producto:");
+
+        jLabel2.setText("Nombre:");
+
+        jLabel3.setText("Descripcion:");
+
+        cbTamaño.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Pequeño", "Grande" }));
+
+        jLabel4.setText("Tamaño:");
+
+        jLabel5.setText("Precio:");
+
+        jLabel6.setText("Tipo:");
+
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Plato", "Bebida", "Postre", "Entrada" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,19 +116,51 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cdTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbTipo_consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tfdescripcion)
                         .addGap(18, 18, 18)
                         .addComponent(tbConsultar))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btEliminar)
-                        .addGap(185, 185, 185)
-                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130)
+                        .addComponent(btLimpiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btIngresar)))
+                        .addComponent(btIngresar)
+                        .addGap(133, 133, 133))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(163, 163, 163)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbTamaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(113, 304, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tfDescripcion)
+                                        .addGap(97, 97, 97))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -117,17 +168,36 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cdTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(tfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbTamaño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(tfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbTipo_consulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tbConsultar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btEliminar)
-                    .addComponent(btEditar)
+                    .addComponent(btLimpiar)
                     .addComponent(btIngresar))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -140,7 +210,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbConsultarActionPerformed
 
-    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
+    private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
         // TODO add your handling code here:
         if (seleccionEliminacionValida()){
             ConexionBase c = new ConexionBase();
@@ -162,7 +232,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
         }
         if (formularioConsultaValida()){
             consultarRegistro();}
-    }//GEN-LAST:event_btEliminarActionPerformed
+    }//GEN-LAST:event_btLimpiarActionPerformed
 
     private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
         // TODO add your handling code here:
@@ -170,39 +240,12 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
         inIng.setVisible(true);
     }//GEN-LAST:event_btIngresarActionPerformed
 
-    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
-        // TODO add your handling code here:
-        if (seleccionEdicionValida()){
-            int fila = tablaIngredientes.getSelectedRow();
-            String id = tablaIngredientes.getValueAt(fila,0).toString();
-            String nombre = tablaIngredientes.getValueAt(fila,1).toString();
-            ArrayList<Ingrediente> ing = new ArrayList<>();
-            ConexionBase c = new ConexionBase();
-
-            try{
-                c.conectar();
-                ing = c.consultarIngredientes("","id");
-            }catch (Exception e){
-                System.out.println("Error al iniciar edicion de cliente");
-            }
-            c.desconectar();
-
-            if (Validaciones.validarDupNombreIng(ing, nombre)){
-                //frmEdicionIngredientes ingedit = new frmEdicionIngredientes(id,nombre,this);
-                //ingedit.setVisible(true);
-            }else{
-                JOptionPane.showMessageDialog(this,"El ingrediente seleccionado no existe","Edición",JOptionPane.ERROR_MESSAGE);
-                System.out.println("El ingrediente no existe");
-            }
-        }
-    }//GEN-LAST:event_btEditarActionPerformed
-
     /**
      * @param args the command line arguments
      */
     
     public void consultarRegistro(){
-        String tipo = cdTipo.getSelectedItem().toString();
+        String tipo = cbTipo_consulta.getSelectedItem().toString();
         String descripcion = tfdescripcion.getText();
         
         //consultar
@@ -219,33 +262,28 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
                 if (tipo.equals("Todos")){
                     resultado = registro;
                 }else{
-                    
                     for (Ingrediente i1:registro){
-                        if(cdTipo.equals("Id")){
-                            if(i1.getId()==Integer.parseInt(descripcion)){
+                        if(tipo.equals("Id")){
+                            if(String.valueOf(i1.getId()).contains(descripcion)){
                                 resultado.add(i1);
                             }
-                        }
-                        if(cdTipo.equals("Nombre")){
+                        }else if(tipo.equals("Nombre")){
                             if(i1.getNombre().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(i1);
                             }
-                        }
-                        if(cdTipo.equals("Tipo")){
+                        }else if(tipo.equals("Tipo")){
                             if(i1.getTipo().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(i1);
                             }
                         }
-                        
                     }
-                    //System.out.println("consulta invalida...");
                 }
                 DefaultTableModel dtm = (DefaultTableModel)tablaIngredientes.getModel();
                 dtm.setRowCount(0);
                 
                 //recorriendo base de datos
                 for (Ingrediente ing:resultado){
-                    Object[] fila = new Object[10];
+                    Object[] fila = new Object[6];
                     fila[0] = ing.getId();
                     fila[1] = ing.getNombre();
                     fila[2] = ing.getDescripcion();
@@ -264,7 +302,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     }
     
     private boolean formularioConsultaValida(){
-        String tipo = cdTipo.getSelectedItem().toString();
+        String tipo = cbTipo_consulta.getSelectedItem().toString();
         String descripcion = tfdescripcion.getText();
         /*
         if(!tipo.equals("Todo") && descripcion.equals("")){
@@ -276,7 +314,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
         }*/
         if(tipo.equals("Nombre") && descripcion.equals("")){
             try{
-                tfdescripcion.equals("");
+                descripcion.equals("");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this,
                     "Debe ingresar un nombre",
@@ -287,7 +325,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
         }
         if(tipo.equals("Tipo") && descripcion.equals("")){
             try{
-                tfdescripcion.equals("");
+                descripcion.equals("");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this,
                     "Debe ingresar un tipo",
@@ -298,7 +336,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
         }
         if(tipo.equals("Id") && descripcion.equals("")){
             try{
-                tfdescripcion.equals("");
+                descripcion.equals("");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this,
                     "Debe ingresar un número",
@@ -339,13 +377,23 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btEditar;
-    private javax.swing.JButton btEliminar;
     private javax.swing.JButton btIngresar;
-    private javax.swing.JComboBox<String> cdTipo;
+    private javax.swing.JButton btLimpiar;
+    private javax.swing.JComboBox<String> cbTamaño;
+    private javax.swing.JComboBox<String> cbTipo;
+    private javax.swing.JComboBox<String> cbTipo_consulta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaIngredientes;
     private javax.swing.JButton tbConsultar;
+    private javax.swing.JTextField tfDescripcion;
+    private javax.swing.JTextField tfNombre;
+    private javax.swing.JTextField tfPrecio;
     private javax.swing.JTextField tfdescripcion;
     // End of variables declaration//GEN-END:variables
 }
