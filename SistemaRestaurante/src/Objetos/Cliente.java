@@ -88,6 +88,19 @@ public class Cliente implements Serializable{
         this.telefono=telefono;
     }
 
+    // constructor para cargar datos de usuario en orden 
+    public Cliente(String nombre, String apellido, String correo, String tipo, int edad, String fecha_nacimiento, String sexo, String direccion, String telefono) {
+        this.nombres=nombre;
+        this.apellidos=apellido;
+        this.correo=correo;
+        this.tipo=tipo;
+        this.edad=edad;
+        this.fecha_nacimiento=fecha_nacimiento;
+        this.sexo=sexo;
+        this.direccion=direccion;
+        this.telefono=telefono;
+    }
+
     /*
     //constructor para edicion de clientes
     public Cliente(String nombres, String apellidos, String correo, String tipo, int edad, String fecha_nac, String sexo, String direccion, String telefono) {

@@ -18,22 +18,24 @@ public class Orden {
     // FACTURA
     //datos cliente
     int id;
-    String codigo;
     String fecha;
-    String cliente;
+    String usuario; //cedula
+    String cliente; //cedula
+    String estado;
     //detalle orden
-    int cantidad;
+    String cantidad;
     String productos;
     //valores
     float sub_total;
     float iva;
     float total;
     
-    public Orden(int id,String codigo, String fecha, String cliente, int cantidad,String productos,float subt,float iva,float total){
+    public Orden(int id, String fecha,String usuario, String cliente,String estado, String cantidad,String productos,float subt,float iva,float total){
         this.id=id;
-        this.codigo=codigo;
         this.fecha=fecha;
+        this.usuario=usuario;
         this.cliente=cliente;
+        this.estado=estado;
         this.cantidad=cantidad;
         this.productos=productos;
         this.sub_total=subt;
@@ -50,19 +52,23 @@ public class Orden {
         return id;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
     public String getFecha() {
         return fecha;
+    }
+
+    public String getUsuario() {
+        return usuario;
     }
 
     public String getCliente() {
         return cliente;
     }
 
-    public int getCantidad() {
+    public String getEstado() {
+        return estado;
+    }
+
+    public String getCantidad() {
         return cantidad;
     }
 
@@ -88,19 +94,23 @@ public class Orden {
         this.id = id;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
     }
 
