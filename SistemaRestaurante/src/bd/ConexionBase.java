@@ -521,8 +521,8 @@ public class ConexionBase {
     
     // FUNCIONES PARA GENERAR ORDENES
     
-    public ArrayList<Cliente> cargarClienteOrden(int cedula){
-        ArrayList<Cliente> cliente = new ArrayList<>();
+    public Cliente cargarClienteOrden(String cedula){
+        Cliente cli = new Cliente();
         try {
             Statement st = this.con.createStatement();
             ResultSet rs = null;
@@ -530,65 +530,29 @@ public class ConexionBase {
             rs = st.executeQuery("select * from cliente where cedula = "+cedula);
             while(rs.next())
             {
-                int id = rs.getInt("id");
-                String ced = rs.getString("cedula");
+                //int id = rs.getInt("id");
+                //String ced = rs.getString("cedula");
                 String nombre = rs.getString("nombre");
                 String apellido = rs.getString("apellido");
                 String correo = rs.getString("correo");
-                String tipo = rs.getString("tipo");
-                int edad = rs.getInt("edad");
-                String fecha_nacimiento = rs.getString("fecha_nacimiento");
-                String sexo = rs.getString("sexo");
+                //String tipo = rs.getString("tipo");
+                //int edad = rs.getInt("edad");
+                //String fecha_nacimiento = rs.getString("fecha_nacimiento");
+                //String sexo = rs.getString("sexo");
                 //int estado = rs.getInt("estado");
                 String direccion = rs.getString("direccion");
                 String telefono = rs.getString("telefono");
                 //creacion de cliente desde consulta
-                Cliente cli = new Cliente(nombre,apellido,correo,tipo,edad,fecha_nacimiento,sexo,direccion,telefono);
-                cliente.add(cli);
+                cli = new Cliente(nombre,apellido,correo,direccion,telefono);
+                //cliente.add(cli);
+                
+                System.out.println("cliente obtenido");
+                System.out.println(cli);
             }
-            /*
-            ArrayList<Cliente> registroC = new ArrayList<Cliente>();
-        try{
-            Statement st = this.con.createStatement();
-            ResultSet rs = null;
-            
-            if (tip.equalsIgnoreCase("cliente")){
-                rs = st.executeQuery("SELECT * FROM cliente;");
-            }else if (tip.equalsIgnoreCase("huesped")){
-                rs = st.executeQuery("select * from cliente where tipo = huesped;");
-            }else if (tip.equalsIgnoreCase("cedula")){
-                rs = st.executeQuery("select * from cliente where cedula = "+tip+";");
-            }else{
-                rs = st.executeQuery("SELECT * FROM cliente WHERE "+tip+" LIKE '%"+busqueda+"%';");
-            }
-            while(rs.next())
-            {
-                int id = rs.getInt("id");
-                String cedula = rs.getString("cedula");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                String correo = rs.getString("correo");
-                String tipo = rs.getString("tipo");
-                int edad = rs.getInt("edad");
-                String fecha_nacimiento = rs.getString("fecha_nacimiento");
-                String sexo = rs.getString("sexo");
-                //int estado = rs.getInt("estado");
-                String direccion = rs.getString("direccion");
-                String telefono = rs.getString("telefono");
-                //creacion de cliente desde consulta
-                Cliente cli = new Cliente(id,cedula,nombre,apellido,correo,tipo,edad,fecha_nacimiento,sexo,direccion,telefono);
-                registroC.add(cli);
-            }
-            System.out.println("cliente consultado");
-        }catch(Exception e){
-            System.out.println("error en consulta de cliente db");
-        }
-        return (registroC);
-            */
         }catch (Exception e){
             System.out.println(e);
         }
-        return null;
+        return cli;
     }
     
     /*

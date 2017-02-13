@@ -75,18 +75,21 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mnIngresarOrden">
+        <Menu class="javax.swing.JMenu" name="mnProcesos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Procesos"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnIngresarOrdenActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnProcesosActionPerformed"/>
           </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnInPedido">
+            <MenuItem class="javax.swing.JMenuItem" name="mnGenerarOrden">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ingresar Orden"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnGenerarOrdenActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

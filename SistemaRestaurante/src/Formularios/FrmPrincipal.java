@@ -28,7 +28,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         tfNombreUsr.setText(nombreUsr);
         lbCuenta.setText(cuentaUser);
         System.out.println("Ingreso al Sistema");
-        
+        String nombreUsuario=tfNombreUsr.getText();
+        System.out.println(nombreUsuario);
         
        /*
         //TRANSACCION CREACION DE PLATOS
@@ -92,8 +93,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnMantClientes = new javax.swing.JMenuItem();
         mnIngredientes = new javax.swing.JMenuItem();
         mnProductos = new javax.swing.JMenuItem();
-        mnIngresarOrden = new javax.swing.JMenu();
-        mnInPedido = new javax.swing.JMenuItem();
+        mnProcesos = new javax.swing.JMenu();
+        mnGenerarOrden = new javax.swing.JMenuItem();
         mAcciones = new javax.swing.JMenu();
         mnListCli = new javax.swing.JMenuItem();
         mnListProductos = new javax.swing.JMenuItem();
@@ -169,17 +170,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mnMantenimiento);
 
-        mnIngresarOrden.setText("Procesos");
-        mnIngresarOrden.addActionListener(new java.awt.event.ActionListener() {
+        mnProcesos.setText("Procesos");
+        mnProcesos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnIngresarOrdenActionPerformed(evt);
+                mnProcesosActionPerformed(evt);
             }
         });
 
-        mnInPedido.setText("Ingresar Orden");
-        mnIngresarOrden.add(mnInPedido);
+        mnGenerarOrden.setText("Ingresar Orden");
+        mnGenerarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnGenerarOrdenActionPerformed(evt);
+            }
+        });
+        mnProcesos.add(mnGenerarOrden);
 
-        jMenuBar1.add(mnIngresarOrden);
+        jMenuBar1.add(mnProcesos);
 
         mAcciones.setText("Reportes");
 
@@ -302,11 +308,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mantPr.setVisible(true);
     }//GEN-LAST:event_mnProductosActionPerformed
 
-    private void mnIngresarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnIngresarOrdenActionPerformed
+    private void mnProcesosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnProcesosActionPerformed
         // TODO add your handling code here:
-        frmGenerarOrden gorden = new frmGenerarOrden(tfNombreUsr.getText(),this);
+    }//GEN-LAST:event_mnProcesosActionPerformed
+
+    private void mnGenerarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnGenerarOrdenActionPerformed
+        // TODO add your handling code here:
+        frmGenerarOrden gorden = new frmGenerarOrden(tfNombreUsr.getText());
         gorden.setVisible(true);
-    }//GEN-LAST:event_mnIngresarOrdenActionPerformed
+        
+        
+    }//GEN-LAST:event_mnGenerarOrdenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -325,15 +337,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mcCambioClave;
     private javax.swing.JMenuItem mnArchSalir;
     private javax.swing.JMenuItem mnAyuda;
-    private javax.swing.JMenuItem mnInPedido;
+    private javax.swing.JMenuItem mnGenerarOrden;
     private javax.swing.JMenuItem mnInfo;
     private javax.swing.JMenuItem mnIngredientes;
-    private javax.swing.JMenu mnIngresarOrden;
     private javax.swing.JMenuItem mnListCli;
     private javax.swing.JMenuItem mnListProductos;
     private javax.swing.JMenuItem mnMantClientes;
     private javax.swing.JMenu mnMantenimiento;
     private javax.swing.JMenuItem mnPedidos;
+    private javax.swing.JMenu mnProcesos;
     private javax.swing.JMenuItem mnProductos;
     private javax.swing.JTextField tfNombreUsr;
     // End of variables declaration//GEN-END:variables

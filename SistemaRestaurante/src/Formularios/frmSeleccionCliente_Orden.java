@@ -43,7 +43,7 @@ public class frmSeleccionCliente_Orden extends javax.swing.JFrame {
         btSeleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Seleccion de Cliente");
+        setTitle("Ordenes - Seleccion de Cliente");
 
         cbTipoConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Cedula", "Nombres", "Apellidos" }));
 
@@ -74,7 +74,7 @@ public class frmSeleccionCliente_Orden extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaClientes);
 
-        btSeleccionar.setText("Editar");
+        btSeleccionar.setText("Seleccionar");
         btSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSeleccionarActionPerformed(evt);
@@ -85,10 +85,6 @@ public class frmSeleccionCliente_Orden extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 265, Short.MAX_VALUE)
-                .addComponent(btSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(293, 293, 293))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,6 +99,10 @@ public class frmSeleccionCliente_Orden extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addComponent(btConsultar)
                         .addGap(106, 106, 106))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btSeleccionar)
+                .addGap(265, 265, 265))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +137,21 @@ public class frmSeleccionCliente_Orden extends javax.swing.JFrame {
         if (seleccionValida()){
             int fila = tablaClientes.getSelectedRow();
             String cedula = tablaClientes.getValueAt(fila,1).toString();
-            //frmGenerarOrden 
+            String nombre = tablaClientes.getValueAt(fila,2).toString();
+            String apellido = tablaClientes.getValueAt(fila,3).toString();
+            String dir = tablaClientes.getValueAt(fila,4).toString();
+            String tel = tablaClientes.getValueAt(fila,5).toString();
+            String correo = tablaClientes.getValueAt(fila,6).toString();
+            
+            System.out.println(cedula);
+            frmGenerarOrden.tfCedula.setText(cedula);
+            frmGenerarOrden.tfNombres.setText(nombre);
+            frmGenerarOrden.tfApellidos.setText(apellido);
+            frmGenerarOrden.tfDireccion.setText(dir);
+            frmGenerarOrden.tfTelefono.setText(tel);
+            frmGenerarOrden.tfCorreo.setText(correo);
+            
+            this.dispose();
         }
         
         /*
