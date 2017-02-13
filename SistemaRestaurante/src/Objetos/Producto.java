@@ -26,7 +26,7 @@ public class Producto {
     private String ingredientes;
     private int ventas;
     
-    //constructor normal
+    //constructor normal y consultas
     public Producto(int id,String nombre,String descripcion,String tamaño,float precio,String tipo,String ing, int ventas){
         this.id=id;
         this.nombre=nombre;
@@ -80,7 +80,12 @@ public class Producto {
     public String getIngredientes() {
         return ingredientes;
     }
+
+    public int getVentas() {
+        return ventas;
+    }
  
+    
     //set
 
     public void setId(int id) {
@@ -110,6 +115,11 @@ public class Producto {
     public void setIngredientes(String ingredientes) {
         this.ingredientes = ingredientes;
     }
+
+    public void setVentas(int ventas) {
+        this.ventas = ventas;
+    }
+    
     
     
 }

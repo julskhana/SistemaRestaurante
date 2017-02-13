@@ -465,6 +465,39 @@ public class ConexionBase {
         return (registroI);
     }
     
+    public ArrayList<Producto> consultarProductos(String busqueda, String tip){
+        ArrayList<Producto> registroP = new ArrayList<Producto>();
+        try{
+            Statement st = this.con.createStatement();
+            ResultSet rs = null;
+            
+            if (tip.equalsIgnoreCase("producto")){
+                rs = st.executeQuery("SELECT * FROM producto;");
+            }else if (tip.equalsIgnoreCase("nombre")){
+                rs = st.executeQuery("select * from producto where nombre = "+tip+";");
+            }else{
+                rs = st.executeQuery("SELECT * FROM producto WHERE "+tip+" LIKE '%"+busqueda+"%';");
+            }
+            while(rs.next())
+            {
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+                String tamaño = rs.getString("tamaño");
+                float precio = rs.getFloat("precio");
+                String tipo = rs.getString("tipo");
+                String ingredientes = rs.getString("ids_ingredientes");
+                int ventas = rs.getInt("ventas");
+                
+                Producto prod = new Producto(id, nombre, descripcion, tamaño, precio, tipo, ingredientes, ventas);
+                registroP.add(prod);
+            }
+            System.out.println("productos consultados");
+        }catch(Exception e){
+            System.out.println("error en consulta de productos db");
+        }
+        return (registroP);
+    }
     
     /*
     public boolean ingresarUniversidad(Universidad u)

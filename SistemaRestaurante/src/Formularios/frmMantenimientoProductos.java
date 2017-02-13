@@ -7,7 +7,7 @@ package Formularios;
 
 import Funciones.Validaciones;
 import Objetos.Cliente;
-import Objetos.Ingrediente;
+import Objetos.Producto;
 import bd.ConexionBase;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -39,7 +39,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
         tfdescripcion = new javax.swing.JTextField();
         tbConsultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaIngredientes = new javax.swing.JTable();
+        tablaProductos = new javax.swing.JTable();
         btEliminar = new javax.swing.JButton();
         btEditar = new javax.swing.JButton();
         btIngresar = new javax.swing.JButton();
@@ -56,7 +56,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
             }
         });
 
-        tablaIngredientes.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -67,7 +67,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
                 "Id", "Nombre", "Descripcion", "Tamaño", "Precio", "Tipo", "Ingredientes", "Ventas"
             }
         ));
-        jScrollPane1.setViewportView(tablaIngredientes);
+        jScrollPane1.setViewportView(tablaProductos);
 
         btEliminar.setText("Eliminar");
         btEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -146,10 +146,10 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
             ConexionBase c = new ConexionBase();
             try{
                 c.conectar();
-                int filas[] =tablaIngredientes.getSelectedRows();
+                int filas[] =tablaProductos.getSelectedRows();
                     for (int i = 0; i < filas.length; i++) {
                         int fila = filas[i];
-                        String id = tablaIngredientes.getValueAt(fila,0).toString();
+                        String id = tablaProductos.getValueAt(fila,0).toString();
                         if(!c.eliminarIngrediente(Integer.parseInt(id))){
                             JOptionPane.showMessageDialog(this,"Ocurrió un error en la eliminación","Eliminación",JOptionPane.ERROR_MESSAGE);
                             return ;
@@ -172,11 +172,13 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         // TODO add your handling code here:
+        
+        /*
         if (seleccionEdicionValida()){
             int fila = tablaIngredientes.getSelectedRow();
             String id = tablaIngredientes.getValueAt(fila,0).toString();
             String nombre = tablaIngredientes.getValueAt(fila,1).toString();
-            ArrayList<Ingrediente> ing = new ArrayList<>();
+            ArrayList<Producto> ing = new ArrayList<>();
             ConexionBase c = new ConexionBase();
 
             try{
@@ -195,6 +197,8 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
                 System.out.println("El ingrediente no existe");
             }
         }
+        */
+        
     }//GEN-LAST:event_btEditarActionPerformed
 
     /**
@@ -212,51 +216,53 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
                 ConexionBase c = new ConexionBase();
                 c.conectar();
                 
-                ArrayList<Ingrediente> registro = c.consultarIngredientes("","ingrediente");
-                ArrayList<Ingrediente> resultado = new ArrayList<Ingrediente>();
+                ArrayList<Producto> registro = c.consultarProductos("","producto");
+                ArrayList<Producto> resultado = new ArrayList<Producto>();
                 
                 
                 if (tipo.equals("Todos")){
                     resultado = registro;
                 }else{
                     
-                    for (Ingrediente i1:registro){
+                    for (Producto prod:registro){
                         if(cdTipo.equals("Id")){
-                            if(i1.getId()==Integer.parseInt(descripcion)){
-                                resultado.add(i1);
+                            if(prod.getId()==Integer.parseInt(descripcion)){
+                                resultado.add(prod);
                             }
                         }
                         if(cdTipo.equals("Nombre")){
-                            if(i1.getNombre().toUpperCase().contains(descripcion.toUpperCase())){
-                                resultado.add(i1);
+                            if(prod.getNombre().toUpperCase().contains(descripcion.toUpperCase())){
+                                resultado.add(prod);
                             }
                         }
                         if(cdTipo.equals("Tipo")){
-                            if(i1.getTipo().toUpperCase().contains(descripcion.toUpperCase())){
-                                resultado.add(i1);
+                            if(prod.getTipo().toUpperCase().contains(descripcion.toUpperCase())){
+                                resultado.add(prod);
                             }
                         }
                         
                     }
                     //System.out.println("consulta invalida...");
                 }
-                DefaultTableModel dtm = (DefaultTableModel)tablaIngredientes.getModel();
+                DefaultTableModel dtm = (DefaultTableModel)tablaProductos.getModel();
                 dtm.setRowCount(0);
                 
                 //recorriendo base de datos
-                for (Ingrediente ing:resultado){
-                    Object[] fila = new Object[10];
-                    fila[0] = ing.getId();
-                    fila[1] = ing.getNombre();
-                    fila[2] = ing.getDescripcion();
-                    fila[3] = ing.getTipo();
-                    fila[4] = ing.getCosto_porcion();
-                    fila[5] = ing.getCantidad();
+                for (Producto pro:resultado){
+                    Object[] fila = new Object[8];
+                    fila[0] = pro.getId();
+                    fila[1] = pro.getNombre();
+                    fila[2] = pro.getDescripcion();
+                    fila[3] = pro.getTamaño();
+                    fila[4] = pro.getPrecio();
+                    fila[5] = pro.getTipo();
+                    fila[6] = pro.getIngredientes();
+                    fila[7] = pro.getVentas();
                     dtm.addRow(fila);
                 }
             c.desconectar();
             }catch (Exception e){
-                System.out.println("error al consultar ingredientes");
+                System.out.println("error al consultar productos");
             }
         }catch (Exception e){
             JOptionPane.showMessageDialog(this,"Ocurrió un error al consultar los registros","Consulta",JOptionPane.ERROR_MESSAGE);
@@ -285,17 +291,6 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
                 return false;
             }        
         }
-        if(tipo.equals("Tipo") && descripcion.equals("")){
-            try{
-                tfdescripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un tipo",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
-                return false;
-            }        
-        }
         if(tipo.equals("Id") && descripcion.equals("")){
             try{
                 tfdescripcion.equals("");
@@ -311,7 +306,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     }
     
     private boolean seleccionEdicionValida(){
-        int n = tablaIngredientes.getSelectedRowCount();
+        int n = tablaProductos.getSelectedRowCount();
         if(n!=1){
             JOptionPane.showMessageDialog(this,
                     "Debe seleccionar un registro para editar",
@@ -323,7 +318,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     }
     
     private boolean seleccionEliminacionValida(){ 
-        int n = tablaIngredientes.getSelectedRowCount();
+        int n = tablaProductos.getSelectedRowCount();
         if(n==0){
             JOptionPane.showMessageDialog(this,
                     "Debe seleccionar mínimo un registro para eliminar",
@@ -344,7 +339,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     private javax.swing.JButton btIngresar;
     private javax.swing.JComboBox<String> cdTipo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaIngredientes;
+    private javax.swing.JTable tablaProductos;
     private javax.swing.JButton tbConsultar;
     private javax.swing.JTextField tfdescripcion;
     // End of variables declaration//GEN-END:variables
