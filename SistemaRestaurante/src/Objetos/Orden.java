@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Objetos;
+import java.util.Date;
 
 /**
  * EL OBJETO ORDEN TENDRA VARIOS STRINGS QUE CONTENDRAN DATOS DE CLIENTES, INGREDIENTES Y PRECIOS
@@ -18,7 +19,7 @@ public class Orden {
     // FACTURA
     //datos cliente
     int id;
-    String fecha;
+    Date fecha;
     String usuario; //cedula
     String cliente; //cedula
     String estado;
@@ -30,7 +31,7 @@ public class Orden {
     float iva;
     float total;
     
-    public Orden(int id, String fecha,String usuario, String cliente,String estado, String cantidad,String productos,float subt,float iva,float total){
+    public Orden(int id, Date fecha,String usuario, String cliente,String estado, String cantidad,String productos,float subt,float iva,float total){
         this.id=id;
         this.fecha=fecha;
         this.usuario=usuario;
@@ -52,7 +53,7 @@ public class Orden {
         return id;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
@@ -94,7 +95,7 @@ public class Orden {
         this.id = id;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
