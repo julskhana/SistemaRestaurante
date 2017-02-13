@@ -166,8 +166,8 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
 
     private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
         // TODO add your handling code here:
-        frmIngresoIngredientes inIng = new frmIngresoIngredientes();
-        inIng.setVisible(true);
+        frmIngresoProductos inPr = new frmIngresoProductos();
+        inPr.setVisible(true);
     }//GEN-LAST:event_btIngresarActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed

@@ -164,6 +164,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnMantenimiento.add(mnIngredientes);
 
         mnProductos.setText("Productos");
+        mnProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnProductosActionPerformed(evt);
+            }
+        });
         mnMantenimiento.add(mnProductos);
 
         jMenuBar1.add(mnMantenimiento);
@@ -301,6 +306,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void mArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mArchivoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mArchivoActionPerformed
+
+    private void mnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnProductosActionPerformed
+        // TODO add your handling code here:
+        frmMantenimientoProductos mantPr = new frmMantenimientoProductos();
+        mantPr.setVisible(true);
+    }//GEN-LAST:event_mnProductosActionPerformed
 
     /**
      * @param args the command line arguments
