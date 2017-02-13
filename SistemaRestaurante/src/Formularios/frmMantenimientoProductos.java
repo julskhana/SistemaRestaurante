@@ -150,7 +150,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
                     for (int i = 0; i < filas.length; i++) {
                         int fila = filas[i];
                         String id = tablaProductos.getValueAt(fila,0).toString();
-                        if(!c.eliminarIngrediente(Integer.parseInt(id))){
+                        if(!c.eliminarProducto(Integer.parseInt(id))){
                             JOptionPane.showMessageDialog(this,"Ocurrió un error en la eliminación","Eliminación",JOptionPane.ERROR_MESSAGE);
                             return ;
                         }

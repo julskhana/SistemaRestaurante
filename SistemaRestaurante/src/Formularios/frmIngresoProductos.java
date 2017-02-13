@@ -6,9 +6,9 @@
 package Formularios;
 
 import Funciones.Validaciones;
-import Objetos.Cliente;
-import Objetos.Ingrediente;
+import Objetos.*;
 import bd.ConexionBase;
+import com.oracle.jrockit.jfr.Producer;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -36,7 +36,7 @@ public class frmIngresoProductos extends javax.swing.JFrame {
     private void initComponents() {
 
         cbTipo_consulta = new javax.swing.JComboBox<>();
-        tfdescripcion = new javax.swing.JTextField();
+        tfdescripcionConsulta = new javax.swing.JTextField();
         tbConsultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaIngredientes = new javax.swing.JTable();
@@ -120,7 +120,7 @@ public class frmIngresoProductos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cbTipo_consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(tfdescripcion)
+                        .addComponent(tfdescripcionConsulta)
                         .addGap(18, 18, 18)
                         .addComponent(tbConsultar))
                     .addGroup(layout.createSequentialGroup()
@@ -187,7 +187,7 @@ public class frmIngresoProductos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbTipo_consulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdescripcionConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tbConsultar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,32 +210,60 @@ public class frmIngresoProductos extends javax.swing.JFrame {
 
     private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
         // TODO add your handling code here:
-        if (seleccionEliminacionValida()){
-            ConexionBase c = new ConexionBase();
+        limpiar();
+    }//GEN-LAST:event_btLimpiarActionPerformed
+
+    private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
+        // TODO add your handling code here:
+        
+        if (validarFormInProducto()){
+            
+            //obtener ingredientes de tabla
+            ArrayList<String> listaI = new ArrayList<>();
+            String ids_ingedientes = "";
+            //agregando lista de ids a un arreglo de strings
+            int filas [] = tablaIngredientes.getSelectedRows();
+            for (int r=0;r<filas.length;r++){
+                int fila = filas[r];
+                String ids = tablaIngredientes.getValueAt(fila,0).toString();
+                listaI.add(ids);
+            }
+            //convirtiendo el arreglo a un solo string
+            StringBuilder sb = new StringBuilder();
+            for (String s : listaI)
+            {
+                sb.append(s);
+                sb.append(",");
+            }
+            ids_ingedientes=sb.toString();
+        
+            //Ingreso de datos totales
+            String nombre = tfNombre.getText();
+            String descripcion = tfDescripcion.getText();
+            String tamaño = cbTamaño.getSelectedItem().toString();
+            float precio = Float.parseFloat(tfPrecio.getText());
+            String tipo = cbTipo.getSelectedItem().toString();
+            String ingredientes = ids_ingedientes;
+            //int ventas = Integer.parseInt(.getText());
+            
+            Producto p = new Producto(nombre, descripcion, tamaño, precio, tipo, ingredientes);
+            ConexionBase c =new ConexionBase();
+            
             try{
                 c.conectar();
-                int filas[] =tablaIngredientes.getSelectedRows();
-                    for (int i = 0; i < filas.length; i++) {
-                        int fila = filas[i];
-                        String id = tablaIngredientes.getValueAt(fila,0).toString();
-                        if(!c.eliminarIngrediente(Integer.parseInt(id))){
-                            JOptionPane.showMessageDialog(this,"Ocurrió un error en la eliminación","Eliminación",JOptionPane.ERROR_MESSAGE);
-                            return ;
-                        }
-                    }
+                if(c.ingresarProducto(p)){
+                    System.out.println("Producto ingresado.");
+                    limpiar();
+                    JOptionPane.showMessageDialog(null,"Producto Ingresado Correctamente.");
+                }else{
+                    System.out.println("producto no ingresado.");
+                    JOptionPane.showMessageDialog(null,"Información Incorrecta.","Ingreso de Productos",JOptionPane.ERROR_MESSAGE);
+                }
             }catch(Exception e){
                 System.out.println(e);
             }
             c.desconectar();
         }
-        if (formularioConsultaValida()){
-            consultarRegistro();}
-    }//GEN-LAST:event_btLimpiarActionPerformed
-
-    private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
-        // TODO add your handling code here:
-        frmIngresoIngredientes inIng = new frmIngresoIngredientes();
-        inIng.setVisible(true);
     }//GEN-LAST:event_btIngresarActionPerformed
 
     /**
@@ -244,7 +272,7 @@ public class frmIngresoProductos extends javax.swing.JFrame {
     
     public void consultarRegistro(){
         String tipo = cbTipo_consulta.getSelectedItem().toString();
-        String descripcion = tfdescripcion.getText();
+        String descripcion = tfdescripcionConsulta.getText();
         
         //consultar
         try{
@@ -301,7 +329,7 @@ public class frmIngresoProductos extends javax.swing.JFrame {
     
     private boolean formularioConsultaValida(){
         String tipo = cbTipo_consulta.getSelectedItem().toString();
-        String descripcion = tfdescripcion.getText();
+        String descripcion = tfdescripcionConsulta.getText();
         /*
         if(!tipo.equals("Todo") && descripcion.equals("")){
             JOptionPane.showMessageDialog(this,
@@ -345,33 +373,23 @@ public class frmIngresoProductos extends javax.swing.JFrame {
         }
         return true;
     }
-    
-    private boolean seleccionEdicionValida(){
-        int n = tablaIngredientes.getSelectedRowCount();
-        if(n!=1){
-            JOptionPane.showMessageDialog(this,
-                    "Debe seleccionar un registro para editar",
-                    "Edición",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
+        
+    private void limpiar(){
+        tfNombre.setText("");
+        tfDescripcion.setText("");
+        tfPrecio.setText("");
     }
     
-    private boolean seleccionEliminacionValida(){ 
-        int n = tablaIngredientes.getSelectedRowCount();
-        if(n==0){
-            JOptionPane.showMessageDialog(this,
-                    "Debe seleccionar mínimo un registro para eliminar",
-                    "Eliminación",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;        
-        }
-        int op = JOptionPane.showConfirmDialog(this, "Está seguro de eliminar los registros seleccionados?","Eliminación",JOptionPane.YES_NO_OPTION);
-        if(op==0)
-            return true;
-        else
+    private boolean validarFormInProducto(){
+        if (tfNombre.getText().equals("") ||
+            tfDescripcion.getText().equals("") ||
+            tfPrecio.getText().equals("")  ||
+            tablaIngredientes.getSelectedRowCount()==0 ){
+            JOptionPane.showMessageDialog(null,"Formulario Incorrecto.","Ingreso de Productos",JOptionPane.ERROR_MESSAGE);
             return false;
+        }else{
+            return true;
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -392,6 +410,6 @@ public class frmIngresoProductos extends javax.swing.JFrame {
     private javax.swing.JTextField tfDescripcion;
     private javax.swing.JTextField tfNombre;
     private javax.swing.JTextField tfPrecio;
-    private javax.swing.JTextField tfdescripcion;
+    private javax.swing.JTextField tfdescripcionConsulta;
     // End of variables declaration//GEN-END:variables
 }

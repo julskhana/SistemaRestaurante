@@ -39,7 +39,7 @@ public class Producto {
     }
     
     //constructor para ingresar productos
-    public Producto(String nombre,String descripcion,String tamaño,float precio,String tipo,String ing, int ventas){
+    public Producto(String nombre,String descripcion,String tamaño,float precio,String tipo,String ing){
         //this.id=id;
         this.nombre=nombre;
         this.descripcion=descripcion;
@@ -47,7 +47,7 @@ public class Producto {
         this.precio=precio;
         this.tipo=tipo;
         this.ingredientes=ing;
-        this.ventas=ventas;
+        //this.ventas=ventas;
     }
     
     //constructor vacio

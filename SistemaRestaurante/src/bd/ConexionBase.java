@@ -391,7 +391,7 @@ public class ConexionBase {
         try{
             //Ingreso de Datos de producto
             PreparedStatement st=null;
-            st = con.prepareStatement("insert into producto (nombre,descripcion,tamaño,precio,tipo) values (?,?,?,?,?);");
+            st = con.prepareStatement("insert into producto (nombre,descripcion,tamaño,precio,tipo,ids_ingredientes,ventas) values (?,?,?,?,?,?,?);");
             //query para ingresar manual
             //  insert into producto (id,nombre,descripcion,tamaño,precio,tipo) values (2,"plato2","platoss","peq",3,"caldo")
             st.setString(1,p.getNombre());
@@ -399,6 +399,8 @@ public class ConexionBase {
             st.setString(3,p.getTamaño());
             st.setFloat(4,p.getPrecio());
             st.setString(5,p.getTipo());
+            st.setString(6,p.getIngredientes());
+            st.setInt(7,p.getVentas());
             
             st.executeUpdate();
             st.close();
@@ -498,6 +500,24 @@ public class ConexionBase {
         }
         return (registroP);
     }
+    
+    public boolean eliminarProducto(int id)
+    {
+        try
+        {
+            PreparedStatement st = null;
+            st = con.prepareStatement("DELETE FROM producto WHERE id = ?");            
+            st.setInt(1,id);         
+            st.executeUpdate();
+            st.close();                        
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            return false;
+        }        
+    } 
     
     /*
     public boolean ingresarUniversidad(Universidad u)
