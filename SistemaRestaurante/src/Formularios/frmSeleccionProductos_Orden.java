@@ -7,6 +7,7 @@ package Formularios;
 
 import Funciones.Validaciones;
 import Objetos.Cliente;
+import Objetos.Detalle;
 import Objetos.Producto;
 import bd.ConexionBase;
 import java.util.ArrayList;
@@ -24,6 +25,40 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
      */
     public frmSeleccionProductos_Orden() {
         initComponents();
+        
+        //consultar
+        try{
+            //cunsolta a la base
+            try{
+                ConexionBase c = new ConexionBase();
+                c.conectar();
+                
+                ArrayList<Producto> resultado = c.consultarProductos("","producto");
+                
+                               
+                DefaultTableModel dtm = (DefaultTableModel)tablaProductos.getModel();
+                dtm.setRowCount(0);
+                
+                //recorriendo base de datos
+                for (Producto pro:resultado){
+                    Object[] fila = new Object[8];
+                    fila[0] = pro.getId();
+                    fila[1] = pro.getNombre();
+                    fila[2] = pro.getDescripcion();
+                    fila[3] = pro.getTamaño();
+                    fila[4] = pro.getPrecio();
+                    fila[5] = pro.getTipo();
+                    fila[6] = pro.getIngredientes();
+                    fila[7] = pro.getVentas();
+                    dtm.addRow(fila);
+                }
+            c.desconectar();
+            }catch (Exception e){
+                System.out.println("error al consultar productos");
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Ocurrió un error al consultar los registros","Consulta",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -43,6 +78,7 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
         btSeleccionar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         tfCantidad = new javax.swing.JTextField();
+        tfDetalle = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Orden - Ingreso de Productos");
@@ -78,11 +114,14 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
 
         jLabel1.setText("Cantidad:");
 
+        tfCantidad.setText("1");
         tfCantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCantidadActionPerformed(evt);
             }
         });
+
+        tfDetalle.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,10 +141,10 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
                         .addComponent(tfdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tbConsultar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(btSeleccionar)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(tfDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btSeleccionar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -120,9 +159,11 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
                     .addComponent(tfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btSeleccionar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btSeleccionar)
+                    .addComponent(tfDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -137,32 +178,28 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
 
     private void btSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSeleccionarActionPerformed
         // TODO add your handling code here:
-        
-        /*
-        if (seleccionEdicionValida()){
-            int fila = tablaIngredientes.getSelectedRow();
-            String id = tablaIngredientes.getValueAt(fila,0).toString();
-            String nombre = tablaIngredientes.getValueAt(fila,1).toString();
-            ArrayList<Producto> ing = new ArrayList<>();
-            ConexionBase c = new ConexionBase();
-
-            try{
-                c.conectar();
-                ing = c.consultarIngredientes("","id");
-            }catch (Exception e){
-                System.out.println("Error al iniciar edicion de cliente");
-            }
-            c.desconectar();
-
-            if (Validaciones.validarDupNombreIng(ing, nombre)){
-                //frmEdicionIngredientes ingedit = new frmEdicionIngredientes(id,nombre,this);
-                //ingedit.setVisible(true);
-            }else{
-                JOptionPane.showMessageDialog(this,"El ingrediente seleccionado no existe","Edición",JOptionPane.ERROR_MESSAGE);
-                System.out.println("El ingrediente no existe");
-            }
+        if(cantidadCValida() && seleccionValida() ){
+            int cant = Integer.parseInt(tfCantidad.getText());
+            int fila = tablaProductos.getSelectedRow();
+            String id_prod = tablaProductos.getValueAt(fila,0).toString();
+            String nombre_prod = tablaProductos.getValueAt(fila,1).toString();
+            String producto = id_prod+","+nombre_prod;
+            float precio_prod = Float.parseFloat(tablaProductos.getValueAt(fila,4).toString());
+            float precioTotal = cant*precio_prod;
+            
+            Detalle det = new Detalle(cant, producto, precio_prod, precioTotal);
+            //generando string para tabla detalle
+            String detalle2 = String.valueOf(cant)+","+producto+","+String.valueOf(precio_prod)+","+String.valueOf(precioTotal);
+            //System.out.println(cant+","+producto+","+precio_prod+","+precioTotal);
+            System.out.println(detalle2);
+            tfDetalle.setText(detalle2);
+            
+//            JOptionPane.showMessageDialog(this,"Producto Ingresado Correctamente\nActualice Datos...",Ingreso de Productos,joption);
+            JOptionPane.showMessageDialog(this,"Actualice Datos...","Ingreso Correcto",JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this,"Producto no Ingresado","Error",JOptionPane.ERROR_MESSAGE);
         }
-        */
         
     }//GEN-LAST:event_btSeleccionarActionPerformed
 
@@ -194,17 +231,17 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
                 }else{
                     
                     for (Producto prod:registro){
-                        if(cdTipo.equals("Id")){
+                        if(tipo.equals("Id")){
                             if(prod.getId()==Integer.parseInt(descripcion)){
                                 resultado.add(prod);
                             }
                         }
-                        if(cdTipo.equals("Nombre")){
+                        if(tipo.equals("Nombre")){
                             if(prod.getNombre().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(prod);
                             }
                         }
-                        if(cdTipo.equals("Tipo")){
+                        if(tipo.equals("Tipo")){
                             if(prod.getTipo().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(prod);
                             }
@@ -241,52 +278,41 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
     private boolean formularioConsultaValida(){
         String tipo = cdTipo.getSelectedItem().toString();
         String descripcion = tfdescripcion.getText();
-        /*
-        if(!tipo.equals("Todo") && descripcion.equals("")){
-            JOptionPane.showMessageDialog(this,
-                    "Debe ingresar una descripción",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }*/
-        if(tipo.equals("Nombre") && descripcion.equals("")){
-            try{
-                descripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un nombre",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
-                return false;
-            }        
-        }
+        
         if(tipo.equals("Id") && descripcion.equals("")){
-            try{
-                tfdescripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un número",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Debe ingresar un Identificador","Consulta",JOptionPane.ERROR_MESSAGE);
                 return false;
-            }        
+        }else if(tipo.equals("Nombre") && descripcion.equals("")){
+                JOptionPane.showMessageDialog(this,"Debe ingresar un nombre","Consulta",JOptionPane.ERROR_MESSAGE);
+                return false;
         }
+        
         return true;
     }
     
     private boolean seleccionValida(){
         int n = tablaProductos.getSelectedRowCount();
         if(n!=1){
-            JOptionPane.showMessageDialog(this,
-                    "Debe seleccionar un registro para Seleccionar",
-                    "Seleccion Productos",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Debe seleccionar un registro para Seleccionar","Seleccion Productos",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
+    }
     
+    private boolean cantidadCValida(){
+        if (tfCantidad.getText().matches("[0-9]+")){
+            return true;
+        }else{
+            JOptionPane.showMessageDialog(this,"Debe ingresar una cantidad correcta","Seleccion Productos",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
     }
 
+    private boolean ingresoProductoOrden(){
+        int cantidad = Integer.parseInt(tfCantidad.getText());
+                
+        return false;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSeleccionar;
@@ -296,6 +322,7 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
     private javax.swing.JTable tablaProductos;
     private javax.swing.JButton tbConsultar;
     private javax.swing.JTextField tfCantidad;
+    public static javax.swing.JTextField tfDetalle;
     private javax.swing.JTextField tfdescripcion;
     // End of variables declaration//GEN-END:variables
 }

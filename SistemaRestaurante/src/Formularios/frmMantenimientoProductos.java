@@ -285,10 +285,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     private boolean seleccionEdicionValida(){
         int n = tablaProductos.getSelectedRowCount();
         if(n!=1){
-            JOptionPane.showMessageDialog(this,
-                    "Debe seleccionar un registro para editar",
-                    "Edición",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Debe seleccionar un registro para editar","Edición",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
@@ -297,10 +294,7 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     private boolean seleccionEliminacionValida(){ 
         int n = tablaProductos.getSelectedRowCount();
         if(n==0){
-            JOptionPane.showMessageDialog(this,
-                    "Debe seleccionar mínimo un registro para eliminar",
-                    "Eliminación",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Debe seleccionar mínimo un registro para eliminar","Eliminación",JOptionPane.ERROR_MESSAGE);
             return false;        
         }
         int op = JOptionPane.showConfirmDialog(this, "Está seguro de eliminar los registros seleccionados?","Eliminación",JOptionPane.YES_NO_OPTION);

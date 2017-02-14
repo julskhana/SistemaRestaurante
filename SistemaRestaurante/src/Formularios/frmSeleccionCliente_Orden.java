@@ -24,6 +24,41 @@ public class frmSeleccionCliente_Orden extends javax.swing.JFrame {
      */
     public frmSeleccionCliente_Orden() {
         initComponents();
+        
+        //consultar
+        try{
+            //cunsolta a la base
+            try{
+                ConexionBase c = new ConexionBase();
+                c.conectar();
+                
+                ArrayList<Cliente> resultado = c.consultarClientes("","cliente");
+                
+                DefaultTableModel dtm = (DefaultTableModel)tablaClientes.getModel();
+                dtm.setRowCount(0);
+                
+                //recorriendo base de datos
+                for (Cliente cli:resultado){
+                    Object[] fila = new Object[10];
+                    fila[0] = cli.getId();
+                    fila[1] = cli.getCedula();
+                    fila[2] = cli.getNombres();
+                    fila[3] = cli.getApellidos();
+                    fila[4] = cli.getDireccion();
+                    fila[5] = cli.getTelefono();
+                    fila[6] = cli.getCorreo();
+                    fila[7] = cli.getEdad();
+                    fila[8] = cli.getFecha_nacimiento();
+                    fila[9] = cli.getTipo();
+                    dtm.addRow(fila);
+                }
+            c.desconectar();
+            }catch (Exception e){
+                System.out.println("error al consultar clientes");
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Ocurrió un error al consultar los registros","Consulta",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -128,7 +163,7 @@ public class frmSeleccionCliente_Orden extends javax.swing.JFrame {
 
     private void btConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultarActionPerformed
         // TODO add your handling code here:
-        if(formularioConsultaValidoA()){
+        if(formularioConsultaValido()){
             consultarRegistro();}
     }//GEN-LAST:event_btConsultarActionPerformed
 
@@ -249,59 +284,25 @@ public class frmSeleccionCliente_Orden extends javax.swing.JFrame {
     private boolean seleccionValida(){
         int n = tablaClientes.getSelectedRowCount();
         if(n!=1){
-            JOptionPane.showMessageDialog(this,
-                    "Debe seleccionar un registro para Seleccionar",
-                    "Seleccion Clientes",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Debe seleccionar un registro para Seleccionar","Seleccion Clientes",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
     
     }
     
-    private boolean formularioConsultaValidoA(){
+    private boolean formularioConsultaValido(){
         String tipo = cbTipoConsulta.getSelectedItem().toString();
         String descripcion = tfdescripcion.getText();
-        /*
-        if(!tipo.equals("Todo") && descripcion.equals("")){
-            JOptionPane.showMessageDialog(this,
-                    "Debe ingresar una descripción",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }*/
-        if(tipo.equals("Cedula")){
-            try{
-                tfdescripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un número",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
+        if(tipo.equals("Cedula") && descripcion.equals("")){
+                JOptionPane.showMessageDialog(this,"Debe ingresar un número","Consulta",JOptionPane.ERROR_MESSAGE);
                 return false;
-            }        
-        }
-        if(tipo.equals("Nombres")){
-            try{
-                tfdescripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un número",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
+        }else if(tipo.equals("Nombres") && descripcion.equals("")){
+                JOptionPane.showMessageDialog(this,"Debe ingresar un número","Consulta",JOptionPane.ERROR_MESSAGE);
                 return false;
-            }        
-        }
-        if(tipo.equals("Apellidos")){
-            try{
-                tfdescripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un número",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
+        }else if(tipo.equals("Apellidos") && descripcion.equals("")){
+                JOptionPane.showMessageDialog(this,"Debe ingresar un número","Consulta",JOptionPane.ERROR_MESSAGE);
                 return false;
-            }        
         }
         return true;
     }
