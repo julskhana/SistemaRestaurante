@@ -23,6 +23,8 @@ import javax.swing.table.DefaultTableModel;
 
 import java.util.List;
 import java.util.Arrays;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -437,6 +439,10 @@ public class frmGenerarOrden extends javax.swing.JFrame {
     private void btIngresarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarOrdenActionPerformed
         // TODO add your handling code here:
         if (ordenValida()){
+            
+            //seleccionando todas las filas de la tabla
+            selectRows(tablaProductosOrden, 0, tablaProductosOrden.getRowCount());
+            
             //obtener cantidades de tabla
             ArrayList<String> listaC = new ArrayList<>();
             String cants = "";
@@ -444,7 +450,7 @@ public class frmGenerarOrden extends javax.swing.JFrame {
             int filas1 [] = tablaProductosOrden.getSelectedRows();
             for (int r=0;r<filas1.length;r++){
                 int fila = filas1[r];
-                String numeros = tablaProductosOrden.getValueAt(fila,1).toString();
+                String numeros = tablaProductosOrden.getValueAt(fila,0).toString();
                 listaC.add(numeros);
             }
             //convirtiendo el arreglo a un solo string
@@ -589,6 +595,14 @@ public class frmGenerarOrden extends javax.swing.JFrame {
         tfTotal.setText(String.valueOf(Total));
     }
     
+    private void selectRows(JTable table, int start, int end) {
+        // Use this mode to demonstrate the following examples
+        table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        // Needs to be set or rows cannot be selected
+        table.setRowSelectionAllowed(true);
+        // Select rows from start to end if start is 0 we change to 1 or leave it (used to preserve coloums headers)
+        table.setRowSelectionInterval(start, end - 1);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btActualizar;
