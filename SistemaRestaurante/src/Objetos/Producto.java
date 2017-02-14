@@ -53,6 +53,13 @@ public class Producto {
     //constructor vacio
     public Producto(){}
 
+    //CONSTRUCTOR PARA INGRESAR PRODUCTOS EN ORDEN
+    public Producto(int id, String nombre, float precio) {
+        this.id=id;
+        this.nombre=nombre;
+        this.precio=precio;
+    }
+
     public int getId() {
         return id;
     }

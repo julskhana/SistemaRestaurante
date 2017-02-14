@@ -225,17 +225,17 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
                 }else{
                     
                     for (Producto prod:registro){
-                        if(cdTipo.equals("Id")){
+                        if(tipo.equals("Id")){
                             if(prod.getId()==Integer.parseInt(descripcion)){
                                 resultado.add(prod);
                             }
                         }
-                        if(cdTipo.equals("Nombre")){
+                        if(tipo.equals("Nombre")){
                             if(prod.getNombre().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(prod);
                             }
                         }
-                        if(cdTipo.equals("Tipo")){
+                        if(tipo.equals("Tipo")){
                             if(prod.getTipo().toUpperCase().contains(descripcion.toUpperCase())){
                                 resultado.add(prod);
                             }
@@ -272,35 +272,12 @@ public class frmMantenimientoProductos extends javax.swing.JFrame {
     private boolean formularioConsultaValida(){
         String tipo = cdTipo.getSelectedItem().toString();
         String descripcion = tfdescripcion.getText();
-        /*
-        if(!tipo.equals("Todo") && descripcion.equals("")){
-            JOptionPane.showMessageDialog(this,
-                    "Debe ingresar una descripción",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }*/
-        if(tipo.equals("Nombre") && descripcion.equals("")){
-            try{
-                tfdescripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un nombre",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
-                return false;
-            }        
-        }
         if(tipo.equals("Id") && descripcion.equals("")){
-            try{
-                tfdescripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un número",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Debe ingresar un número","Consulta",JOptionPane.ERROR_MESSAGE);
                 return false;
-            }        
+        }else if(tipo.equals("Nombre") && descripcion.equals("")){
+                JOptionPane.showMessageDialog(this,"Debe ingresar un nombre","Consulta",JOptionPane.ERROR_MESSAGE);
+                return false;
         }
         return true;
     }

@@ -184,10 +184,12 @@ public class frmGenerarOrden extends javax.swing.JFrame {
         jLabel15.setText("Descuento:");
 
         tfDescuento.setEditable(false);
+        tfDescuento.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         jLabel16.setText("Subtotal 0%:");
 
         tfSubtotalCero.setEditable(false);
+        tfSubtotalCero.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

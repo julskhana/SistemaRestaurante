@@ -309,47 +309,17 @@ public class frmMantenimientoClientes extends javax.swing.JFrame {
     private boolean formularioConsultaValidoA(){
         String tipo = cbTipoConsulta.getSelectedItem().toString();
         String descripcion = tfdescripcion.getText();
-        /*
-        if(!tipo.equals("Todo") && descripcion.equals("")){
-            JOptionPane.showMessageDialog(this,
-                    "Debe ingresar una descripción",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;
-        }*/
-        if(tipo.equals("Cedula")){
-            try{
-                tfdescripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un número",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
+        if(tipo.equals("Cedula") && descripcion.equals("")){
+                JOptionPane.showMessageDialog(this,"Debe ingresar un número","Consulta",JOptionPane.ERROR_MESSAGE);
                 return false;
-            }        
-        }
-        if(tipo.equals("Nombres")){
-            try{
-                tfdescripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un número",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
+        }else if(tipo.equals("Nombres") && descripcion.equals("")){
+                JOptionPane.showMessageDialog(this,"Debe ingresar un Nombre","Consulta",JOptionPane.ERROR_MESSAGE);
                 return false;
-            }        
-        }
-        if(tipo.equals("Apellidos")){
-            try{
-                tfdescripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un número",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
+        }else if(tipo.equals("Apellidos") && descripcion.equals("")){
+                JOptionPane.showMessageDialog(this,"Debe ingresar un Apellido","Consulta",JOptionPane.ERROR_MESSAGE);
                 return false;
-            }        
         }
+        
         return true;
     }
     

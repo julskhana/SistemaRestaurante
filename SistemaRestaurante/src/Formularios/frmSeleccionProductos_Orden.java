@@ -41,9 +41,11 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
         btSeleccionar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        tfCantidad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Mantenimiento de Productos");
+        setTitle("Orden - Ingreso de Productos");
 
         cdTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Id", "Nombre" }));
 
@@ -74,6 +76,14 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Cantidad:");
+
+        tfCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCantidadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,13 +93,17 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cdTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfdescripcion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tbConsultar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(254, 254, 254)
+                        .addGap(240, 240, 240)
                         .addComponent(btSeleccionar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -101,12 +115,14 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cdTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tbConsultar))
+                    .addComponent(tbConsultar)
+                    .addComponent(jLabel1)
+                    .addComponent(tfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btSeleccionar)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -149,6 +165,10 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
         */
         
     }//GEN-LAST:event_btSeleccionarActionPerformed
+
+    private void tfCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCantidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,7 +251,7 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
         }*/
         if(tipo.equals("Nombre") && descripcion.equals("")){
             try{
-                tfdescripcion.equals("");
+                descripcion.equals("");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(this,
                     "Debe ingresar un nombre",
@@ -254,40 +274,28 @@ public class frmSeleccionProductos_Orden extends javax.swing.JFrame {
         return true;
     }
     
-    private boolean seleccionEdicionValida(){
+    private boolean seleccionValida(){
         int n = tablaProductos.getSelectedRowCount();
         if(n!=1){
             JOptionPane.showMessageDialog(this,
-                    "Debe seleccionar un registro para editar",
-                    "Edición",
+                    "Debe seleccionar un registro para Seleccionar",
+                    "Seleccion Productos",
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
-    }
     
-    private boolean seleccionEliminacionValida(){ 
-        int n = tablaProductos.getSelectedRowCount();
-        if(n==0){
-            JOptionPane.showMessageDialog(this,
-                    "Debe seleccionar mínimo un registro para eliminar",
-                    "Eliminación",
-                    JOptionPane.ERROR_MESSAGE);
-            return false;        
-        }
-        int op = JOptionPane.showConfirmDialog(this, "Está seguro de eliminar los registros seleccionados?","Eliminación",JOptionPane.YES_NO_OPTION);
-        if(op==0)
-            return true;
-        else
-            return false;
     }
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSeleccionar;
     private javax.swing.JComboBox<String> cdTipo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaProductos;
     private javax.swing.JButton tbConsultar;
+    private javax.swing.JTextField tfCantidad;
     private javax.swing.JTextField tfdescripcion;
     // End of variables declaration//GEN-END:variables
 }

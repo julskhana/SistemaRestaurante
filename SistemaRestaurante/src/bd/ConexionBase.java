@@ -555,6 +555,42 @@ public class ConexionBase {
         return cli;
     }
     
+    public Producto cargarProductoOrden(String id){
+        Producto prod = new Producto();
+        int idpr = Integer.parseInt(id);
+        try {
+            Statement st = this.con.createStatement();
+            ResultSet rs = null;
+            
+            rs = st.executeQuery("select * from producto where id = "+id);
+            while(rs.next())
+            {
+                //String ced = rs.getString("cedula");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                String correo = rs.getString("correo");
+                //String tipo = rs.getString("tipo");
+                //int edad = rs.getInt("edad");
+                //String fecha_nacimiento = rs.getString("fecha_nacimiento");
+                //String sexo = rs.getString("sexo");
+                //int estado = rs.getInt("estado");
+                String direccion = rs.getString("direccion");
+                String telefono = rs.getString("telefono");
+                float precio = rs.getFloat("");
+                //creacion de cliente desde consulta
+                prod = new Producto(idpr,nombre,precio);
+                //cliente.add(cli);
+                
+                System.out.println("cliente obtenido");
+                System.out.println(prod);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return prod;
+    }
+    
+    
     /*
     public boolean ingresarUniversidad(Universidad u)
     {

@@ -269,38 +269,15 @@ public class frmMantenimientoIngredientes extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }*/
-        if(tipo.equals("Nombre") && descripcion.equals("")){
-            try{
-                descripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un nombre",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
-                return false;
-            }        
-        }
-        if(tipo.equals("Tipo") && descripcion.equals("")){
-            try{
-                descripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un tipo",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
-                return false;
-            }        
-        }
         if(tipo.equals("Id") && descripcion.equals("")){
-            try{
-                descripcion.equals("");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this,
-                    "Debe ingresar un número",
-                    "Consulta",
-                    JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Debe ingresar un Identificador","Consulta",JOptionPane.ERROR_MESSAGE);
                 return false;
-            }        
+        }else if(tipo.equals("Nombre") && descripcion.equals("")){
+                JOptionPane.showMessageDialog(this,"Debe ingresar un nombre","Consulta",JOptionPane.ERROR_MESSAGE);
+                return false;
+        }else if(tipo.equals("Tipo") && descripcion.equals("")){
+                JOptionPane.showMessageDialog(this,"Debe ingresar un tipo","Consulta",JOptionPane.ERROR_MESSAGE);
+                return false;
         }
         return true;
     }
