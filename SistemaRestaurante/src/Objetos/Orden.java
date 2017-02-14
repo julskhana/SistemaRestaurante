@@ -19,7 +19,7 @@ public class Orden {
     // FACTURA
     //datos cliente
     int id;
-    Date fecha;
+    String fecha;
     String usuario; //cedula
     String cliente; //cedula
     String estado;
@@ -28,10 +28,12 @@ public class Orden {
     String productos;
     //valores
     float sub_total;
+    float descuento;
+    float subcero;
     float iva;
     float total;
     
-    public Orden(int id, Date fecha,String usuario, String cliente,String estado, String cantidad,String productos,float subt,float iva,float total){
+    public Orden(int id, String fecha,String usuario, String cliente,String estado, String cantidad,String productos,float subt,float desc,float subcero,float iva,float total){
         this.id=id;
         this.fecha=fecha;
         this.usuario=usuario;
@@ -40,6 +42,8 @@ public class Orden {
         this.cantidad=cantidad;
         this.productos=productos;
         this.sub_total=subt;
+        this.descuento=desc;
+        this.subcero=subcero;
         this.iva=iva;
         this.total=total;
     }
@@ -47,13 +51,28 @@ public class Orden {
     //constructor vacio
     public Orden(){}
     
+    //onstructor para ingreso de ordenes
+    public Orden(String fecha,String usuario, String cliente,String estado, String cantidad,String productos,float subt,float desc,float subcero,float iva,float total){
+        this.fecha=fecha;
+        this.usuario=usuario;
+        this.cliente=cliente;
+        this.estado=estado;
+        this.cantidad=cantidad;
+        this.productos=productos;
+        this.sub_total=subt;
+        this.descuento=desc;
+        this.subcero=subcero;
+        this.iva=iva;
+        this.total=total;
+    }
+    
     //getter
 
     public int getId() {
         return id;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
@@ -88,6 +107,15 @@ public class Orden {
     public float getTotal() {
         return total;
     }
+
+    public float getDescuento() {
+        return descuento;
+    }
+
+    public float getSubcero() {
+        return subcero;
+    }
+    
     
     //setters
 
@@ -95,7 +123,7 @@ public class Orden {
         this.id = id;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -129,6 +157,14 @@ public class Orden {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public void setDescuento(float descuento) {
+        this.descuento = descuento;
+    }
+
+    public void setSubcero(float subcero) {
+        this.subcero = subcero;
     }
     
 }

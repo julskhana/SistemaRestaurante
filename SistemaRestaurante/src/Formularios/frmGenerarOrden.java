@@ -416,7 +416,6 @@ public class frmGenerarOrden extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmSeleccionCliente_Orden selectCli = new frmSeleccionCliente_Orden();
         selectCli.setVisible(true);
-        
     }//GEN-LAST:event_btBuscarClienteActionPerformed
 
     private void tfTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefonoActionPerformed
@@ -433,14 +432,83 @@ public class frmGenerarOrden extends javax.swing.JFrame {
     private void btActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarActionPerformed
         // TODO add your handling code here:
         actualizarProductos();
-        
-        int cantidad;
     }//GEN-LAST:event_btActualizarActionPerformed
 
     private void btIngresarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarOrdenActionPerformed
         // TODO add your handling code here:
         if (ordenValida()){
-            JOptionPane.showMessageDialog(this,"Orden ingresada Correctamente","Ingreso Correcto",JOptionPane.INFORMATION_MESSAGE);
+            //obtener cantidades de tabla
+            ArrayList<String> listaC = new ArrayList<>();
+            String cants = "";
+            //agregando lista de nombres a un arreglo de strings
+            int filas1 [] = tablaProductosOrden.getSelectedRows();
+            for (int r=0;r<filas1.length;r++){
+                int fila = filas1[r];
+                String numeros = tablaProductosOrden.getValueAt(fila,1).toString();
+                listaC.add(numeros);
+            }
+            //convirtiendo el arreglo a un solo string
+            StringBuilder sb1 = new StringBuilder();
+            for (String s : listaC)
+            {
+                sb1.append(s);
+                sb1.append(",");
+            }
+            cants=sb1.toString();
+            
+            //obtener productos de tabla
+            ArrayList<String> listaP = new ArrayList<>();
+            String nombs_prod = "";
+            //agregando lista de nombres a un arreglo de strings
+            int filas [] = tablaProductosOrden.getSelectedRows();
+            for (int r=0;r<filas.length;r++){
+                int fila = filas[r];
+                String ids = tablaProductosOrden.getValueAt(fila,1).toString();
+                listaP.add(ids);
+            }
+            //convirtiendo el arreglo a un solo string
+            StringBuilder sb = new StringBuilder();
+            for (String s : listaP)
+            {
+                sb.append(s);
+                sb.append(",");
+            }
+            nombs_prod=sb.toString();
+            
+            //ingreso de datos de orden
+            String fechahora = tfFechaOrden.getText();
+            String usuario = tfUsuario.getText();
+            String cliente = tfCedula.getText();
+            String estado = "cancelado";
+            String cantidades = cants;
+            String productos = nombs_prod;
+            float subTotal = Float.parseFloat(tfSubTotal.getText());
+            float descuento = Float.parseFloat(tfDescuento.getText());
+            float subcero = Float.parseFloat(tfSubtotalCero.getText());
+            float iva = Float.parseFloat(tfIVA.getText());
+            float total = Float.parseFloat(tfTotal.getText());
+            
+            //convirtiendo fecha
+            try{
+                Orden orden1 = new Orden(fechahora, usuario, cliente, estado, cantidades, productos, subTotal, descuento, subcero, iva, total);
+                System.out.println("objeto orden creado...");
+                ConexionBase c = new ConexionBase();
+                try{
+                    c.conectar();
+                    if(c.ingresarOrden(orden1)){
+                        System.out.println("orden ingresada correctamente");
+                        JOptionPane.showMessageDialog(this,"Orden ingresada Correctamente","Ingreso Correcto",JOptionPane.INFORMATION_MESSAGE);
+                        this.dispose();
+                    }else{
+                        System.out.println("error al ingresar orden");
+                        JOptionPane.showMessageDialog(this,"Orden no ingresada","Ingreso Incorrecto",JOptionPane.ERROR_MESSAGE);
+                    }
+                }catch (Exception e){
+                    System.out.println(e);
+                }
+            }catch (Exception e){
+                System.out.println(e);
+            }
         }else{
             JOptionPane.showMessageDialog(this,"Formulario Invalido","Ingreso Incorrecto",JOptionPane.ERROR_MESSAGE);
         }
@@ -453,13 +521,6 @@ public class frmGenerarOrden extends javax.swing.JFrame {
             DefaultTableModel dtm = (DefaultTableModel)tablaProductosOrden.getModel();
             dtm.removeRow(fila);
             calcularTotal();
-            /*
-            tfSubTotal.setText("");
-            tfDescuento.setText("");
-            tfSubtotalCero.setText("");
-            tfIVA.setText("");        
-            tfTotal.setText("");
-            */
         }
         
     }//GEN-LAST:event_tbEliminarItemActionPerformed
@@ -469,7 +530,7 @@ public class frmGenerarOrden extends javax.swing.JFrame {
      */
 
     private boolean ordenValida(){
-        if(tfCedula.getText().equals("") || tablaProductosOrden.getSelectedRowCount()==0 ){
+        if(tfCedula.getText().equals("") /*|| tablaProductosOrden.getSelectedRowCount()==0 */ ){
             return false;
         }
         return true;

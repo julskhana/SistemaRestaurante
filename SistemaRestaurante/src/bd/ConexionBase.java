@@ -590,6 +590,34 @@ public class ConexionBase {
         return prod;
     }
     
+    public boolean ingresarOrden(Orden ord){
+        try{
+            //Ingreso de Datos de orden
+            PreparedStatement st=null;
+            st = con.prepareStatement("insert into orden (fecha,usuario,cliente,estado,cantidad,productos,subtotal,descuento,subtotal_cero,iva,total) values (?,?,?,?,?,?,?,?,?,?,?);");
+            
+            st.setString(1,ord.getFecha());
+            st.setString(2,ord.getUsuario());
+            st.setString(3,ord.getCliente());
+            st.setString(4,ord.getEstado());
+            st.setString(5,ord.getCantidad());
+            st.setString(6,ord.getProductos());
+            st.setFloat(7,ord.getSub_total());
+            st.setFloat(8,ord.getDescuento());
+            st.setFloat(9,ord.getSubcero());
+            st.setFloat(10,ord.getIva());
+            st.setFloat(11,ord.getTotal());
+            
+            st.executeUpdate();
+            st.close();
+            
+            System.out.println("Orden Ingresada a DB...");
+            return true;
+        }catch (Exception e){
+            System.out.println("Error al ingresar orden a DB...");
+            return false;
+        }
+    }
     
     /*
     public boolean ingresarUniversidad(Universidad u)
