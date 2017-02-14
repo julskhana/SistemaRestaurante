@@ -6,6 +6,7 @@
 package Formularios;
 
 import Objetos.*;
+import bd.ConexionBase;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import static java.rmi.Naming.list;
@@ -112,6 +113,7 @@ public class frmGenerarOrden extends javax.swing.JFrame {
         tfSubtotalCero = new javax.swing.JTextField();
         icon = new javax.swing.JLabel();
         btActualizar = new javax.swing.JButton();
+        tbEliminarItem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Generacion de Orden");
@@ -173,6 +175,7 @@ public class frmGenerarOrden extends javax.swing.JFrame {
                 "Cantidad", "Descripcion (Productos)", "Precio Unitario", "Precio Total"
             }
         ));
+        tablaProductosOrden.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(tablaProductosOrden);
 
         tfSubTotal.setEditable(false);
@@ -186,8 +189,10 @@ public class frmGenerarOrden extends javax.swing.JFrame {
         jLabel12.setText("SubTotal IVA %:");
 
         tfTotal.setEditable(false);
+        tfTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tfTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Total:");
 
         btIngresarOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/orden2_icon.png"))); // NOI18N
@@ -228,6 +233,13 @@ public class frmGenerarOrden extends javax.swing.JFrame {
         btActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btActualizarActionPerformed(evt);
+            }
+        });
+
+        tbEliminarItem.setText("Eliminar Item");
+        tbEliminarItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbEliminarItemActionPerformed(evt);
             }
         });
 
@@ -282,6 +294,7 @@ public class frmGenerarOrden extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btIngresarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel10)
@@ -290,27 +303,33 @@ public class frmGenerarOrden extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel15)
-                                .addComponent(jLabel16)
-                                .addComponent(jLabel12)
-                                .addComponent(jLabel13)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(btActualizar)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(tbEliminarItem, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel11)))
+                                    .addComponent(jLabel11))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel16)
+                                        .addComponent(jLabel12)
+                                        .addComponent(jLabel15))))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                                .addComponent(tfIVA, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(tfIVA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                                 .addComponent(tfSubtotalCero, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(tfDescuento, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(tfSubTotal, javax.swing.GroupLayout.Alignment.TRAILING))))
-                    .addComponent(btIngresarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfSubTotal, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel13)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -374,14 +393,16 @@ public class frmGenerarOrden extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(btActualizar))
-                        .addGap(75, 75, 75)))
+                            .addComponent(btActualizar)
+                            .addComponent(tbEliminarItem))
+                        .addGap(72, 72, 72)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btIngresarOrden, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(btIngresarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -406,7 +427,7 @@ public class frmGenerarOrden extends javax.swing.JFrame {
         // TODO add your handling code here:
         frmSeleccionProductos_Orden inProductosOrden = new frmSeleccionProductos_Orden();
         inProductosOrden.setVisible(true);
-        
+        btActualizar.requestFocus();
     }//GEN-LAST:event_btIngresarProductosOrdenActionPerformed
 
     private void btActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarActionPerformed
@@ -424,6 +445,24 @@ public class frmGenerarOrden extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Formulario Invalido","Ingreso Incorrecto",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btIngresarOrdenActionPerformed
+
+    private void tbEliminarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbEliminarItemActionPerformed
+        // TODO add your handling code here:
+        int fila = tablaProductosOrden.getSelectedRow();
+        if (seleccionEliminacionValida()){
+            DefaultTableModel dtm = (DefaultTableModel)tablaProductosOrden.getModel();
+            dtm.removeRow(fila);
+            calcularTotal();
+            /*
+            tfSubTotal.setText("");
+            tfDescuento.setText("");
+            tfSubtotalCero.setText("");
+            tfIVA.setText("");        
+            tfTotal.setText("");
+            */
+        }
+        
+    }//GEN-LAST:event_tbEliminarItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -447,28 +486,46 @@ public class frmGenerarOrden extends javax.swing.JFrame {
         Object[] det = {lista.get(0),lista.get(2),lista.get(3),lista.get(4)};
         dtm.addRow(det);
         
-        //Obteniendo calculos
+        calcularTotal();
+    }
+    
+    private void actualizarDatos(){
         
+    }
+    
+    private boolean seleccionEliminacionValida(){ 
+        int n = tablaProductosOrden.getSelectedRowCount();
+        if(n==0){
+            JOptionPane.showMessageDialog(this,"Debe seleccionar mínimo un Item para eliminar","Eliminación",JOptionPane.ERROR_MESSAGE);
+            return false;        
+        }
+        int op = JOptionPane.showConfirmDialog(this, "Está seguro de eliminar los registros seleccionados?","Eliminación",JOptionPane.YES_NO_OPTION);
+        if(op==0)
+            return true;
+        else
+            return false;
+    }
+    
+    private void calcularTotal(){
+        //Obteniendo calculos
         float subtotal = 0;
         for (int i=0;i<tablaProductosOrden.getRowCount();i++){
-            float precioTotal = Float.parseFloat(lista.get(4).toString());
+            DefaultTableModel dtm = (DefaultTableModel)tablaProductosOrden.getModel();
+            float precioTotal = Float.parseFloat(dtm.getValueAt(i,3).toString());
+            System.out.println(precioTotal);
             subtotal = subtotal+precioTotal;
+            System.out.println(subtotal);
         }
         System.out.println("subtotal: "+subtotal);
         tfSubTotal.setText(String.valueOf(subtotal));
         float descuento = 0;
         tfDescuento.setText(String.valueOf(descuento));
-        float subtotalcero = subtotal-descuento;
+        float subtotalcero = 0;
         tfSubtotalCero.setText(String.valueOf(subtotalcero));
-        float sub_iva = subtotalcero*0.14f;
+        float sub_iva = subtotal*0.14f;
         tfIVA.setText(String.valueOf(sub_iva));
-        float Total = subtotalcero + sub_iva;
+        float Total = subtotal + sub_iva;
         tfTotal.setText(String.valueOf(Total));
-        
-    }
-    
-    private void actualizarDatos(){
-        
     }
     
     
@@ -496,6 +553,7 @@ public class frmGenerarOrden extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tablaProductosOrden;
+    private javax.swing.JButton tbEliminarItem;
     public static javax.swing.JTextField tfApellidos;
     public static javax.swing.JTextField tfCedula;
     public static javax.swing.JTextField tfCorreo;

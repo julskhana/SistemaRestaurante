@@ -84,7 +84,7 @@ public class frmEdicionIngredientes extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo:");
 
-        cbtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fruta", "Verdura", "Cereal", "Lacteo", "Carne" }));
+        cbtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fruta", "Verdura", "Cereal", "Lacteo", "Carne", "Liquido" }));
 
         jLabel4.setText("Costo de Porcion:");
 

@@ -263,6 +263,7 @@ public class frmIngresoProductos extends javax.swing.JFrame {
             }
             c.desconectar();
         }
+        this.dispose();
     }//GEN-LAST:event_btIngresarActionPerformed
 
     /**
