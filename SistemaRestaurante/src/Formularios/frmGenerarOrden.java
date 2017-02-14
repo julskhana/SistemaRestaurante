@@ -62,6 +62,9 @@ public class frmGenerarOrden extends javax.swing.JFrame {
         String fecha_hora = dateFormat.format(date); //2016/11/16 12:08:43
         tfFechaOrden.setText(fecha_hora);
         
+        DefaultTableModel dtm = (DefaultTableModel)tablaProductosOrden.getModel();
+        dtm.setRowCount(0);
+        
     }
 
     /**
@@ -439,10 +442,29 @@ public class frmGenerarOrden extends javax.swing.JFrame {
         //obteniendo datos de string detalle
         ArrayList lista = new ArrayList(Arrays.asList(detalle.split(",")));
         
-        //String [] lista2 = ;
-        //Object[] fila = {itemsDet[0],itemsDet[1],itemsDet[2],itemsDet[3]};
+        //agregando items al detalle
+        DefaultTableModel dtm = (DefaultTableModel)tablaProductosOrden.getModel();
+        Object[] det = {lista.get(0),lista.get(2),lista.get(3),lista.get(4)};
+        dtm.addRow(det);
         
-                
+        //Obteniendo calculos
+        
+        float subtotal = 0;
+        for (int i=0;i<tablaProductosOrden.getRowCount();i++){
+            float precioTotal = Float.parseFloat(lista.get(4).toString());
+            subtotal = subtotal+precioTotal;
+        }
+        System.out.println("subtotal: "+subtotal);
+        tfSubTotal.setText(String.valueOf(subtotal));
+        float descuento = 0;
+        tfDescuento.setText(String.valueOf(descuento));
+        float subtotalcero = subtotal-descuento;
+        tfSubtotalCero.setText(String.valueOf(subtotalcero));
+        float sub_iva = subtotalcero*0.14f;
+        tfIVA.setText(String.valueOf(sub_iva));
+        float Total = subtotalcero + sub_iva;
+        tfTotal.setText(String.valueOf(Total));
+        
     }
     
     private void actualizarDatos(){
