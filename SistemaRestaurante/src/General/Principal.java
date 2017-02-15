@@ -19,7 +19,7 @@ public class Principal {
         // TODO code application logic here
         
         // SELECCION PARA EJECUTAR EL PROGRAMA CON O SIN INGRESO DE USUARIOS
-        int estadoIn = 0;
+        int estadoIn = 1;
         //
         if (estadoIn==1){
             // CODIGO PARA PRESENTACION DE PROYECTO

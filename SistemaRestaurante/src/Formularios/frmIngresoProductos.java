@@ -8,7 +8,7 @@ package Formularios;
 import Funciones.Validaciones;
 import Objetos.*;
 import bd.ConexionBase;
-import com.oracle.jrockit.jfr.Producer;
+//import com.oracle.jrockit.jfr.Producer;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
