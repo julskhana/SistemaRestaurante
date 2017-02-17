@@ -41,6 +41,7 @@ public class frmSeleccion_Ingredientes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaIngredientes = new javax.swing.JTable();
         btSeleccionar = new javax.swing.JButton();
+        btIngresarCliente_Orden = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mantenimiento de Ingredientes");
@@ -74,6 +75,13 @@ public class frmSeleccion_Ingredientes extends javax.swing.JFrame {
             }
         });
 
+        btIngresarCliente_Orden.setText("Nuevo Cliente");
+        btIngresarCliente_Orden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btIngresarCliente_OrdenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,9 +98,11 @@ public class frmSeleccion_Ingredientes extends javax.swing.JFrame {
                         .addComponent(tbConsultar)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(100, 100, 100)
+                .addComponent(btIngresarCliente_Orden)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btSeleccionar)
-                .addGap(210, 210, 210))
+                .addGap(82, 82, 82))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +115,9 @@ public class frmSeleccion_Ingredientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btSeleccionar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btSeleccionar)
+                    .addComponent(btIngresarCliente_Orden))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -145,6 +157,12 @@ public class frmSeleccion_Ingredientes extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btSeleccionarActionPerformed
+
+    private void btIngresarCliente_OrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarCliente_OrdenActionPerformed
+        // INGRESAR CLIENTE QUE NO ESTA EN LA BASE CUNADO SE HACE UNA ORDEN
+        frmIngresoClientes incliOrden= new frmIngresoClientes();
+        incliOrden.setVisible(true);
+    }//GEN-LAST:event_btIngresarCliente_OrdenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,6 +312,7 @@ public class frmSeleccion_Ingredientes extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btIngresarCliente_Orden;
     private javax.swing.JButton btSeleccionar;
     private javax.swing.JComboBox<String> cbConsulta;
     private javax.swing.JScrollPane jScrollPane1;

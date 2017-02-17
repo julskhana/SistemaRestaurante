@@ -39,9 +39,11 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
+              <Component id="btIngresarCliente_Orden" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="btSeleccionar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,7 +59,10 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="136" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btSeleccionar" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btSeleccionar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btIngresarCliente_Orden" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -118,6 +123,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSeleccionarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btIngresarCliente_Orden">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nuevo Cliente"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btIngresarCliente_OrdenActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

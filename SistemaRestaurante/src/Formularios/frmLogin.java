@@ -199,7 +199,7 @@ public class frmLogin extends javax.swing.JFrame {
                     //Usuario usrAct = c.obtenerDatosUsuario(cuenta);
                     FrmPrincipal principal = new FrmPrincipal(nombreUsr,cuenta);
                     principal.setVisible(true);
-                    JOptionPane.showMessageDialog(null,"Bienvenido "+nombreUsr);
+                    JOptionPane.showMessageDialog(principal,"Bienvenido "+nombreUsr);
                     this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(null,"Usuario o Clave incorrecta","Autenticación",JOptionPane.ERROR_MESSAGE);
