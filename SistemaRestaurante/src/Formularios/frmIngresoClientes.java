@@ -300,6 +300,7 @@ public class frmIngresoClientes extends javax.swing.JFrame {
                     System.out.println("Cliente ingresado.");
                     limpiarFormCli();
                     JOptionPane.showMessageDialog(null,"Cliente Ingresado Correctamente.");
+                    this.dispose();
                 }else{
                     System.out.println("Cliente no ingresado.");
                     JOptionPane.showMessageDialog(null,"Información Incorrecta.","Ingreso de Clientes",JOptionPane.ERROR_MESSAGE);
