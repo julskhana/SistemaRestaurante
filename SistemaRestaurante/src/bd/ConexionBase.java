@@ -14,8 +14,7 @@ public class ConexionBase {
        private static final String HOST = "127.0.0.1";
        private static final String PORT = "3306";
        //base para windows - esterprise
-       //private static final String DATABASE = "base_restaurante1";
-       
+       //private static final String DATABASE = "base_restaurante1"       
        //base para linux - nostromo
        private static final String DATABASE = "restaurante3";
        
