@@ -28,9 +28,7 @@ public class ConexionBase {
     public void conectar ()throws Exception{
         try {
             Class.forName(DRIVER);
-        }catch(ClassNotFoundException ce){
-        }
-        
+        }catch(ClassNotFoundException ce){}
             try{
                 this.con = DriverManager.getConnection("jdbc:" + DBMS + "://" + HOST + ":" + PORT + "/" + DATABASE, USER, PASSWORD);                
                 System.out.println("CONEXION EXITOSA CON LA BASE DE DATOS");
