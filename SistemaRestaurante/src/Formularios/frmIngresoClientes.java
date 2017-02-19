@@ -323,7 +323,7 @@ public class frmIngresoClientes extends javax.swing.JFrame {
     }
     
     private boolean validarFormInCliente(){
-        if (tfCedula.getText().length()==11 ||
+        if (tfCedula.getText().length()==10 ||
             tfNombres.getText().equals("") ||
             tfCorreo.getText().equals("") ||
             tfDireccion.getText().equals("") ||
