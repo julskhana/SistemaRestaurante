@@ -5,4 +5,7 @@
 *
 *   PROFESOR: 	ING. RONALD CRIOLLO
 *   ESTUDIANTE: JULIAN BAJAÑA
+*
+*   Version 0.2
+
 
