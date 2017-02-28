@@ -20,6 +20,14 @@ public class Principal {
     public static void main(String[] args) {
         // TODO code application logic here
         
+        /*
+        NOTAS
+        
+        IMPLEMENTAR CAMBIO DE CLAVE, INGRESO DIFERENTE A USUARIOS ADMINISTRADORES Y CAJEROS, ADEMAS DE AGREGAR OPCIONES
+        DE CIERRE DE SESION DE USUARIOS.
+        
+        */
+        
         // SELECCION PARA EJECUTAR EL PROGRAMA CON O SIN INGRESO DE USUARIOS
         int estadoIn = 1;
         //
