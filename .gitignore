@@ -24,3 +24,4 @@ nb-configuration.xml
 *.war
 *.ear
 /PracticaWeb3/nbproject/private/
+/SistemaRestaurante/nbproject/private/
