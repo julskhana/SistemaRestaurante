@@ -17,7 +17,6 @@ public class ConexionBase {
        //private static final String DATABASE = "base_restaurante1"       
        //base para linux - nostromo
        private static final String DATABASE = "restaurante3";
-       
        private static final String USER = "root";
        private static final String PASSWORD = "";
 
